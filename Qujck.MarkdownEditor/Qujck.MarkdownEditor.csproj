@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BA80835D-62AC-483C-84A6-4B179FAEA5CA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Qujck.MarkdownEditor</RootNamespace>
+    <AssemblyName>Qujck.MarkdownEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Strike.IE, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Strike.IE.Merged.1.2.2\Lib\NET40\Strike.IE.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Content\bootstrap-theme.css.map" />
+    <None Include="Content\bootstrap.css.map" />
+    <None Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="fonts\glyphicons-halflings-regular.woff" />
+    <None Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Scripts\jquery-1.11.3.min.map" />
+    <EmbeddedResource Include="test.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <EmbeddedResource Include="Content\layout.html" />
+    <EmbeddedResource Include="Content\site.css" />
+    <EmbeddedResource Include="Content\stackoverflow.css" />
+    <EmbeddedResource Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <EmbeddedResource Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Prettify\prettify.css" />
+    <Content Include="Content\Prettify\Themes\desert.css" />
+    <Content Include="Content\Prettify\Themes\doxy.css" />
+    <Content Include="Content\Prettify\Themes\sons-of-obsidian.css" />
+    <Content Include="Content\Prettify\Themes\sunburst.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <EmbeddedResource Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.11.3.intellisense.js" />
+    <Content Include="Scripts\jquery-1.11.3.js" />
+    <EmbeddedResource Include="Scripts\jquery-1.11.3.min.js" />
+    <EmbeddedResource Include="Scripts\modernizr-2.8.3.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-apollo.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-basic.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-clj.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-css.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-dart.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-erlang.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-go.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-hs.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-lisp.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-llvm.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-lua.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-matlab.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-ml.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-mumps.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-n.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-pascal.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-proto.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-r.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-rd.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-scala.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-sql.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-tcl.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-tex.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-vb.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-vhdl.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-wiki.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-xq.js" />
+    <EmbeddedResource Include="Scripts\Prettify\lang-yaml.js" />
+    <EmbeddedResource Include="Scripts\Prettify\prettify.js" />
+    <Content Include="Scripts\Prettify\run_prettify.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
