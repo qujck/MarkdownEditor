@@ -19,7 +19,7 @@ namespace Qujck.MarkdownEditor.Queries
             internal Html() { }
         }
 
-        internal static partial class Handlers
+        public static partial class Handlers
         {
             public sealed class HtmlHandler : IQueryHandler<Html, string>
             {

@@ -10,7 +10,13 @@ namespace Qujck.MarkdownEditor.Infrastructure
 {
     public static class ResourceHelpers
     {
-        static Assembly assembly = Assembly.GetExecutingAssembly();
+        private static Assembly Assembly
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly();
+            }
+        }
 
         public static StringBuilder AppendResource(this StringBuilder sb, string name)
         {
@@ -21,7 +27,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
         public static StringBuilder AppendManyResources(this StringBuilder sb, string name)
         {
             var resources =
-                from resource in assembly.GetManifestResourceNames()
+                from resource in Assembly.GetManifestResourceNames()
                 where resource.StartsWith("Qujck.MarkdownEditor." + name)
                 select ReadResource(resource);
             resources.ToList().ForEach(langFile => sb.AppendLine(langFile));
@@ -30,7 +36,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
         public static string ReadResource(string name)
         {
-            var resource = assembly.GetManifestResourceStream(name);
+            var resource = Assembly.GetManifestResourceStream(name);
             return new StreamReader(resource).ReadToEnd();
         }
     }

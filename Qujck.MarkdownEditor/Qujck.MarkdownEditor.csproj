@@ -55,6 +55,7 @@
     <Compile Include="Aspects\PrettifyMarkdown.cs" />
     <Compile Include="Aspects\PrettifyScripts.cs" />
     <Compile Include="Aspects\PrettifyStyles.cs" />
+    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
     <Compile Include="Commands\WriteDocument.cs" />
     <Compile Include="CompositionRoot.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\Html.cs" />
+    <Compile Include="Queries\IQuery.cs" />
     <Compile Include="Queries\IQueryHandler.cs" />
     <Compile Include="Queries\Markdown.cs" />
     <Compile Include="Queries\Scripts.cs" />

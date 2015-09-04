@@ -15,9 +15,9 @@ using Qujck.MarkdownEditor.Commands;
 
 namespace Qujck.MarkdownEditor
 {
-    public partial class MainForm : Form
+    public sealed partial class MainForm : Form, IDisposable
     {
-        private CompositionRoot resolver;
+        private readonly CompositionRoot resolver;
 
         public MainForm()
         {
@@ -25,17 +25,17 @@ namespace Qujck.MarkdownEditor
             this.resolver = new CompositionRoot();
 
             var md = ResourceHelpers.ReadResource("Qujck.MarkdownEditor.test.md");
-            textView.Text = md;
-            textView.Select(0, 0);
+            TextView.Text = md;
+            TextView.Select(0, 0);
         }
 
-        private void textView_TextChanged(object sender, EventArgs e)
+        private void TextView_TextChanged(object sender, EventArgs e)
         {
             var markdownHandler = this.resolver.Resolve<IQueryHandler<Query.Markdown, string>>();
             var writeDocumentHandler = this.resolver.Resolve<ICommandHandler<Command.WriteDocument>>();
 
-            var markdown = markdownHandler.Execute(textView.Text);
-            writeDocumentHandler.Run(renderedView, markdown);
+            var markdown = markdownHandler.Execute(TextView.Text);
+            writeDocumentHandler.Run(RenderedView, markdown);
         }
     }
 }

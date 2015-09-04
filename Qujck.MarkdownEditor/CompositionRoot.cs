@@ -9,7 +9,7 @@ using Qujck.MarkdownEditor.Aspects;
 
 namespace Qujck.MarkdownEditor
 {
-    public class CompositionRoot
+    public sealed class CompositionRoot
     {
         private readonly ICommandHandler<Command.WriteDocument> writeDocumentHandler;
 

@@ -19,7 +19,7 @@ namespace Qujck.MarkdownEditor.Queries
             internal Scripts() { }
         }
 
-        internal static partial class Handlers
+        public static partial class Handlers
         {
             public sealed class ScriptsHandler : IQueryHandler<Scripts, string>
             {

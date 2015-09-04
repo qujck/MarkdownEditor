@@ -33,7 +33,7 @@ namespace Qujck.MarkdownEditor.Commands
             public string Markdown { get; private set; }
         }
 
-        internal static partial class Handlers
+        public static partial class Handlers
         {
             public sealed class WriteDocumentHandler : ICommandHandler<WriteDocument>
             {

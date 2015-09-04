@@ -25,7 +25,7 @@ namespace Qujck.MarkdownEditor.Queries
             public string Text { get; private set; }
         }
 
-        internal static partial class Handlers
+        public static partial class Handlers
         {
             public sealed class MarkdownHandler : IQueryHandler<Markdown, string>
             {
