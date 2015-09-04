@@ -50,8 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aspects\MarkdownPrettyPrint.cs" />
+    <Compile Include="Aspects\PrepareHtml.cs" />
+    <Compile Include="Aspects\PrettifyInvoke.cs" />
+    <Compile Include="Aspects\PrettifyMarkdown.cs" />
+    <Compile Include="Aspects\PrettifyScripts.cs" />
+    <Compile Include="Aspects\PrettifyStyles.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
+    <Compile Include="Commands\WriteDocument.cs" />
     <Compile Include="CompositionRoot.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

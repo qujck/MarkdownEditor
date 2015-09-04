@@ -11,16 +11,39 @@ namespace Qujck.MarkdownEditor
 {
     public class CompositionRoot
     {
-        public T Resolve<T>() where T : class
+        private readonly ICommandHandler<Command.WriteDocument> writeDocumentHandler;
+
+        private readonly IQueryHandler<Query.Html, string> htmlHandler;
+        private readonly IQueryHandler<Query.Markdown, string> markdownHandler;
+        private readonly IQueryHandler<Query.Scripts, string> scriptsHandler;
+        private readonly IQueryHandler<Query.Styles, string> stylesHandler;
+
+        public CompositionRoot()
         {
-            if (typeof(T) == typeof(IQueryHandler<Query.Scripts, string>))
-                return new Query.Handlers.ScriptsHandler() as T;
-            else if (typeof(T) == typeof(IQueryHandler<Query.Styles, string>))
-                return new Query.Handlers.StylesHandler() as T;
-            else if (typeof(T) == typeof(IQueryHandler<Query.Html, string>))
-                return new Query.Handlers.HtmlHandler() as T;
-            else if (typeof(T) == typeof(IQueryHandler<Query.Markdown, string>))
-                return new MarkdownPrettyPrint(new Query.Handlers.MarkdownHandler()) as T;
+            this.markdownHandler = new PrettifyMarkdown(new Query.Handlers.MarkdownHandler());
+            this.scriptsHandler = new PrettifyScripts(new Query.Handlers.ScriptsHandler());
+            this.stylesHandler = new PrettifyStyles(new Query.Handlers.StylesHandler());
+
+            this.htmlHandler = new PrepareHtml(
+                new Query.Handlers.HtmlHandler(),
+                this.stylesHandler,
+                this.scriptsHandler);
+
+            this.writeDocumentHandler = new PrettifyInvoke(
+                new Command.Handlers.WriteDocumentHandler(
+                    this.htmlHandler));
+        }
+
+        public T Resolve<T>() where T : class
+        { 
+            if (typeof(T) == typeof(IQueryHandler<Query.Markdown, string>))
+            {
+                return this.markdownHandler as T;
+            }
+            else if (typeof(T) == typeof(ICommandHandler<Command.WriteDocument>))
+            {
+                return this.writeDocumentHandler as T;
+            }
 
             throw new InvalidOperationException();
         }

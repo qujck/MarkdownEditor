@@ -7,11 +7,11 @@ using Qujck.MarkdownEditor.Queries;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    public sealed class MarkdownPrettyPrint : IQueryHandler<Query.Markdown, string>
+    public sealed class PrettifyMarkdown : IQueryHandler<Query.Markdown, string>
     {
         private readonly IQueryHandler<Query.Markdown, string> decorated;
 
-        public MarkdownPrettyPrint(IQueryHandler<Query.Markdown, string> decorated)
+        public PrettifyMarkdown(IQueryHandler<Query.Markdown, string> decorated)
         {
             this.decorated = decorated;
         }
