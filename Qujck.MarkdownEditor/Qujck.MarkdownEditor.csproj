@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aspects\ImagePathFixer.cs" />
     <Compile Include="Aspects\PrepareHtml.cs" />
     <Compile Include="Aspects\PrettifyInvoke.cs" />
     <Compile Include="Aspects\PrettifyMarkdown.cs" />
@@ -70,7 +71,7 @@
     <Compile Include="Queries\Html.cs" />
     <Compile Include="Queries\IQuery.cs" />
     <Compile Include="Queries\IQueryHandler.cs" />
-    <Compile Include="Queries\Markdown.cs" />
+    <Compile Include="Queries\MarkdownToHtml.cs" />
     <Compile Include="Queries\Scripts.cs" />
     <Compile Include="Queries\Styles.cs" />
     <Compile Include="Infrastructure\ResourceHelpers.cs" />

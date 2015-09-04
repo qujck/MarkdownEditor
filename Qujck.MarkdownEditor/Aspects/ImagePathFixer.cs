@@ -8,22 +8,24 @@ using Qujck.MarkdownEditor.Queries;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    public sealed class PrettifyMarkdown : IQueryHandler<Query.MarkdownToHtml, string>
+    public sealed class ImagePathFixer : IQueryHandler<Query.MarkdownToHtml, string>
     {
         private readonly IQueryHandler<Query.MarkdownToHtml, string> decorated;
 
-        public PrettifyMarkdown(IQueryHandler<Query.MarkdownToHtml, string> decorated)
+        public ImagePathFixer(IQueryHandler<Query.MarkdownToHtml, string> decorated)
         {
             this.decorated = decorated;
         }
 
         public string Execute(Query.MarkdownToHtml query)
         {
-            string result = this.decorated.Execute(query);
+            string markdown = query.Text.Replace(
+                "![image](~",
+                string.Format("![image]({0}", ".."));
 
-            result = result.Replace("<pre", "<pre class=\"prettyprint\"");
+            string html = this.decorated.Execute(markdown);
 
-            return result;
+            return html;
         }
     }
 }

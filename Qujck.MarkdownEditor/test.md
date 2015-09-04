@@ -42,7 +42,7 @@ public class GetProductDetails : IQuery<IEnumerable<ProductDetail>> { }
 
 Which (in Visual Studio) gives us this neat little tooltip
 
-![image](../images/GetProductDetails.png)
+![image](~/images/GetProductDetails.png)
 
 In a similar way we can provide more detailed information at the point the developer comes to instantiating an instance of the parameter 
 
@@ -63,7 +63,7 @@ public class GetProductDetails : IQuery<IEnumerable<ProductDetail>>
 
 Which will be displayed like this at the point the developer beings to `new` up an instance
 
-![image](../images/GetProductDetails2.png)
+![image](~/images/GetProductDetails2.png)
 
 This level of detail can be especially useful when a parameter object supports multiple sets of input criteria, i.e. when it has more than method of construction
 
@@ -89,7 +89,7 @@ public class GetProductDetails : IQuery<IEnumerable<ProductDetail>>
 }
 ```
 
-![image](../images/GetProductDetails3.png)
+![image](~/images/GetProductDetails3.png)
 
 ## Discoverable
 
@@ -183,7 +183,7 @@ All the handlers are now squirrelled away within the static `Handlers` class.
 
 It is also good practice to organise the source code into folder structures that match the heirarchy of organising class names
 
-![image](../images/GetProductDetails4.png)
+![image](~/images/GetProductDetails4.png)
 
 ## Reducing code
 

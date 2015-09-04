@@ -11,8 +11,8 @@ namespace Qujck.MarkdownEditor.Aspects
     public sealed class PrepareHtml : IQueryHandler<Query.Html, string>
     {
         private readonly IQueryHandler<Query.Html, string> decorated;
-        private readonly IQueryHandler<Query.Styles, string> styles;
-        private readonly IQueryHandler<Query.Scripts, string> scripts;
+        private readonly IQueryHandler<Query.Styles, string> stylesQuery;
+        private readonly IQueryHandler<Query.Scripts, string> scriptsQuery;
 
         public PrepareHtml(
             IQueryHandler<Query.Html, string> decorated,
@@ -20,8 +20,8 @@ namespace Qujck.MarkdownEditor.Aspects
             IQueryHandler<Query.Scripts, string> scripts)
         {
             this.decorated = decorated;
-            this.styles = styles;
-            this.scripts = scripts;
+            this.stylesQuery = styles;
+            this.scriptsQuery = scripts;
         }
 
         public string Execute(Query.Html query)
@@ -29,8 +29,8 @@ namespace Qujck.MarkdownEditor.Aspects
             string result = this.decorated.Execute(query);
 
             var html = result
-                .Replace("${style}", this.styles.Execute())
-                .Replace("${script}", this.scripts.Execute());
+                .Replace("${style}", this.stylesQuery.Execute())
+                .Replace("${script}", this.scriptsQuery.Execute());
 
             return html;
         }

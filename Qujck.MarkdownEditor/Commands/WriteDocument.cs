@@ -37,18 +37,20 @@ namespace Qujck.MarkdownEditor.Commands
         {
             public sealed class WriteDocumentHandler : ICommandHandler<WriteDocument>
             {
-                private readonly IQueryHandler<Query.Html, string> html;
+                private readonly IQueryHandler<Query.Html, string> htmlQuery;
 
                 public WriteDocumentHandler(IQueryHandler<Query.Html, string> html)
                 {
-                    this.html = html;
+                    this.htmlQuery = html;
                 }
 
                 public void Run(WriteDocument command)
                 {
+                    string html = this.htmlQuery.Execute();
+
                     command.WebBrowser.Url = new Uri("about:blank");
                     var document = command.WebBrowser.Document.OpenNew(true);
-                    var text = this.html.Execute().Replace("${body}", command.Markdown);
+                    var text = html.Replace("${body}", command.Markdown);
                     document.Write(text);
                 }
             }

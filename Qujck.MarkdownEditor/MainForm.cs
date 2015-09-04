@@ -31,7 +31,7 @@ namespace Qujck.MarkdownEditor
 
         private void TextView_TextChanged(object sender, EventArgs e)
         {
-            var markdownHandler = this.resolver.Resolve<IQueryHandler<Query.Markdown, string>>();
+            var markdownHandler = this.resolver.Resolve<IQueryHandler<Query.MarkdownToHtml, string>>();
             var writeDocumentHandler = this.resolver.Resolve<ICommandHandler<Command.WriteDocument>>();
 
             var markdown = markdownHandler.Execute(TextView.Text);

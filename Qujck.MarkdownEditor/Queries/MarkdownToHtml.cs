@@ -10,14 +10,14 @@ namespace Qujck.MarkdownEditor.Queries
 {
     public static partial class Query
     {
-        public static string Execute(this IQueryHandler<Markdown, string> handler, string text)
+        public static string Execute(this IQueryHandler<MarkdownToHtml, string> handler, string text)
         {
-            return handler.Execute(new Markdown(text));
+            return handler.Execute(new MarkdownToHtml(text));
         }
 
-        public sealed class Markdown : IQuery<string>
+        public sealed class MarkdownToHtml : IQuery<string>
         {
-            internal Markdown(string text)
+            internal MarkdownToHtml(string text)
             {
                 this.Text = text;
             }
@@ -27,17 +27,13 @@ namespace Qujck.MarkdownEditor.Queries
 
         public static partial class Handlers
         {
-            public sealed class MarkdownHandler : IQueryHandler<Markdown, string>
+            public sealed class MarkdownToHtmlHandler : IQueryHandler<MarkdownToHtml, string>
             {
-                public string Execute(Markdown query)
+                public string Execute(MarkdownToHtml query)
                 {
-                    var content = query.Text.Replace(
-                        "![image](~",
-                        string.Format("![image]({0}", ""));
-
                     var transformer = new Markdownify();
 
-                    string markdown = transformer.Transform(content);
+                    string markdown = transformer.Transform(query.Text);
 
                     return markdown;
                 }
