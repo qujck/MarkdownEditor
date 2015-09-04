@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Strike.IE;
+using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Queries
 {

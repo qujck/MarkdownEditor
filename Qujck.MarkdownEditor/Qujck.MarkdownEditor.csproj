@@ -71,7 +71,7 @@
     <Compile Include="Queries\Markdown.cs" />
     <Compile Include="Queries\Scripts.cs" />
     <Compile Include="Queries\Styles.cs" />
-    <Compile Include="ResourceHelpers.cs" />
+    <Compile Include="Infrastructure\ResourceHelpers.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

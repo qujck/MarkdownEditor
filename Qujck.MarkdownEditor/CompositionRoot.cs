@@ -20,9 +20,12 @@ namespace Qujck.MarkdownEditor
 
         public CompositionRoot()
         {
-            this.markdownHandler = new PrettifyMarkdown(new Query.Handlers.MarkdownHandler());
-            this.scriptsHandler = new PrettifyScripts(new Query.Handlers.ScriptsHandler());
-            this.stylesHandler = new PrettifyStyles(new Query.Handlers.StylesHandler());
+            this.markdownHandler = new PrettifyMarkdown(
+                new Query.Handlers.MarkdownHandler());
+            this.scriptsHandler = new PrettifyScripts(
+                new Query.Handlers.ScriptsHandler());
+            this.stylesHandler = new PrettifyStyles(
+                new Query.Handlers.StylesHandler());
 
             this.htmlHandler = new PrepareHtml(
                 new Query.Handlers.HtmlHandler(),

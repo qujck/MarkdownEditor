@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qujck.MarkdownEditor
+namespace Qujck.MarkdownEditor.Infrastructure
 {
     public static class ResourceHelpers
     {
