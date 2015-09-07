@@ -4,28 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.Commands;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    public sealed class ImagePathFixer : IQueryHandler<Query.MarkdownToHtml, string>
+    public sealed class ImagePathFixer : ICommandHandler<Command.WriteDocument>
     {
-        private readonly IQueryHandler<Query.MarkdownToHtml, string> decorated;
+        private readonly ICommandHandler<Command.WriteDocument> decorated;
 
-        public ImagePathFixer(IQueryHandler<Query.MarkdownToHtml, string> decorated)
+        public ImagePathFixer(ICommandHandler<Command.WriteDocument> decorated)
         {
             this.decorated = decorated;
         }
 
-        public string Execute(Query.MarkdownToHtml query)
+        public void Run(Command.WriteDocument command)
         {
-            string markdown = query.Text.Replace(
+            string text = command.Markdown.Replace(
                 "![image](~",
                 string.Format("![image]({0}", ".."));
 
-            string html = this.decorated.Execute(markdown);
-
-            return html;
+            this.decorated.Run(command.WebBrowser, text);
         }
     }
 }

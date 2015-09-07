@@ -14,16 +14,11 @@ namespace Qujck.MarkdownEditor
         private readonly ICommandHandler<Command.WriteDocument> writeDocumentHandler;
 
         private readonly IQueryHandler<Query.Html, string> htmlHandler;
-        private readonly IQueryHandler<Query.MarkdownToHtml, string> markdownHandler;
         private readonly IQueryHandler<Query.Scripts, string> scriptsHandler;
         private readonly IQueryHandler<Query.Styles, string> stylesHandler;
 
         public CompositionRoot()
         {
-            this.markdownHandler = new PrettifyMarkdown(
-                new ImagePathFixer(
-                    new Query.Handlers.MarkdownToHtmlHandler()));
-
             this.scriptsHandler = new PrettifyScripts(
                 new Query.Handlers.ScriptsHandler());
 
@@ -42,11 +37,7 @@ namespace Qujck.MarkdownEditor
 
         public T Resolve<T>() where T : class
         { 
-            if (typeof(T) == typeof(IQueryHandler<Query.MarkdownToHtml, string>))
-            {
-                return this.markdownHandler as T;
-            }
-            else if (typeof(T) == typeof(ICommandHandler<Command.WriteDocument>))
+            if (typeof(T) == typeof(ICommandHandler<Command.WriteDocument>))
             {
                 return this.writeDocumentHandler as T;
             }

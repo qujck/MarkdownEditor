@@ -48,10 +48,9 @@ namespace Qujck.MarkdownEditor.Commands
                 {
                     string html = this.htmlQuery.Execute();
 
-                    command.WebBrowser.Url = new Uri("about:blank");
-                    var document = command.WebBrowser.Document.OpenNew(true);
-                    var text = html.Replace("${body}", command.Markdown);
-                    document.Write(text);
+                    var document = command.WebBrowser.Document;
+                    document.Write(html);
+                    document.InvokeScript("render", new object[] { command.Markdown });
                 }
             }
         }

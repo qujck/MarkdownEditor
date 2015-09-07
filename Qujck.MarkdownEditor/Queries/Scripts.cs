@@ -25,7 +25,8 @@ namespace Qujck.MarkdownEditor.Queries
             {
                 public string Execute(Scripts query)
                 {
-                    var scripts = new StringBuilder();
+                    var scripts = new StringBuilder()
+                        .AppendResource(@"Scripts.marked.js");
 
                     return scripts.ToString();
                 }
