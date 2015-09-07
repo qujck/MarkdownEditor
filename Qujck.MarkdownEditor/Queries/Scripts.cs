@@ -25,10 +25,7 @@ namespace Qujck.MarkdownEditor.Queries
             {
                 public string Execute(Scripts query)
                 {
-                    var scripts = new StringBuilder()
-                        .AppendResource("Scripts.modernizr-2.8.3.js")
-                        .AppendResource("Scripts.jquery-1.11.3.min.js")
-                        .AppendResource("Scripts.bootstrap.min.js");
+                    var scripts = new StringBuilder();
 
                     return scripts.ToString();
                 }

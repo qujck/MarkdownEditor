@@ -106,7 +106,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Scripts\jquery-1.11.3.min.map" />
     <EmbeddedResource Include="test.md" />
   </ItemGroup>
   <ItemGroup>
@@ -117,7 +116,7 @@
     <EmbeddedResource Include="Content\layout.html" />
     <EmbeddedResource Include="Content\site.css" />
     <EmbeddedResource Include="Content\stackoverflow.css" />
-    <EmbeddedResource Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <EmbeddedResource Include="Content\bootstrap.min.css" />
     <Content Include="Content\Prettify\prettify.css" />
@@ -127,11 +126,7 @@
     <Content Include="Content\Prettify\Themes\sunburst.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\bootstrap.js" />
-    <EmbeddedResource Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.11.3.intellisense.js" />
-    <Content Include="Scripts\jquery-1.11.3.js" />
-    <EmbeddedResource Include="Scripts\jquery-1.11.3.min.js" />
-    <EmbeddedResource Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <EmbeddedResource Include="Scripts\Prettify\lang-apollo.js" />
     <EmbeddedResource Include="Scripts\Prettify\lang-basic.js" />
     <EmbeddedResource Include="Scripts\Prettify\lang-clj.js" />
@@ -161,6 +156,7 @@
     <EmbeddedResource Include="Scripts\Prettify\lang-xq.js" />
     <EmbeddedResource Include="Scripts\Prettify\lang-yaml.js" />
     <EmbeddedResource Include="Scripts\Prettify\prettify.js" />
+    <EmbeddedResource Include="Scripts\marked.js" />
     <Content Include="Scripts\Prettify\run_prettify.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

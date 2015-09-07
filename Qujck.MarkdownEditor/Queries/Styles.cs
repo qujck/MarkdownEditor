@@ -27,7 +27,6 @@ namespace Qujck.MarkdownEditor.Queries
                 {
                     var csss = new StringBuilder()
                         .AppendResource("Content.bootstrap.min.css")
-                        .AppendResource("Content.bootstrap-theme.min.css")
                         .AppendResource("Content.site.css");
 
                     return csss.ToString();
