@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Qujck.MarkdownEditor.Infrastructure;
 using Qujck.MarkdownEditor.Queries;
@@ -42,9 +36,11 @@ namespace Qujck.MarkdownEditor
 
         private void TextView_TextChanged(object sender, EventArgs e)
         {
-            var writeDocumentHandler = this.resolver.Resolve<ICommandHandler<Command.WriteDocument>>();
+            var writeCommand = this.resolver.Resolve<ICommandHandler<Command.WriteDocument>>();
 
-            writeDocumentHandler.Run(RenderedView, TextView.Text);
+            writeCommand.Run(
+                this.RenderedView.Document, 
+                TextView.Text);
         }
     }
 }

@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
     <script>${script}</script>
-    <style>${style}</style>
     <script>
-        function render(text) {
+        function renderMarkdown(text) {
             var result = marked(text);
-            result = result.replace(new RegExp('<pre', 'g'), '<pre class="prettyprint"');
             document.getElementById('content').innerHTML = result; 
         }
     </script>
+    <style>${style}</style>
 </head>
 <body>
     <div class="container body-content">

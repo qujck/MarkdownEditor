@@ -23,7 +23,7 @@ namespace Qujck.MarkdownEditor.Aspects
                 "![image](~",
                 string.Format("![image]({0}", ".."));
 
-            this.decorated.Run(command.WebBrowser, text);
+            this.decorated.Run(command.Document, text);
         }
     }
 }

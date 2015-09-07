@@ -21,7 +21,7 @@ namespace Qujck.MarkdownEditor.Aspects
         {
             this.decorated.Run(command);
 
-            command.WebBrowser.Document.InvokeScript("Prettify");
+            command.Document.InvokeScript("prettifyCodeSamples");
         }
     }
 }

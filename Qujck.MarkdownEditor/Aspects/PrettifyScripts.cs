@@ -24,9 +24,9 @@ namespace Qujck.MarkdownEditor.Aspects
             var scripts = new StringBuilder(result)
                 .AppendResource("Scripts.Prettify.prettify.js")
                 .AppendManyResources("Scripts.Prettify.lang-")
-                .AppendLine(@"function Prettify() {
+                .AppendLine(@"function prettifyCodeSamples() {
     var text = document.getElementById('content').innerHTML;
-    var result = text.split('<pre').join('<pre class=""prettyprint""');
+    var result = text.replace(/<pre/gi, '<pre class=""prettyprint""');
     document.getElementById('content').innerHTML = result;
     prettyPrint();
 }");

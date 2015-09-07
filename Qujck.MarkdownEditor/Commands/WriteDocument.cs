@@ -13,23 +13,23 @@ namespace Qujck.MarkdownEditor.Commands
     {
         public static void Run(
             this ICommandHandler<WriteDocument> handler,
-            WebBrowser webBrowser,
+            HtmlDocument document,
             string markdown)
         {
-            handler.Run(new WriteDocument(webBrowser, markdown));
+            handler.Run(new WriteDocument(document, markdown));
         }
 
         public sealed class WriteDocument : ICommand
         {
             internal WriteDocument(
-                WebBrowser webBrowser, 
+                HtmlDocument document, 
                 string markdown)
             {
-                this.WebBrowser = webBrowser;
+                this.Document = document;
                 this.Markdown = markdown;
             }
 
-            public WebBrowser WebBrowser { get; private set; }
+            public HtmlDocument Document { get; private set; }
             public string Markdown { get; private set; }
         }
 
@@ -39,8 +39,7 @@ namespace Qujck.MarkdownEditor.Commands
             {
                 public void Run(WriteDocument command)
                 {
-                    var document = command.WebBrowser.Document;
-                    document.InvokeScript("render", new object[] { command.Markdown });
+                    command.Document.InvokeScript("renderMarkdown", new object[] { command.Markdown });
                 }
             }
         }
