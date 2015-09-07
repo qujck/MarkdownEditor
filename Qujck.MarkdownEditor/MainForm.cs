@@ -23,11 +23,21 @@ namespace Qujck.MarkdownEditor
         {
             InitializeComponent();
             this.resolver = new CompositionRoot();
-            this.RenderedView.Url = new Uri("about:blank");
+            this.InitialiseHtml();
 
             var md = ResourceHelpers.ReadResource("Qujck.MarkdownEditor.test.md");
             TextView.Text = md;
             TextView.Select(0, 0);
+        }
+
+        private void InitialiseHtml()
+        {
+            var htmlQuery = this.resolver.Resolve<IQueryHandler<Query.Html, string>>();
+
+            string html = htmlQuery.Execute();
+            this.RenderedView.Url = new Uri("about:blank");
+            var document = RenderedView.Document;
+            document.Write(html);
         }
 
         private void TextView_TextChanged(object sender, EventArgs e)

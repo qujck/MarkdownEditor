@@ -26,7 +26,7 @@ namespace Qujck.MarkdownEditor.Aspects
                 .AppendManyResources("Scripts.Prettify.lang-")
                 .AppendLine(@"function Prettify() {
     var text = document.getElementById('content').innerHTML;
-    var result = text.replace(new RegExp('<pre', 'g'), '<pre class=""prettyprint""');
+    var result = text.split('<pre').join('<pre class=""prettyprint""');
     document.getElementById('content').innerHTML = result;
     prettyPrint();
 }");

@@ -31,12 +31,15 @@ namespace Qujck.MarkdownEditor
                 this.scriptsHandler);
 
             this.writeDocumentHandler = new PrettifyInvoke(
-                new Command.Handlers.WriteDocumentHandler(
-                    this.htmlHandler));
+                new Command.Handlers.WriteDocumentHandler());
         }
 
         public T Resolve<T>() where T : class
         { 
+            if (typeof(T) == typeof(IQueryHandler<Query.Html, string>))
+            {
+                return this.htmlHandler as T;
+            }
             if (typeof(T) == typeof(ICommandHandler<Command.WriteDocument>))
             {
                 return this.writeDocumentHandler as T;
