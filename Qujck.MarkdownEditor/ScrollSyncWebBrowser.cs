@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Qujck.MarkdownEditor
 {
-    public class ScrollSyncWebBrowser : WebBrowser, ISyncScroll
+    public sealed class ScrollSyncWebBrowser : WebBrowser, ISyncScroll
     {
         public ISyncScroll Buddy { get; set; }
 

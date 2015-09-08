@@ -2131,7 +2131,11 @@ select m
       <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Instances size shouldn't be too big</Name>
 warnif count > 0 from t in JustMyCode.Types where 
   t.SizeOfInst > 64 &&
-  t.BaseClass.Name != "Form"
+  t.BaseClass.Name != "Form" &&
+  !new string[] {
+    "ScrollSyncTextBox",
+    "ScrollSyncWebBrowser"
+  }.Contains(t.Name)
   orderby t.SizeOfInst descending
 select new { t, t.SizeOfInst, t.InstanceFields }
 

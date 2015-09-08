@@ -56,7 +56,6 @@
     <Compile Include="Commands\ICommandHandler.cs" />
     <Compile Include="Commands\WriteDocument.cs" />
     <Compile Include="CompositionRoot.cs" />
-    <Compile Include="Infrastructure\Markdown.cs" />
     <Compile Include="ISyncScroll.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Qujck.MarkdownEditor
 {
-    class TODO
-    {
-        [DllImport("user32.dll")]
-        public static extern bool LockWindowUpdate(IntPtr hWndLock);
-    }
+    //class TODO
+    //{
+    //    [DllImport("user32.dll")]
+    //    public static extern bool LockWindowUpdate(IntPtr hWndLock);
+    //}
 }

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace Qujck.MarkdownEditor
 {
-    public class ScrollSyncTextBox : TextBox, ISyncScroll
+    public sealed class ScrollSyncTextBox : TextBox, ISyncScroll
     {
         public ISyncScroll Buddy { get; set; }
 
@@ -77,18 +77,28 @@ namespace Qujck.MarkdownEditor
         [DllImport("user32.dll")]
         private static extern bool GetScrollInfo(IntPtr hwnd, int fnBar, ref SCROLLINFO ScrollInfo);
 
-        struct SCROLLINFO
+        private struct SCROLLINFO
         {
             public int cbSize;
-            public uint fMask;
+            public int fMask;
             public int nMin;
             public int nMax;
-            public uint nPage;
+            public int nPage;
             public int nPos;
             public int nTrackPos;
+
+            public override bool Equals(object obj)
+            {
+                return base.Equals(obj);
+            }
+
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
         }
 
-        public enum ScrollBarDirection
+        private enum ScrollBarDirection
         {
             SB_HORZ = 0,
             SB_VERT = 1,
@@ -96,7 +106,7 @@ namespace Qujck.MarkdownEditor
             SB_BOTH = 3
         }
 
-        public enum ScrollInfoMask
+        private enum ScrollInfoMask
         {
             SIF_RANGE = 0x1,
             SIF_PAGE = 0x2,
