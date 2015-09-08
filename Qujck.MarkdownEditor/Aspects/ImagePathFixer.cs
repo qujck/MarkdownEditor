@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Qujck.MarkdownEditor.Infrastructure;
@@ -21,7 +22,7 @@ namespace Qujck.MarkdownEditor.Aspects
         {
             string text = command.Markdown.Replace(
                 "![image](~",
-                string.Format("![image]({0}", ".."));
+                string.Format("![image]({0}", System.IO.Directory.GetCurrentDirectory() + "\\..\\..\\" ));
 
             this.decorated.Run(command.Document, text);
         }

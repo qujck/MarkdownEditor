@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qujck.MarkdownEditor.Tests.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4E0A783F-ED57-4BC6-80AA-D472EB9E26B6}"
 	ProjectSection(SolutionItems) = preProject
+		Qujck.MarkdownEditor\Image1.png = Qujck.MarkdownEditor\Image1.png
+		Qujck.MarkdownEditor\Image2.png = Qujck.MarkdownEditor\Image2.png
+		Qujck.MarkdownEditor\Image3.png = Qujck.MarkdownEditor\Image3.png
+		Qujck.MarkdownEditor\Image4.png = Qujck.MarkdownEditor\Image4.png
 		Qujck.MarkdownEditor.ndproj = Qujck.MarkdownEditor.ndproj
 	EndProjectSection
 EndProject

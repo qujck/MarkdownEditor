@@ -30,8 +30,9 @@ namespace Qujck.MarkdownEditor
                 this.stylesHandler,
                 this.scriptsHandler);
 
-            this.writeDocumentHandler = new PrettifyInvoke(
-                new Command.Handlers.WriteDocumentHandler());
+            this.writeDocumentHandler = new ImagePathFixer(
+                new PrettifyInvoke(
+                    new Command.Handlers.WriteDocumentHandler()));
         }
 
         public T Resolve<T>() where T : class
