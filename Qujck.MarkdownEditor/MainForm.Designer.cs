@@ -42,6 +42,7 @@
             this.SplitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.SplitContainer1.IsSplitterFixed = true;
             this.SplitContainer1.Location = new System.Drawing.Point(1, 0);
             this.SplitContainer1.Name = "SplitContainer1";
             // 
@@ -52,8 +53,8 @@
             // SplitContainer1.Panel2
             // 
             this.SplitContainer1.Panel2.Controls.Add(this.RenderedView);
-            this.SplitContainer1.Size = new System.Drawing.Size(933, 695);
-            this.SplitContainer1.SplitterDistance = 437;
+            this.SplitContainer1.Size = new System.Drawing.Size(934, 695);
+            this.SplitContainer1.SplitterDistance = 465;
             this.SplitContainer1.TabIndex = 2;
             // 
             // TextView
@@ -66,7 +67,7 @@
             this.TextView.Multiline = true;
             this.TextView.Name = "TextView";
             this.TextView.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TextView.Size = new System.Drawing.Size(437, 695);
+            this.TextView.Size = new System.Drawing.Size(465, 695);
             this.TextView.TabIndex = 3;
             this.TextView.TextChanged += new System.EventHandler(this.TextView_TextChanged);
             // 
@@ -79,7 +80,7 @@
             this.RenderedView.MinimumSize = new System.Drawing.Size(20, 20);
             this.RenderedView.Name = "RenderedView";
             this.RenderedView.ScriptErrorsSuppressed = true;
-            this.RenderedView.Size = new System.Drawing.Size(492, 695);
+            this.RenderedView.Size = new System.Drawing.Size(465, 695);
             this.RenderedView.TabIndex = 3;
             this.RenderedView.WebBrowserShortcutsEnabled = false;
             // 
@@ -87,7 +88,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 695);
+            this.ClientSize = new System.Drawing.Size(934, 695);
             this.Controls.Add(this.SplitContainer1);
             this.Name = "MainForm";
             this.Text = "Form1";

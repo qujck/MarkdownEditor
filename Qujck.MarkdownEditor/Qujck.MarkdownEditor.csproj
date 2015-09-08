@@ -158,7 +158,7 @@
     <EmbeddedResource Include="Scripts\Prettify\lang-xq.js" />
     <EmbeddedResource Include="Scripts\Prettify\lang-yaml.js" />
     <EmbeddedResource Include="Scripts\Prettify\prettify.js" />
-    <EmbeddedResource Include="Scripts\marked.js" />
+    <EmbeddedResource Include="Scripts\marked.min.js" />
     <Content Include="Scripts\Prettify\run_prettify.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
