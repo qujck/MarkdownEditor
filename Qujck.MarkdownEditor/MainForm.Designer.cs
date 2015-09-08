@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SplitContainer1 = new System.Windows.Forms.SplitContainer();
             this.TextView = new Qujck.MarkdownEditor.ScrollSyncTextBox();
             this.RenderedView = new Qujck.MarkdownEditor.ScrollSyncWebBrowser();
@@ -54,7 +55,7 @@
             // 
             this.SplitContainer1.Panel2.Controls.Add(this.RenderedView);
             this.SplitContainer1.Size = new System.Drawing.Size(934, 695);
-            this.SplitContainer1.SplitterDistance = 465;
+            this.SplitContainer1.SplitterDistance = 464;
             this.SplitContainer1.TabIndex = 2;
             // 
             // TextView
@@ -67,7 +68,7 @@
             this.TextView.Multiline = true;
             this.TextView.Name = "TextView";
             this.TextView.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TextView.Size = new System.Drawing.Size(465, 695);
+            this.TextView.Size = new System.Drawing.Size(464, 695);
             this.TextView.TabIndex = 3;
             this.TextView.TextChanged += new System.EventHandler(this.TextView_TextChanged);
             // 
@@ -80,7 +81,7 @@
             this.RenderedView.MinimumSize = new System.Drawing.Size(20, 20);
             this.RenderedView.Name = "RenderedView";
             this.RenderedView.ScriptErrorsSuppressed = true;
-            this.RenderedView.Size = new System.Drawing.Size(465, 695);
+            this.RenderedView.Size = new System.Drawing.Size(466, 695);
             this.RenderedView.TabIndex = 3;
             this.RenderedView.WebBrowserShortcutsEnabled = false;
             // 
@@ -90,8 +91,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(934, 695);
             this.Controls.Add(this.SplitContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Qujck Markdown Editor";
             this.SplitContainer1.Panel1.ResumeLayout(false);
             this.SplitContainer1.Panel1.PerformLayout();
             this.SplitContainer1.Panel2.ResumeLayout(false);
