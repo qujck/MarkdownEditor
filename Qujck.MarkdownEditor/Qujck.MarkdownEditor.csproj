@@ -57,6 +57,7 @@
     <Compile Include="Commands\WriteDocument.cs" />
     <Compile Include="CompositionRoot.cs" />
     <Compile Include="Infrastructure\Markdown.cs" />
+    <Compile Include="ISyncScroll.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +72,13 @@
     <Compile Include="Queries\Scripts.cs" />
     <Compile Include="Queries\Styles.cs" />
     <Compile Include="Infrastructure\ResourceHelpers.cs" />
+    <Compile Include="ScrollSyncTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ScrollSyncWebBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TODO.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

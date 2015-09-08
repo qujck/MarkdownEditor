@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.SplitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.TextView = new System.Windows.Forms.TextBox();
-            this.RenderedView = new System.Windows.Forms.WebBrowser();
+            this.TextView = new Qujck.MarkdownEditor.ScrollSyncTextBox();
+            this.RenderedView = new Qujck.MarkdownEditor.ScrollSyncWebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer1)).BeginInit();
             this.SplitContainer1.Panel1.SuspendLayout();
             this.SplitContainer1.Panel2.SuspendLayout();
@@ -58,30 +58,28 @@
             // 
             // TextView
             // 
-            this.TextView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.TextView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextView.Buddy = null;
+            this.TextView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TextView.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextView.Location = new System.Drawing.Point(0, 0);
             this.TextView.Multiline = true;
             this.TextView.Name = "TextView";
             this.TextView.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TextView.Size = new System.Drawing.Size(434, 692);
+            this.TextView.Size = new System.Drawing.Size(437, 695);
             this.TextView.TabIndex = 3;
             this.TextView.TextChanged += new System.EventHandler(this.TextView_TextChanged);
             // 
             // RenderedView
             // 
             this.RenderedView.AllowWebBrowserDrop = false;
-            this.RenderedView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RenderedView.Location = new System.Drawing.Point(3, 0);
+            this.RenderedView.Buddy = null;
+            this.RenderedView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RenderedView.Location = new System.Drawing.Point(0, 0);
             this.RenderedView.MinimumSize = new System.Drawing.Size(20, 20);
             this.RenderedView.Name = "RenderedView";
             this.RenderedView.ScriptErrorsSuppressed = true;
-            this.RenderedView.Size = new System.Drawing.Size(486, 692);
+            this.RenderedView.Size = new System.Drawing.Size(492, 695);
             this.RenderedView.TabIndex = 3;
             this.RenderedView.WebBrowserShortcutsEnabled = false;
             // 
@@ -105,8 +103,8 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer SplitContainer1;
-        private System.Windows.Forms.WebBrowser RenderedView;
-        private System.Windows.Forms.TextBox TextView;
+        private ScrollSyncWebBrowser RenderedView;
+        private ScrollSyncTextBox TextView;
     }
 }
 

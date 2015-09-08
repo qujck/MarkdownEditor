@@ -16,6 +16,10 @@ namespace Qujck.MarkdownEditor
         public MainForm()
         {
             InitializeComponent();
+
+            this.TextView.Buddy = this.RenderedView;
+            this.RenderedView.Buddy = this.TextView;
+
             this.resolver = new CompositionRoot();
             this.InitialiseHtml();
 
@@ -29,9 +33,7 @@ namespace Qujck.MarkdownEditor
             var htmlQuery = this.resolver.Resolve<IQueryHandler<Query.Html, string>>();
 
             string html = htmlQuery.Execute();
-            this.RenderedView.Url = new Uri("about:blank");
-            var document = RenderedView.Document;
-            document.Write(html);
+            this.RenderedView.Load(html);
         }
 
         private void TextView_TextChanged(object sender, EventArgs e)
