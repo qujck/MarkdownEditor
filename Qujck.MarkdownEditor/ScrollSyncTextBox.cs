@@ -1,5 +1,4 @@
-﻿// http://stackoverflow.com/questions/3823188/how-can-i-sync-the-scrolling-of-two-multiline-textboxes
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
@@ -10,12 +9,10 @@ namespace Qujck.MarkdownEditor
     {
         public ISyncScroll Buddy { get; set; }
 
-        public bool IsScrolling
-        {
-            get;
-            private set;
-        }
+        public bool IsScrolling { get; private set; }
 
+        /* http://stackoverflow.com/q/3823188 - http://stackoverflow.com/users/319611/lesderid
+         * http://stackoverflow.com/a/3823319 - http://stackoverflow.com/users/17034/hans-passant */
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
@@ -32,24 +29,6 @@ namespace Qujck.MarkdownEditor
             }
         }
 
-        private double ScrollBarTopToPercentage()
-        {
-            SCROLLINFO info = new SCROLLINFO();
-            info.cbSize = Marshal.SizeOf(info);
-            info.fMask = (int)ScrollInfoMask.SIF_ALL;
-            var result = GetScrollInfo(this.Handle, (int)ScrollBarDirection.SB_VERT, ref info);
-            return (info.nPos * 100.0) / (info.nMax * 1.0);
-        }
-
-        private int ScrollBarTopFromPercentage(double percentage)
-        {
-            SCROLLINFO info = new SCROLLINFO();
-            info.cbSize = Marshal.SizeOf(info);
-            info.fMask = (int)ScrollInfoMask.SIF_ALL;
-            var result = GetScrollInfo(this.Handle, (int)ScrollBarDirection.SB_VERT, ref info);
-            return (int)((percentage / 100) * info.nMax);
-        }
-
         public void Scroll(double percentage)
         {
             if (!this.IsScrolling)
@@ -62,8 +41,32 @@ namespace Qujck.MarkdownEditor
             }
         }
 
+        private double ScrollBarTopToPercentage()
+        {
+            SCROLLINFO info = this.GetScrollInfo();
+
+            return (info.nPos * 100.0) / (info.nMax * 1.0);
+        }
+
+        private int ScrollBarTopFromPercentage(double percentage)
+        {
+            SCROLLINFO info = this.GetScrollInfo();
+
+            return (int)((percentage / 100) * info.nMax);
+        }
+
+        private SCROLLINFO GetScrollInfo()
+        {
+            SCROLLINFO info = new SCROLLINFO();
+            info.cbSize = Marshal.SizeOf(info);
+            info.fMask = (int)ScrollInfoMask.SIF_ALL;
+            GetScrollInfo(this.Handle, (int)ScrollBarDirection.SB_VERT, ref info);
+
+            return info;
+        }
+
         [DllImport("user32.dll")]
-        static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
+        private static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
 
         [DllImport("user32.dll")]
         private static extern bool SendMessage(IntPtr hWnd, int nBar, int wParam, int lParam);

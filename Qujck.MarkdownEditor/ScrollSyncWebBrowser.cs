@@ -8,22 +8,30 @@ namespace Qujck.MarkdownEditor
     {
         public ISyncScroll Buddy { get; set; }
 
-        public bool IsScrolling
-        {
-            get;
-            private set;
-        }
+        public bool IsScrolling { get; private set; }
 
         public void Load(string html)
         {
             this.Url = new Uri("about:blank");
             this.Document.Write(html);
+            /* http://stackoverflow.com/q/11115043 - http://stackoverflow.com/users/1356321/pomster
+             * http://stackoverflow.com/a/12893075 - http://stackoverflow.com/users/331982/nick-w */
             this.Document.Window.AttachEventHandler("onscroll", OnScrollEventHandler);
         }
 
-        public void OnScrollEventHandler(object sender, EventArgs e)
+        public void Scroll(double percentage)
         {
-            // Trap WM_VSCROLL message and pass to buddy
+            if (!this.IsScrolling)
+            {
+                this.IsScrolling = true;
+                int top = this.ScrollBarTopFromPercentage(percentage);
+                this.Document.GetElementsByTagName("HTML")[0].ScrollTop = top;
+                Task.Factory.StartNew(() => this.IsScrolling = false);
+            }
+        }
+
+        private void OnScrollEventHandler(object sender, EventArgs e)
+        {
             if (!this.IsScrolling &&
                 !this.Buddy.IsScrolling &&
                 this.Buddy != null &&
@@ -38,24 +46,17 @@ namespace Qujck.MarkdownEditor
 
         private double ScrollBarTopToPercentage()
         {
-            return (this.Document.GetElementsByTagName("HTML")[0].ScrollTop * 100) /
-                    this.Document.GetElementsByTagName("HTML")[0].ScrollRectangle.Height;
+            int top = this.Document.GetElementsByTagName("HTML")[0].ScrollTop;
+            int height = this.Document.GetElementsByTagName("HTML")[0].ScrollRectangle.Height;
+
+            return (top * 100.0) / (height * 1.0);
         }
 
         private int ScrollBarTopFromPercentage(double percentage)
         {
-            return (int)((percentage / 100) * this.Document.GetElementsByTagName("HTML")[0].ScrollRectangle.Height);   
-        }
+            int height = this.Document.GetElementsByTagName("HTML")[0].ScrollRectangle.Height;
 
-        public void Scroll(double percentage)
-        {
-            if (!this.IsScrolling)
-            {
-                this.IsScrolling = true;
-                int top = this.ScrollBarTopFromPercentage(percentage);
-                this.Document.GetElementsByTagName("HTML")[0].ScrollTop = top;
-                Task.Factory.StartNew(() => this.IsScrolling = false);
-            }
+            return (int)((percentage / 100) * height);
         }
     }
 }
