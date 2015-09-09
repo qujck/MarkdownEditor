@@ -32,7 +32,7 @@ namespace Qujck.MarkdownEditor.Queries
 
                 public string Execute(Html query)
                 {
-                    string html = this.stringResourceProvider.Single("Content.layout.html");
+                    string html = this.stringResourceProvider.Single(Constants.Content.Layout);
 
                     return html;
                 }

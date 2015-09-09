@@ -56,6 +56,7 @@
     <Compile Include="Commands\ICommandHandler.cs" />
     <Compile Include="Commands\WriteDocument.cs" />
     <Compile Include="CompositionRoot.cs" />
+    <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="Infrastructure\IStringResourceProvider.cs" />
     <Compile Include="Infrastructure\StringResourceProvider.cs" />
     <Compile Include="ISyncScroll.cs" />
