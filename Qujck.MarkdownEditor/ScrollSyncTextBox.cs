@@ -92,9 +92,18 @@ namespace Qujck.MarkdownEditor
             {
                 this.SyncSmoothScrollTimer.Tag = info.nPos;
                 this.ScrollBuddy();
+                this.smoothScrollSyncCheckCounter = 0;
                 this.SyncSmoothScrollTimer.Enabled = true;
             }
+            else
+            {
+                this.SyncSmoothScrollTimer.Enabled =
+                    smoothScrollSyncCheckCounter++ < MAXSMOOTHSCROLLCHECKCOUNTER;
+            }
         }
+
+        private int smoothScrollSyncCheckCounter = 0;
+        private const int MAXSMOOTHSCROLLCHECKCOUNTER = 10;
 
         private void InitializeComponent()
         {
@@ -104,6 +113,7 @@ namespace Qujck.MarkdownEditor
             // 
             // SyncSmoothScrollTimer
             // 
+            this.SyncSmoothScrollTimer.Interval = 10;
             this.SyncSmoothScrollTimer.Tick += new System.EventHandler(this.SyncSmoothScrollTimer_Tick);
             this.ResumeLayout(false);
 
