@@ -75,6 +75,9 @@
     <Compile Include="ScrollSyncRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ScrollSyncTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ScrollSyncWebBrowser.cs">
       <SubType>Component</SubType>
     </Compile>
