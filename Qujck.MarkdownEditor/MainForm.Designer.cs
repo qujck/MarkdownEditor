@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SplitContainer1 = new System.Windows.Forms.SplitContainer();
             this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
-            this.TextView = new Qujck.MarkdownEditor.ScrollSyncTextBox();
+            this.TextView = new Qujck.MarkdownEditor.ScrollSyncRichTextBox();
             this.RenderedView = new Qujck.MarkdownEditor.ScrollSyncWebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer1)).BeginInit();
             this.SplitContainer1.Panel1.SuspendLayout();
@@ -113,7 +113,7 @@
 
         private System.Windows.Forms.SplitContainer SplitContainer1;
         private ScrollSyncWebBrowser RenderedView;
-        private ScrollSyncTextBox TextView;
+        private ScrollSyncRichTextBox TextView;
         private System.Windows.Forms.Timer RefreshTimer;
     }
 }

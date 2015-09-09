@@ -72,7 +72,7 @@
     <Compile Include="Queries\IQueryHandler.cs" />
     <Compile Include="Queries\Scripts.cs" />
     <Compile Include="Queries\Styles.cs" />
-    <Compile Include="ScrollSyncTextBox.cs">
+    <Compile Include="ScrollSyncRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ScrollSyncWebBrowser.cs">
@@ -106,8 +106,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="ScrollSyncTextBox.resx">
-      <DependentUpon>ScrollSyncTextBox.cs</DependentUpon>
+    <EmbeddedResource Include="ScrollSyncRichTextBox.resx">
+      <DependentUpon>ScrollSyncRichTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="test.md" />
   </ItemGroup>

@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 
 namespace Qujck.MarkdownEditor
 {
-    public sealed class ScrollSyncTextBox : RichTextBox, ISyncScroll
+    public sealed class ScrollSyncRichTextBox : RichTextBox, ISyncScroll
     {
-        public ScrollSyncTextBox()
+        public ScrollSyncRichTextBox()
         {
             this.InitializeComponent();
         }
