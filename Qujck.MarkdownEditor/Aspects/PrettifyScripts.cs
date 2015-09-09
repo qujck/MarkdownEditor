@@ -10,28 +10,36 @@ namespace Qujck.MarkdownEditor.Aspects
 {
     public sealed class PrettifyScripts : IQueryHandler<Query.Scripts, string>
     {
-        private readonly IQueryHandler<Query.Scripts, string> decorated;
+        const string prettifyCodeSamples = 
+@"function prettifyCodeSamples() {
+    var text = document.getElementById('content').innerHTML;
+    var result = text.replace(/<pre>/gi, '<pre class=""prettyprint"">');
+    document.getElementById('content').innerHTML = result;
+    prettyPrint();
+}";
 
-        public PrettifyScripts(IQueryHandler<Query.Scripts, string> decorated)
+        private readonly IQueryHandler<Query.Scripts, string> decorated;
+        private readonly IStringResourceProvider stringResourceProvider;
+
+        public PrettifyScripts(
+            IQueryHandler<Query.Scripts, string> decorated,
+            IStringResourceProvider stringResourceProvider)
         {
             this.decorated = decorated;
+            this.stringResourceProvider = stringResourceProvider;
         }
 
         public string Execute(Query.Scripts query)
         {
             string result = this.decorated.Execute(query);
 
-            var scripts = new StringBuilder(result)
-                .AppendResource("Scripts.Prettify.prettify.js")
-                .AppendManyResources("Scripts.Prettify.lang-")
-                .AppendLine(@"function prettifyCodeSamples() {
-    var text = document.getElementById('content').innerHTML;
-    var result = text.replace(/<pre>/gi, '<pre class=""prettyprint"">');
-    document.getElementById('content').innerHTML = result;
-    prettyPrint();
-}");
+            string prettify = this.stringResourceProvider.Single("Scripts.Prettify.prettify.js");
+            string prettifyLang = this.stringResourceProvider.Many("Scripts.Prettify.lang-");
 
-            return scripts.ToString();
+            return result + Environment.NewLine +
+                prettify + Environment.NewLine +
+                prettifyLang + Environment.NewLine +
+                prettifyCodeSamples;
         }
     }
 }

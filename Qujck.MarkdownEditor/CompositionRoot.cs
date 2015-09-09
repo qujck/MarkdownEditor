@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Qujck.MarkdownEditor.Infrastructure;
 using Qujck.MarkdownEditor.Commands;
 using Qujck.MarkdownEditor.Queries;
 using Qujck.MarkdownEditor.Aspects;
@@ -17,16 +18,25 @@ namespace Qujck.MarkdownEditor
         private readonly IQueryHandler<Query.Scripts, string> scriptsHandler;
         private readonly IQueryHandler<Query.Styles, string> stylesHandler;
 
+        private readonly IStringResourceProvider stringResourceProvider;
+
         public CompositionRoot()
         {
+            this.stringResourceProvider = new StringResourceProvider();
+
             this.scriptsHandler = new PrettifyScripts(
-                new Query.Handlers.ScriptsHandler());
+                new Query.Handlers.ScriptsHandler(
+                    this.stringResourceProvider),
+                this.stringResourceProvider);
 
             this.stylesHandler = new PrettifyStyles(
-                new Query.Handlers.StylesHandler());
+                new Query.Handlers.StylesHandler(
+                    this.stringResourceProvider),
+                this.stringResourceProvider);
 
             this.htmlHandler = new PrepareHtml(
-                new Query.Handlers.HtmlHandler(),
+                new Query.Handlers.HtmlHandler(
+                    this.stringResourceProvider),
                 this.stylesHandler,
                 this.scriptsHandler);
 
@@ -41,9 +51,13 @@ namespace Qujck.MarkdownEditor
             {
                 return this.htmlHandler as T;
             }
-            if (typeof(T) == typeof(ICommandHandler<Command.WriteDocument>))
+            else if (typeof(T) == typeof(ICommandHandler<Command.WriteDocument>))
             {
                 return this.writeDocumentHandler as T;
+            }
+            else if (typeof(T) == typeof(IStringResourceProvider))
+            {
+                return this.stringResourceProvider as T;
             }
 
             throw new InvalidOperationException();

@@ -23,13 +23,20 @@ namespace Qujck.MarkdownEditor.Queries
         {
             public sealed class StylesHandler : IQueryHandler<Styles, string>
             {
+                private readonly IStringResourceProvider stringResourceProvider;
+
+                public StylesHandler(IStringResourceProvider stringResourceProvider)
+                {
+                    this.stringResourceProvider = stringResourceProvider;
+                }
+
                 public string Execute(Styles query)
                 {
-                    var csss = new StringBuilder()
-                        .AppendResource("Content.bootstrap.min.css")
-                        .AppendResource("Content.site.css");
+                    string bootstrap = this.stringResourceProvider.Single("Content.bootstrap.min.css");
+                    string site = this.stringResourceProvider.Single("Content.site.css");
 
-                    return csss.ToString();
+                    return bootstrap + Environment.NewLine + 
+                        site;
                 }
             }
         }

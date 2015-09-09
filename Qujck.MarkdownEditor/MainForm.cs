@@ -20,7 +20,7 @@ namespace Qujck.MarkdownEditor
             this.resolver = new CompositionRoot();
             this.InitialiseHtml();
 
-            var md = ResourceHelpers.ReadResource("Qujck.MarkdownEditor.test.md");
+            var md = this.resolver.Resolve<IStringResourceProvider>().Single("test.md");
             this.TextView.Text = md;
             this.RefreshTimer.Enabled = true;
         }

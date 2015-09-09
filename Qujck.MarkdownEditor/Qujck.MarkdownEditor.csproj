@@ -56,6 +56,8 @@
     <Compile Include="Commands\ICommandHandler.cs" />
     <Compile Include="Commands\WriteDocument.cs" />
     <Compile Include="CompositionRoot.cs" />
+    <Compile Include="Infrastructure\IStringResourceProvider.cs" />
+    <Compile Include="Infrastructure\StringResourceProvider.cs" />
     <Compile Include="ISyncScroll.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -70,7 +72,6 @@
     <Compile Include="Queries\IQueryHandler.cs" />
     <Compile Include="Queries\Scripts.cs" />
     <Compile Include="Queries\Styles.cs" />
-    <Compile Include="Infrastructure\ResourceHelpers.cs" />
     <Compile Include="ScrollSyncTextBox.cs">
       <SubType>Component</SubType>
     </Compile>

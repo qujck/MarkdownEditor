@@ -23,11 +23,18 @@ namespace Qujck.MarkdownEditor.Queries
         {
             public sealed class HtmlHandler : IQueryHandler<Html, string>
             {
+                private readonly IStringResourceProvider stringResourceProvider;
+
+                public HtmlHandler(IStringResourceProvider stringResourceProvider)
+                {
+                    this.stringResourceProvider = stringResourceProvider;
+                }
+
                 public string Execute(Html query)
                 {
-                    var html = ResourceHelpers.ReadResource("Qujck.MarkdownEditor.Content.layout.html");
+                    string html = this.stringResourceProvider.Single("Content.layout.html");
 
-                    return html.ToString();
+                    return html;
                 }
             }
         }

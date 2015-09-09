@@ -23,12 +23,18 @@ namespace Qujck.MarkdownEditor.Queries
         {
             public sealed class ScriptsHandler : IQueryHandler<Scripts, string>
             {
+                private readonly IStringResourceProvider stringResourceProvider;
+
+                public ScriptsHandler(IStringResourceProvider stringResourceProvider)
+                {
+                    this.stringResourceProvider = stringResourceProvider;
+                }
+
                 public string Execute(Scripts query)
                 {
-                    var scripts = new StringBuilder()
-                        .AppendResource(@"Scripts.marked.min.js");
+                    string scripts = this.stringResourceProvider.Single(@"Scripts.marked.min.js");
 
-                    return scripts.ToString();
+                    return scripts;
                 }
             }
         }
