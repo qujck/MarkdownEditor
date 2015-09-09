@@ -17,15 +17,12 @@ namespace Qujck.MarkdownEditor
         {
             InitializeComponent();
 
-            this.TextView.Buddy = this.RenderedView;
-            this.RenderedView.Buddy = this.TextView;
-
             this.resolver = new CompositionRoot();
             this.InitialiseHtml();
 
             var md = ResourceHelpers.ReadResource("Qujck.MarkdownEditor.test.md");
-            TextView.Text = md;
-            TextView.Select(0, 0);
+            this.TextView.Text = md;
+            this.RefreshTimer.Enabled = true;
         }
 
         private void InitialiseHtml()
@@ -38,11 +35,32 @@ namespace Qujck.MarkdownEditor
 
         private void TextView_TextChanged(object sender, EventArgs e)
         {
-            var writeCommand = this.resolver.Resolve<ICommandHandler<Command.WriteDocument>>();
+            if (!this.RefreshTimer.Enabled)
+            {
+                this.RefreshTimer.Enabled = true;
+            }
+        }
 
-            writeCommand.Run(
-                this.RenderedView.Document, 
-                TextView.Text);
+        private void RefreshTimer_Tick(object sender, EventArgs e)
+        {
+            this.RefreshView();
+        }
+
+        private void RefreshView()
+        {
+            if (RefreshTimer.Enabled && this.RefreshTimer.Tag == null)
+            {
+                RefreshTimer.Enabled = false;
+                this.RefreshTimer.Tag = this;
+
+                var writeCommand = this.resolver.Resolve<ICommandHandler<Command.WriteDocument>>();
+
+                writeCommand.Run(
+                    this.RenderedView.Document,
+                    TextView.Text);
+
+                this.RefreshTimer.Tag = null;
+            }
         }
     }
 }

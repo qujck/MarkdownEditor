@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SplitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
             this.TextView = new Qujck.MarkdownEditor.ScrollSyncTextBox();
             this.RenderedView = new Qujck.MarkdownEditor.ScrollSyncWebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer1)).BeginInit();
@@ -58,24 +60,29 @@
             this.SplitContainer1.SplitterDistance = 464;
             this.SplitContainer1.TabIndex = 2;
             // 
+            // RefreshTimer
+            // 
+            this.RefreshTimer.Interval = 10;
+            this.RefreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
+            // 
             // TextView
             // 
+            this.TextView.AutoWordSelection = true;
             this.TextView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TextView.Buddy = null;
+            this.TextView.Buddy = this.RenderedView;
             this.TextView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TextView.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextView.Location = new System.Drawing.Point(0, 0);
-            this.TextView.Multiline = true;
             this.TextView.Name = "TextView";
-            this.TextView.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TextView.Size = new System.Drawing.Size(464, 695);
             this.TextView.TabIndex = 3;
+            this.TextView.Text = "";
             this.TextView.TextChanged += new System.EventHandler(this.TextView_TextChanged);
             // 
             // RenderedView
             // 
             this.RenderedView.AllowWebBrowserDrop = false;
-            this.RenderedView.Buddy = null;
+            this.RenderedView.Buddy = this.TextView;
             this.RenderedView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RenderedView.Location = new System.Drawing.Point(0, 0);
             this.RenderedView.MinimumSize = new System.Drawing.Size(20, 20);
@@ -95,7 +102,6 @@
             this.Name = "MainForm";
             this.Text = "Qujck Markdown Editor";
             this.SplitContainer1.Panel1.ResumeLayout(false);
-            this.SplitContainer1.Panel1.PerformLayout();
             this.SplitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer1)).EndInit();
             this.SplitContainer1.ResumeLayout(false);
@@ -108,6 +114,7 @@
         private System.Windows.Forms.SplitContainer SplitContainer1;
         private ScrollSyncWebBrowser RenderedView;
         private ScrollSyncTextBox TextView;
+        private System.Windows.Forms.Timer RefreshTimer;
     }
 }
 

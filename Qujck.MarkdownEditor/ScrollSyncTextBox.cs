@@ -1,31 +1,36 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace Qujck.MarkdownEditor
 {
-    public sealed class ScrollSyncTextBox : TextBox, ISyncScroll
+    public sealed class ScrollSyncTextBox : RichTextBox, ISyncScroll
     {
+        public ScrollSyncTextBox()
+        {
+            this.InitializeComponent();
+        }
+
         public ISyncScroll Buddy { get; set; }
 
         public bool IsScrolling { get; private set; }
 
         /* http://stackoverflow.com/q/3823188 - http://stackoverflow.com/users/319611/lesderid
-         * http://stackoverflow.com/a/3823319 - http://stackoverflow.com/users/17034/hans-passant */
+         * http://stackoverflow.com/a/8149232 - http://stackoverflow.com/users/1049308/john-willemse */
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
-            if ((m.Msg == 0x115 || m.Msg == 0x20a) && 
+            if ((m.Msg == WM_VSCROLL || m.Msg == WM_MOUSEWHEEL) && 
                 !this.IsScrolling && 
-                !this.Buddy.IsScrolling &&
-                this.Buddy != null && 
-                this.Buddy.IsHandleCreated)
+                this.Buddy != null)
             {
-                this.IsScrolling = true;
-                double percentage = this.ScrollBarTopToPercentage();
-                this.Buddy.Scroll(percentage);
-                this.IsScrolling = false;
+                this.ScrollBuddy();
+                if (m.Msg == WM_MOUSEWHEEL)
+                {
+                    this.SyncSmoothScrollTimer.Enabled = true;
+                }
             }
         }
 
@@ -35,10 +40,18 @@ namespace Qujck.MarkdownEditor
             {
                 this.IsScrolling = true;
                 int top = this.ScrollBarTopFromPercentage(percentage);
-                SetScrollPos(this.Handle, (int)ScrollBarDirection.SB_VERT, top, false);
-                SendMessage(this.Handle, WM_VSCROLL, SB_THUMBPOSITION + 0x10000 * top, 0);
+                var message = Message.Create(this.Handle, WM_VSCROLL, (IntPtr)(SB_THUMBPOSITION + 0x10000 * top), (IntPtr)0);
+                this.WndProc(ref message);
                 Task.Factory.StartNew(() => this.IsScrolling = false);
             }
+        }
+
+        private void ScrollBuddy()
+        {
+            this.IsScrolling = true;
+            double percentage = this.ScrollBarTopToPercentage();
+            this.Buddy.Scroll(percentage);
+            this.IsScrolling = false;
         }
 
         private double ScrollBarTopToPercentage()
@@ -65,14 +78,42 @@ namespace Qujck.MarkdownEditor
             return info;
         }
 
-        [DllImport("user32.dll")]
-        private static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
+        private void SyncSmoothScrollTimer_Tick(object sender, EventArgs e)
+        {
+            this.SyncSmoothScrollTimer.Enabled = false;
+            this.HandleSmoothScrolling();
+        }
 
-        [DllImport("user32.dll")]
-        private static extern bool SendMessage(IntPtr hWnd, int nBar, int wParam, int lParam);
+        private void HandleSmoothScrolling()
+        {
+            SCROLLINFO info = this.GetScrollInfo();
+            int tag = Convert.ToInt32(this.SyncSmoothScrollTimer.Tag);
+            if (tag < info.nPos - 1 || tag > info.nPos + 1)
+            {
+                this.SyncSmoothScrollTimer.Tag = info.nPos;
+                this.ScrollBuddy();
+                this.SyncSmoothScrollTimer.Enabled = true;
+            }
+        }
+
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.SyncSmoothScrollTimer = new System.Windows.Forms.Timer(this.components);
+            this.SuspendLayout();
+            // 
+            // SyncSmoothScrollTimer
+            // 
+            this.SyncSmoothScrollTimer.Tick += new System.EventHandler(this.SyncSmoothScrollTimer_Tick);
+            this.ResumeLayout(false);
+
+        }
 
         private const int SB_THUMBPOSITION = 4;
         private const int WM_VSCROLL = 0x115;
+        private Timer SyncSmoothScrollTimer;
+        private System.ComponentModel.IContainer components;
+        private const int WM_MOUSEWHEEL = 0x20a;
 
         [DllImport("user32.dll")]
         private static extern bool GetScrollInfo(IntPtr hwnd, int fnBar, ref SCROLLINFO ScrollInfo);

@@ -105,6 +105,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="ScrollSyncTextBox.resx">
+      <DependentUpon>ScrollSyncTextBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="test.md" />
   </ItemGroup>
   <ItemGroup>

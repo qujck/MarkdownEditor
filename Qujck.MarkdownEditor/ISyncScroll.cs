@@ -9,7 +9,5 @@ namespace Qujck.MarkdownEditor
     public interface ISyncScroll
     {
         void Scroll(double pos);
-        bool IsHandleCreated { get; }
-        bool IsScrolling { get; }
     }
 }

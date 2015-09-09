@@ -32,16 +32,18 @@ namespace Qujck.MarkdownEditor
 
         private void OnScrollEventHandler(object sender, EventArgs e)
         {
-            if (!this.IsScrolling &&
-                !this.Buddy.IsScrolling &&
-                this.Buddy != null &&
-                this.Buddy.IsHandleCreated)
+            if (!this.IsScrolling && this.Buddy != null)
             {
-                this.IsScrolling = true;
-                double percentage = this.ScrollBarTopToPercentage();
-                this.Buddy.Scroll(percentage);
-                this.IsScrolling = false;
+                this.ScrollBuddy();
             }
+        }
+
+        private void ScrollBuddy()
+        {
+            this.IsScrolling = true;
+            double percentage = this.ScrollBarTopToPercentage();
+            this.Buddy.Scroll(percentage);
+            this.IsScrolling = false;
         }
 
         private double ScrollBarTopToPercentage()
