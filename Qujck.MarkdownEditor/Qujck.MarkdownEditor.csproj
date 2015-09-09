@@ -91,8 +91,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Content\bootstrap-theme.css.map" />
-    <None Include="Content\bootstrap.css.map" />
     <None Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="fonts\glyphicons-halflings-regular.ttf" />
     <None Include="fonts\glyphicons-halflings-regular.woff" />
@@ -113,12 +111,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
     <EmbeddedResource Include="Content\layout.html" />
     <EmbeddedResource Include="Content\site.css" />
     <EmbeddedResource Include="Content\stackoverflow.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
     <EmbeddedResource Include="Content\bootstrap.min.css" />
     <Content Include="Content\Prettify\prettify.css" />
     <Content Include="Content\Prettify\Themes\desert.css" />
@@ -126,8 +121,6 @@
     <Content Include="Content\Prettify\Themes\sons-of-obsidian.css" />
     <Content Include="Content\Prettify\Themes\sunburst.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <EmbeddedResource Include="Scripts\Prettify\lang-apollo.js" />
     <EmbeddedResource Include="Scripts\Prettify\lang-basic.js" />
     <EmbeddedResource Include="Scripts\Prettify\lang-clj.js" />
