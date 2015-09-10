@@ -12,15 +12,19 @@ namespace Qujck.MarkdownEditor.Tests.Unit.Queries
 {
     public class ScriptsTests
     {
-        [Theory]
-        [InlineData(Constants.Scripts.Marked)]
-        public void Execute_Always_ReturnsExpectedStringResource(string resource)
+        string[] resources = new string[] 
+        {
+            Constants.Scripts.Marked
+        };
+
+        [Fact]
+        public void Execute_Always_ReturnsExpectedStringResource()
         {
             var handler = this.HandlerFactory();
 
             var result = handler.Execute();
 
-            result.Should().Be(resource);
+            result.Should().Be(string.Join(Environment.NewLine, resources));
         }
 
         private Query.Handlers.ScriptsHandler HandlerFactory()

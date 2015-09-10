@@ -12,7 +12,10 @@ namespace Qujck.MarkdownEditor.Tests.Unit.Queries
 {
     public class StylesTests
     {
-        string[] resources = new string[] { Constants.Content.Bootstrap + Environment.NewLine + Constants.Content.SiteCss };
+        string[] resources = new string[]
+        {
+            Constants.Content.Bootstrap + Environment.NewLine + Constants.Content.SiteCss
+        };
 
         [Fact]
         public void Execute_Always_ReturnsExpectedStringResource()
@@ -21,7 +24,7 @@ namespace Qujck.MarkdownEditor.Tests.Unit.Queries
 
             var result = handler.Execute();
 
-            result.Should().Contain(string.Join(Environment.NewLine, resources));
+            result.Should().Be(string.Join(Environment.NewLine, resources));
         }
 
         private Query.Handlers.StylesHandler HandlerFactory()

@@ -12,15 +12,14 @@ namespace Qujck.MarkdownEditor.Tests.Unit.Queries
 {
     public class HtmlTests
     {
-        [Theory]
-        [InlineData(Constants.Content.Layout)]
-        public void Execute_Always_ReturnsExpectedStringResource(string resource)
+        [Fact]
+        public void Execute_Always_ReturnsExpectedStringResource()
         {
             var handler = this.HandlerFactory();
 
             var result = handler.Execute();
 
-            result.Should().Be(resource);
+            result.Should().Be(Constants.Content.Layout);
         }
 
         private Query.Handlers.HtmlHandler HandlerFactory()
