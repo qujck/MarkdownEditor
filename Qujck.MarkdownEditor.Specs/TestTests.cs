@@ -39,35 +39,9 @@ namespace Qujck.MarkdownEditor.Specs
                 .f(() => response.Should().Be(TestResponse));
         }
 
-        [Fact]
-        public void Execute_Always_ReturnsExpectedStringResource()
-        {
-            var handler = this.HandlerFactory();
-
-            var result = handler.Execute();
-
-            result.Should().Be(TestResponse);
-        }
-
-        private Query.Handlers.HtmlHandler HandlerFactory()
-        {
-            return new Query.Handlers.HtmlHandler(
-                new StubStringResourceProvider(request =>
-                {
-                    return request == Constants.Content.Layout
-                        ? TestResponse
-                        : null;
-                }));
-        }
-
         private class StubStringResourceProvider : IStringResourceProvider
         {
             private readonly Func<string, string> response;
-
-            public StubStringResourceProvider(string response) :
-                this((request) => response)
-            {
-            }
 
             public StubStringResourceProvider(Func<string, string> response)
             {
@@ -78,8 +52,7 @@ namespace Qujck.MarkdownEditor.Specs
 
             public string Many(string name)
             {
-                this.Name = name;
-                return this.response(name);
+                throw new NotImplementedException();
             }
 
             public string Single(string name)
