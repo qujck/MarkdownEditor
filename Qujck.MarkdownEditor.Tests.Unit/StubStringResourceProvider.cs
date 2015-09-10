@@ -9,30 +9,14 @@ namespace Qujck.MarkdownEditor.Tests.Unit
 {
     public class StubStringResourceProvider : IStringResourceProvider
     {
-        private readonly Func<string, string> response;
-
-        public StubStringResourceProvider(string response) :
-            this((request) => response)
+        public string Many(params string[] prefixes)
         {
+            return string.Join(Environment.NewLine, prefixes);
         }
 
-        public StubStringResourceProvider(Func<string, string> response)
+        public string Single(params string[] names)
         {
-            this.response = response;
-        }
-
-        public string Name { get; private set; }
-
-        public string Many(string name)
-        {
-            this.Name = name;
-            return this.response(name);
-        }
-
-        public string Single(string name)
-        {
-            this.Name = name;
-            return this.response(name);
+            return string.Join(Environment.NewLine, names);
         }
     }
 }

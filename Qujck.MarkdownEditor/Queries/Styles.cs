@@ -32,8 +32,8 @@ namespace Qujck.MarkdownEditor.Queries
 
                 public string Execute(Styles query)
                 {
-                    string bootstrap = this.stringResourceProvider.Single("Content.bootstrap.min.css");
-                    string site = this.stringResourceProvider.Single("Content.site.css");
+                    string bootstrap = this.stringResourceProvider.Single(Constants.Content.Bootstrap);
+                    string site = this.stringResourceProvider.Single(Constants.Content.SiteCss);
 
                     return bootstrap + Environment.NewLine + 
                         site;

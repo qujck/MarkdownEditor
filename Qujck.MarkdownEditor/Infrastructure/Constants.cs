@@ -10,7 +10,16 @@ namespace Qujck.MarkdownEditor.Infrastructure
     {
         public struct Content
         {
-            public const string Layout = "Content.layout.html";
+            private const string Prefix = "Content.";
+            public const string Layout = Prefix + "layout.html";
+            public const string Bootstrap = Prefix + "bootstrap.min.css";
+            public const string SiteCss = Prefix + "site.css";
+        }
+
+        public struct Scripts
+        {
+            private const string Prefix = "Scripts.";
+            public const string Marked = Prefix + "marked.min.js";
         }
     }
 }

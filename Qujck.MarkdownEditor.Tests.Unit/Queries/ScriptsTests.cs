@@ -10,10 +10,10 @@ using Qujck.MarkdownEditor.Queries;
 
 namespace Qujck.MarkdownEditor.Tests.Unit.Queries
 {
-    public class HtmlTests
+    public class ScriptsTests
     {
         [Theory]
-        [InlineData(Constants.Content.Layout)]
+        [InlineData(Constants.Scripts.Marked)]
         public void Execute_Always_ReturnsExpectedStringResource(string resource)
         {
             var handler = this.HandlerFactory();
@@ -23,9 +23,9 @@ namespace Qujck.MarkdownEditor.Tests.Unit.Queries
             result.Should().Be(resource);
         }
 
-        private Query.Handlers.HtmlHandler HandlerFactory()
+        private Query.Handlers.ScriptsHandler HandlerFactory()
         {
-            return new Query.Handlers.HtmlHandler(
+            return new Query.Handlers.ScriptsHandler(
                 new StubStringResourceProvider());
         }
     }

@@ -67,6 +67,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\HtmlTests.cs" />
     <Compile Include="StubStringResourceProvider.cs" />
+    <Compile Include="Queries\ScriptsTests.cs" />
+    <Compile Include="Queries\StylesTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

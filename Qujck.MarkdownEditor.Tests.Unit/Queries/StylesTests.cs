@@ -10,22 +10,22 @@ using Qujck.MarkdownEditor.Queries;
 
 namespace Qujck.MarkdownEditor.Tests.Unit.Queries
 {
-    public class HtmlTests
+    public class StylesTests
     {
         [Theory]
-        [InlineData(Constants.Content.Layout)]
-        public void Execute_Always_ReturnsExpectedStringResource(string resource)
+        [InlineData(Constants.Content.Bootstrap, Constants.Content.SiteCss)]
+        public void Execute_Always_ReturnsExpectedStringResource(params string[] resources)
         {
             var handler = this.HandlerFactory();
 
             var result = handler.Execute();
 
-            result.Should().Be(resource);
+            result.Should().Contain(string.Join(Environment.NewLine, resources));
         }
 
-        private Query.Handlers.HtmlHandler HandlerFactory()
+        private Query.Handlers.StylesHandler HandlerFactory()
         {
-            return new Query.Handlers.HtmlHandler(
+            return new Query.Handlers.StylesHandler(
                 new StubStringResourceProvider());
         }
     }

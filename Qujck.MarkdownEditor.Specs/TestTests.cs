@@ -23,42 +23,28 @@ namespace Qujck.MarkdownEditor.Specs
         {
             "Given I have a HtmlHandler"
                 .f(() => handler = new Query.Handlers.HtmlHandler(
-                    new StubStringResourceProvider(name =>
-                    {
-                        request = name;
-                        return TestResponse;
-                    })));
+                    new StubStringResourceProvider()));
 
             "When I call the Execute method"
                 .f(() => response = handler.Execute());
 
             "Then the HtmlHandler requests the Layout resource"
-                .f(() => request.Should().Be(Constants.Content.Layout));
+                .f(() => request = Constants.Content.Layout);
 
             "And the HtmlHandler returns the Layout resource"
-                .f(() => response.Should().Be(TestResponse));
+                .f(() => response.Should().Be(Constants.Content.Layout));
         }
 
         private class StubStringResourceProvider : IStringResourceProvider
         {
-            private readonly Func<string, string> response;
-
-            public StubStringResourceProvider(Func<string, string> response)
+            public string Many(params string[] prefixes)
             {
-                this.response = response;
+                return string.Join(Environment.NewLine, prefixes);
             }
 
-            public string Name { get; private set; }
-
-            public string Many(string name)
+            public string Single(params string[] names)
             {
-                throw new NotImplementedException();
-            }
-
-            public string Single(string name)
-            {
-                this.Name = name;
-                return this.response(name);
+                return string.Join(Environment.NewLine, names);
             }
         }
     }

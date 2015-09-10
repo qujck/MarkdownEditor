@@ -10,20 +10,23 @@ namespace Qujck.MarkdownEditor.Infrastructure
 {
     public sealed class StringResourceProvider : IStringResourceProvider
     {
-        public string Many(string name)
+        public string Many(params string[] prefixes)
         {
             var resources =
                 from resource in Assembly.GetExecutingAssembly().GetManifestResourceNames()
-                where resource.StartsWith("Qujck.MarkdownEditor." + name)
+                from prefix in prefixes
+                where resource.StartsWith("Qujck.MarkdownEditor." + prefix)
                 select ReadResource(resource);
             var sb = new StringBuilder();
             resources.ToList().ForEach(langFile => sb.AppendLine(langFile));
             return sb.ToString();
         }
 
-        public string Single(string name)
+        public string Single(params string[] names)
         {
-            return ReadResource("Qujck.MarkdownEditor." + name);
+            return string.Join(Environment.NewLine,
+                from name in names 
+                select ReadResource("Qujck.MarkdownEditor." + name));
         }
 
         private static string ReadResource(string name)
