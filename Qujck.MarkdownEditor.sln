@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Qujck.MarkdownEditor.ndproj = Qujck.MarkdownEditor.ndproj
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qujck.MarkdownEditor.Specs", "Qujck.MarkdownEditor.Specs\Qujck.MarkdownEditor.Specs.csproj", "{C2034779-5A6F-4E12-B82A-7C40D87001CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{6105B19A-643B-42B0-B71D-B6AFD4523C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6105B19A-643B-42B0-B71D-B6AFD4523C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6105B19A-643B-42B0-B71D-B6AFD4523C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2034779-5A6F-4E12-B82A-7C40D87001CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2034779-5A6F-4E12-B82A-7C40D87001CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2034779-5A6F-4E12-B82A-7C40D87001CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2034779-5A6F-4E12-B82A-7C40D87001CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

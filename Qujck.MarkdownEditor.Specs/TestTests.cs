@@ -9,9 +9,9 @@ using FluentAssertions;
 using Qujck.MarkdownEditor.Infrastructure;
 using Qujck.MarkdownEditor.Queries;
 
-namespace Qujck.MarkdownEditor.Tests.Unit.Queries
+namespace Qujck.MarkdownEditor.Specs
 {
-    public class HtmlTests
+    public class TestTests
     {
         const string TestResponse = "HtmlTests_Layout";
 
@@ -58,6 +58,35 @@ namespace Qujck.MarkdownEditor.Tests.Unit.Queries
                         ? TestResponse
                         : null;
                 }));
+        }
+
+        private class StubStringResourceProvider : IStringResourceProvider
+        {
+            private readonly Func<string, string> response;
+
+            public StubStringResourceProvider(string response) :
+                this((request) => response)
+            {
+            }
+
+            public StubStringResourceProvider(Func<string, string> response)
+            {
+                this.response = response;
+            }
+
+            public string Name { get; private set; }
+
+            public string Many(string name)
+            {
+                this.Name = name;
+                return this.response(name);
+            }
+
+            public string Single(string name)
+            {
+                this.Name = name;
+                return this.response(name);
+            }
         }
     }
 }
