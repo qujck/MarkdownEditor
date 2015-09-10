@@ -12,9 +12,10 @@ namespace Qujck.MarkdownEditor.Tests.Unit.Queries
 {
     public class StylesTests
     {
-        [Theory]
-        [InlineData(Constants.Content.Bootstrap, Constants.Content.SiteCss)]
-        public void Execute_Always_ReturnsExpectedStringResource(params string[] resources)
+        string[] resources = new string[] { Constants.Content.Bootstrap + Environment.NewLine + Constants.Content.SiteCss };
+
+        [Fact]
+        public void Execute_Always_ReturnsExpectedStringResource()
         {
             var handler = this.HandlerFactory();
 
