@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -56,6 +57,19 @@ namespace Qujck.MarkdownEditor
 
             string html = htmlQuery.Execute();
             this.RenderedView.NavigateToString(html);
+
+            //     <input type="button" value="Go Again!" onclick="window.external.AnotherMethod('Hello');" />
+            this.RenderedView.ObjectForScripting = new ScriptManager();
+        }
+
+        [ComVisible(true)]
+        public class ScriptManager
+        {
+            // This method can also be called from JavaScript.
+            public void AnotherMethod(string message)
+            {
+                MessageBox.Show(message);
+            }
         }
 
         private void TextView_TextChanged(object sender, EventArgs e)
