@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title}</title>
+    <script>${script}</script>
+    <script>
+        function renderMarkdown(text) {
+            var result = marked(text);
+            document.getElementById('content').innerHTML = result; 
+        }
+    </script>
+    <style>${style}</style>
+</head>
+<body>
+    <div class="container body-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10" id="content"></div>
+            </div>
+        </div>    
+    </div>
+</body>
+</html>

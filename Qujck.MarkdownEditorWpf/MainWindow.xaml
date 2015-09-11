@@ -12,16 +12,18 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ScrollViewer Grid.Column="0">
+        <ScrollViewer Name="TextEditorScroller"
+                      Grid.Column="0"
+                      ScrollChanged="ScrollChanged">
             <avalonEdit:TextEditor
 				Name="TextEditor"
 				FontFamily="Segoe UI"
 				FontSize="12pt"
 				SyntaxHighlighting="MarkDown"
-                Grid.Column="0"
                 ScrollViewer.CanContentScroll="True" 
                 ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                WordWrap="True">
             </avalonEdit:TextEditor>
         </ScrollViewer>
         <WebBrowser Name="RenderedView" Grid.Column="1">
