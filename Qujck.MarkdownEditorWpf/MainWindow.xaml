@@ -7,25 +7,23 @@
         xmlns:local="clr-namespace:Qujck.MarkdownEditor"
         mc:Ignorable="d"
         Title="Qujck Markdown Editor" Height="350" Width="530" WindowStartupLocation="CenterScreen" WindowState="Maximized">
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ScrollViewer Name="TextEditorScroller"
-                      Grid.Column="0"
-                      ScrollChanged="ScrollChanged">
-            <avalonEdit:TextEditor
-				Name="TextEditor"
-				FontFamily="Segoe UI"
-				FontSize="12pt"
-				SyntaxHighlighting="MarkDown"
-                ScrollViewer.CanContentScroll="True" 
-                ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-                ScrollViewer.VerticalScrollBarVisibility="Auto"
-                WordWrap="True">
-            </avalonEdit:TextEditor>
-        </ScrollViewer>
+        <avalonEdit:TextEditor
+			Name="TextEditor"
+			FontFamily="Segoe UI"
+			FontSize="12pt"
+			SyntaxHighlighting="MarkDown"
+            ScrollViewer.CanContentScroll="True" 
+            ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            ScrollViewer.ScrollChanged="ScrollChanged"
+            WordWrap="True"
+            Grid.Column="0">
+        </avalonEdit:TextEditor>
         <WebBrowser Name="RenderedView" Grid.Column="1">
         </WebBrowser>
     </Grid>
