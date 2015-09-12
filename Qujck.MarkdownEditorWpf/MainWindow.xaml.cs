@@ -28,12 +28,15 @@ namespace Qujck.MarkdownEditor
     public partial class MainWindow : Window
     {
         private readonly CompositionRoot resolver;
-        private readonly DispatcherTimer refreshTimer;
-        private readonly DispatcherTimer scrollTimer;
+        private readonly DispatcherTimer textChangedRefreshRenderedViewTimer;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            this.textChangedRefreshRenderedViewTimer = new DispatcherTimer { Interval = new TimeSpan(100) };
+            this.textChangedRefreshRenderedViewTimer.Tick += RefreshTimer_Tick;
+            this.textChangedRefreshRenderedViewTimer.Start();
 
             this.TextEditor.TextArea.MouseWheel += (sender, e) =>
                 {
@@ -48,20 +51,27 @@ namespace Qujck.MarkdownEditor
                     }
                 };
 
+            this.TextEditor.TextChanged += (sender, e) =>
+                {
+                    if (!this.textChangedRefreshRenderedViewTimer.IsEnabled)
+                    {
+                        this.textChangedRefreshRenderedViewTimer.Start();
+                    }
+                };
+
+            this.RenderedView.LoadCompleted += (sender, e) =>
+                {
+                    var document = (mshtml.IHTMLDocument2)this.RenderedView.Document;
+                    var window = (mshtml.IHTMLWindow3)document.parentWindow;
+                    window.attachEvent("onscroll", new EventListener(this.Scrolled));
+                };
+
             this.resolver = new CompositionRoot();
 
             this.InitialiseHtml();
 
             var md = this.resolver.Resolve<IStringResourceProvider>().Single("test.md");
             this.TextEditor.Text = md;
-
-            this.refreshTimer = new DispatcherTimer { Interval = new TimeSpan(100) };
-            this.refreshTimer.Tick += RefreshTimer_Tick;
-            this.refreshTimer.Start();
-
-            this.scrollTimer = new DispatcherTimer { Interval = new TimeSpan(100) };
-            this.scrollTimer.Tick += ScrollTimer_Tick;
-            this.scrollTimer.Start();
         }
 
         private void InitialiseHtml()
@@ -70,27 +80,6 @@ namespace Qujck.MarkdownEditor
 
             string html = htmlQuery.Execute();
             this.RenderedView.NavigateToString(html);
-
-            //     <input type="button" value="Go Again!" onclick="window.external.AnotherMethod('Hello');" />
-            this.RenderedView.ObjectForScripting = new ScriptManager();
-        }
-
-        [ComVisible(true)]
-        public class ScriptManager
-        {
-            // This method can also be called from JavaScript.
-            public void AnotherMethod(string message)
-            {
-                MessageBox.Show(message);
-            }
-        }
-
-        private void TextView_TextChanged(object sender, EventArgs e)
-        {
-            if (!this.refreshTimer.IsEnabled)
-            {
-                this.refreshTimer.Start();
-            }
         }
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
@@ -100,10 +89,10 @@ namespace Qujck.MarkdownEditor
 
         private void RefreshView()
         {
-            if (this.refreshTimer.IsEnabled && this.refreshTimer.Tag == null)
+            if (this.textChangedRefreshRenderedViewTimer.IsEnabled && this.textChangedRefreshRenderedViewTimer.Tag == null)
             {
-                this.refreshTimer.Stop();
-                this.refreshTimer.Tag = this;
+                this.textChangedRefreshRenderedViewTimer.Stop();
+                this.textChangedRefreshRenderedViewTimer.Tag = this;
 
                 var writeCommand = this.resolver.Resolve<ICommandHandler<Command.WriteDocument>>();
 
@@ -111,12 +100,12 @@ namespace Qujck.MarkdownEditor
                     (scriptName, args) => this.RenderedView.InvokeScript(scriptName, args),
                     this.TextEditor.Text);
 
-                this.refreshTimer.Tag = null;
+                this.textChangedRefreshRenderedViewTimer.Tag = null;
             }
         }
 
         private int top = 0;
-        private void ScrollTimer_Tick(object sender, EventArgs e)
+        private void Scrolled()
         {
             var document = (mshtml.IHTMLDocument2)this.RenderedView.Document;
             var element = (mshtml.IHTMLElement2)document.all.tags("html")[0];
@@ -128,10 +117,29 @@ namespace Qujck.MarkdownEditor
             }
         }
 
+        [ComVisible(true)]
+        [ClassInterface(ClassInterfaceType.AutoDispatch)]
+        public class EventListener
+        {
+            private readonly Action action;
+
+            public EventListener(Action action)
+            {
+                this.action = action;
+            }
+
+            [DispId(0)]
+            public void NameDoesNotMatter(object data)
+            {
+                this.action();
+            }
+        }
+
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             this.TextEditor.ScrollToVerticalOffset(e.VerticalOffset);
             Debug.WriteLine(e.VerticalOffset);
         }
+
     }
 }
