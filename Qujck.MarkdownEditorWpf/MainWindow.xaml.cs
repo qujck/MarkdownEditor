@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -63,7 +63,7 @@ namespace Qujck.MarkdownEditor
                 {
                     var document = (mshtml.IHTMLDocument2)this.RenderedView.Document;
                     var window = (mshtml.IHTMLWindow3)document.parentWindow;
-                    window.attachEvent("onscroll", new EventListener(this.Scrolled));
+                    window.attachEvent("onscroll", new ComEventListener(this.RenderedView_ScrollChanged));
                 };
 
             this.resolver = new CompositionRoot();
@@ -104,42 +104,62 @@ namespace Qujck.MarkdownEditor
             }
         }
 
-        private int top = 0;
-        private void Scrolled()
+        bool scrolling;
+        private void RenderedView_ScrollChanged()
+        {
+            if (!this.scrolling)
+            {
+                scrolling = true;
+                this.SetTextEditorScrolledRatio(this.GetWebBrowserScrolledRatio());
+                this.scrolling = false;
+            }
+        }
+
+        private void TextView_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (!this.scrolling)
+            {
+                scrolling = true;
+                this.TextEditor.ScrollToVerticalOffset(e.VerticalOffset);
+                this.SetWebBrowserScrolledRatio(this.GetTextEditorScrolledRatio(e.VerticalOffset));
+                this.scrolling = false;
+            }
+        }
+
+        private double GetTextEditorScrolledRatio(double verticalOffset)
+        {
+            var scroller = (ScrollViewer)VisualTreeHelper.GetChild(this.TextEditor, 0);
+            ScrollBar bar = scroller.Template.FindName("PART_VerticalScrollBar", scroller) as ScrollBar;
+
+            double ratio = bar.Value / bar.Maximum;
+
+            return ratio;
+        }
+
+        private void SetTextEditorScrolledRatio(double ratio)
+        {
+            var scroller = (ScrollViewer)VisualTreeHelper.GetChild(this.TextEditor, 0);
+            ScrollBar bar = scroller.Template.FindName("PART_VerticalScrollBar", scroller) as ScrollBar;
+
+            this.TextEditor.ScrollToVerticalOffset(bar.Maximum * ratio);
+        }
+
+        private double GetWebBrowserScrolledRatio()
         {
             var document = (mshtml.IHTMLDocument2)this.RenderedView.Document;
-            var element = (mshtml.IHTMLElement2)document.all.tags("html")[0];
-            int latest = Convert.ToInt32(element.scrollTop);
-            if (latest != top)
-            {
-                top = latest;
-                Debug.WriteLine(top);
-            }
+            var html = (mshtml.IHTMLElement2)document.all.tags("html")[0];
+
+            double ratio = Convert.ToDouble(html.scrollTop) / Convert.ToDouble(html.scrollHeight);
+
+            return ratio;
         }
 
-        [ComVisible(true)]
-        [ClassInterface(ClassInterfaceType.AutoDispatch)]
-        public class EventListener
+        private void SetWebBrowserScrolledRatio(double ratio)
         {
-            private readonly Action action;
+            var document = (mshtml.IHTMLDocument2)this.RenderedView.Document;
+            var html = (mshtml.IHTMLElement2)document.all.tags("html")[0];
 
-            public EventListener(Action action)
-            {
-                this.action = action;
-            }
-
-            [DispId(0)]
-            public void NameDoesNotMatter(object data)
-            {
-                this.action();
-            }
+            html.scrollTop = Convert.ToInt32(Convert.ToDouble(html.scrollHeight) * ratio);
         }
-
-        private void ScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-            this.TextEditor.ScrollToVerticalOffset(e.VerticalOffset);
-            Debug.WriteLine(e.VerticalOffset);
-        }
-
     }
 }

@@ -20,7 +20,7 @@
             ScrollViewer.CanContentScroll="True" 
             ScrollViewer.HorizontalScrollBarVisibility="Auto" 
             ScrollViewer.VerticalScrollBarVisibility="Auto"
-            ScrollViewer.ScrollChanged="ScrollChanged"
+            ScrollViewer.ScrollChanged="TextView_ScrollChanged"
             WordWrap="True"
             Grid.Column="0">
         </avalonEdit:TextEditor>
