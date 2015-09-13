@@ -29,6 +29,7 @@ namespace Qujck.MarkdownEditor
     {
         private readonly CompositionRoot resolver;
         private readonly DispatcherTimer textChangedRefreshRenderedViewTimer;
+        private readonly DispatcherTimer currentPosTimer;
 
         public MainWindow()
         {
@@ -37,6 +38,10 @@ namespace Qujck.MarkdownEditor
             this.textChangedRefreshRenderedViewTimer = new DispatcherTimer { Interval = new TimeSpan(100) };
             this.textChangedRefreshRenderedViewTimer.Tick += RefreshTimer_Tick;
             this.textChangedRefreshRenderedViewTimer.Start();
+
+            this.currentPosTimer = new DispatcherTimer { Interval = new TimeSpan(1000) };
+            this.currentPosTimer.Tick += CurrentPosTimer_Tick;
+            this.currentPosTimer.Start();
 
             this.TextEditor.TextArea.MouseWheel += (sender, e) =>
                 {
@@ -72,6 +77,14 @@ namespace Qujck.MarkdownEditor
 
             var md = this.resolver.Resolve<IStringResourceProvider>().Single("test.md");
             this.TextEditor.Text = md;
+        }
+
+        private void CurrentPosTimer_Tick(object sender, EventArgs e)
+        {
+            Debug.WriteLine(
+                "TextEditor: {0}        WebBrowser: {1}",
+                this.GetTextEditorScrolledRatio(),
+                this.GetWebBrowserScrolledRatio());
         }
 
         private void InitialiseHtml()
@@ -121,45 +134,96 @@ namespace Qujck.MarkdownEditor
             {
                 scrolling = true;
                 this.TextEditor.ScrollToVerticalOffset(e.VerticalOffset);
-                this.SetWebBrowserScrolledRatio(this.GetTextEditorScrolledRatio(e.VerticalOffset));
+                this.SetWebBrowserScrolledRatio(this.GetTextEditorScrolledRatio());
                 this.scrolling = false;
             }
         }
 
-        private double GetTextEditorScrolledRatio(double verticalOffset)
+        private double GetTextEditorScrolledRatio()
         {
-            var scroller = (ScrollViewer)VisualTreeHelper.GetChild(this.TextEditor, 0);
-            ScrollBar bar = scroller.Template.FindName("PART_VerticalScrollBar", scroller) as ScrollBar;
-
-            double ratio = bar.Value / bar.Maximum;
+            double ratio = this.TextBoxScrollBarPosition / this.TextBoxScrollBarLength;
 
             return ratio;
         }
 
         private void SetTextEditorScrolledRatio(double ratio)
         {
-            var scroller = (ScrollViewer)VisualTreeHelper.GetChild(this.TextEditor, 0);
-            ScrollBar bar = scroller.Template.FindName("PART_VerticalScrollBar", scroller) as ScrollBar;
-
-            this.TextEditor.ScrollToVerticalOffset(bar.Maximum * ratio);
+            this.TextEditor.ScrollToVerticalOffset(this.TextBoxScrollBarLength * ratio);
         }
 
         private double GetWebBrowserScrolledRatio()
         {
-            var document = (mshtml.IHTMLDocument2)this.RenderedView.Document;
-            var html = (mshtml.IHTMLElement2)document.all.tags("html")[0];
-
-            double ratio = Convert.ToDouble(html.scrollTop) / Convert.ToDouble(html.scrollHeight);
+            double ratio = this.WebBrowserScrollBarPosition / this.WebBrowserScrollBarLength;
 
             return ratio;
         }
 
         private void SetWebBrowserScrolledRatio(double ratio)
         {
-            var document = (mshtml.IHTMLDocument2)this.RenderedView.Document;
-            var html = (mshtml.IHTMLElement2)document.all.tags("html")[0];
+            this.WebBrowserScrollBarPosition = Convert.ToDouble(this.WebBrowserScrollBarLength) * ratio;
+        }
 
-            html.scrollTop = Convert.ToInt32(Convert.ToDouble(html.scrollHeight) * ratio);
+        private double TextBoxScrollBarPosition
+        {
+            get
+            {
+                return this.VerticalScrollBar.Value;
+            }
+        }
+
+        private double TextBoxScrollBarLength
+        {
+            get
+            {
+                // we need to adjust for the length of the "thumb" because the web browser version of this method works differently
+                var bar = this.VerticalScrollBar;
+                var track = bar.Template.FindName("PART_Track", bar) as Track;
+
+                double thumbSize = (track.ViewportSize / (track.Maximum - track.Minimum + track.ViewportSize)) * track.ActualHeight;
+                return bar.Maximum - thumbSize;
+            }
+        }
+
+        private double WebBrowserScrollBarPosition
+        {
+            get
+            {
+                return Convert.ToDouble(this.HtmlTag.scrollTop);
+            }
+            set
+            {
+                this.HtmlTag.scrollTop = Convert.ToInt32(value);
+            }
+        }
+
+        private double WebBrowserScrollBarLength
+        {
+            get
+            {
+                return Convert.ToDouble(this.HtmlTag.scrollHeight);
+            }
+        }
+
+        private mshtml.IHTMLElement2 HtmlTag
+        {
+            get
+            {
+                var document = (mshtml.IHTMLDocument2)this.RenderedView.Document;
+                var html = (mshtml.IHTMLElement2)document.all.tags("html")[0];
+
+                return html;
+            }
+        }
+
+        private ScrollBar VerticalScrollBar
+        {
+            get
+            {
+                var scroller = (ScrollViewer)VisualTreeHelper.GetChild(this.TextEditor, 0);
+                ScrollBar bar = scroller.Template.FindName("PART_VerticalScrollBar", scroller) as ScrollBar;
+
+                return bar;
+            }
         }
     }
 }
