@@ -179,7 +179,9 @@ namespace Qujck.MarkdownEditor
                 var bar = this.VerticalScrollBar;
                 var track = bar.Template.FindName("PART_Track", bar) as Track;
 
+                // http://stackoverflow.com/questions/3116287/setting-the-scrollbar-thumb-size
                 double thumbSize = (track.ViewportSize / (track.Maximum - track.Minimum + track.ViewportSize)) * track.ActualHeight;
+
                 return bar.Maximum - thumbSize;
             }
         }
