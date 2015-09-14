@@ -182,7 +182,9 @@ namespace Qujck.MarkdownEditor
                 // http://stackoverflow.com/questions/3116287/setting-the-scrollbar-thumb-size
                 double thumbSize = (track.ViewportSize / (track.Maximum - track.Minimum + track.ViewportSize)) * track.ActualHeight;
 
-                return bar.Maximum - thumbSize;
+                double proportionOfScreenThatIsTheThumb = thumbSize / track.ViewportSize;
+
+                return bar.Maximum + (bar.Maximum * proportionOfScreenThatIsTheThumb);
             }
         }
 
