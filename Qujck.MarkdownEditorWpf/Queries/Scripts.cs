@@ -32,7 +32,7 @@ namespace Qujck.MarkdownEditor.Queries
 
                 public string Execute(Scripts query)
                 {
-                    string scripts = this.stringResourceProvider.Single(Constants.Scripts.Marked);
+                    string scripts = this.stringResourceProvider.One(Constants.Scripts.Marked);
 
                     return scripts;
                 }

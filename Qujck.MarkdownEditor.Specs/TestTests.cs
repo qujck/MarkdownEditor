@@ -42,7 +42,7 @@ namespace Qujck.MarkdownEditor.Specs
                 return string.Join(Environment.NewLine, prefixes);
             }
 
-            public string Single(params string[] names)
+            public string One(params string[] names)
             {
                 return string.Join(Environment.NewLine, names);
             }

@@ -120,6 +120,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="test.md" />
     <Resource Include="fonts\glyphicons-halflings-regular.ttf" />
+    <EmbeddedResource Include="Content\Markdown2.xshd" />
     <None Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="fonts\glyphicons-halflings-regular.woff2" />

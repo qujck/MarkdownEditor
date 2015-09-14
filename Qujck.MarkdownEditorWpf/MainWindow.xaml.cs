@@ -66,7 +66,7 @@ namespace Qujck.MarkdownEditor
                     var window = (mshtml.IHTMLWindow3)document.parentWindow;
                     window.attachEvent("onscroll", new ComEventListener(this.RenderedViewScrolled));
 
-                    var md = this.resolver.Resolve<IStringResourceProvider>().Single("test.md");
+                    var md = this.resolver.Resolve<IStringResourceProvider>().One("test.md");
                     this.TextEditor.Text = md;
                 };
 

@@ -33,7 +33,7 @@ namespace Qujck.MarkdownEditor.Aspects
         {
             string result = this.decorated.Execute(query);
 
-            string prettify = this.stringResourceProvider.Single("Scripts.Prettify.prettify.js");
+            string prettify = this.stringResourceProvider.One("Scripts.Prettify.prettify.js");
             string prettifyLang = this.stringResourceProvider.Many("Scripts.Prettify.lang-");
 
             return result + Environment.NewLine +

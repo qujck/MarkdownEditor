@@ -17,7 +17,6 @@
             Grid.Column="0"
 			FontFamily="Segoe UI"
 			FontSize="12pt"
-			SyntaxHighlighting="MarkDown"
             ScrollViewer.CanContentScroll="True" 
             ScrollViewer.HorizontalScrollBarVisibility="Auto" 
             ScrollViewer.VerticalScrollBarVisibility="Auto"
