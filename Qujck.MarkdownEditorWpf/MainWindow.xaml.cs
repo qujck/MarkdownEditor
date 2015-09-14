@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,19 +28,16 @@ namespace Qujck.MarkdownEditor
     {
         private readonly CompositionRoot resolver;
         private readonly DispatcherTimer textChangedRefreshRenderedViewTimer;
-        private readonly DispatcherTimer currentPosTimer;
 
         public MainWindow()
         {
+            this.resolver = new CompositionRoot();
+
             InitializeComponent();
 
             this.textChangedRefreshRenderedViewTimer = new DispatcherTimer { Interval = new TimeSpan(100) };
             this.textChangedRefreshRenderedViewTimer.Tick += RefreshTimer_Tick;
-            this.textChangedRefreshRenderedViewTimer.Start();
-
-            this.currentPosTimer = new DispatcherTimer { Interval = new TimeSpan(1000) };
-            this.currentPosTimer.Tick += CurrentPosTimer_Tick;
-            this.currentPosTimer.Start();
+            //this.textChangedRefreshRenderedViewTimer.Start();
 
             this.TextEditor.TextArea.MouseWheel += (sender, e) =>
                 {
@@ -68,23 +64,13 @@ namespace Qujck.MarkdownEditor
                 {
                     var document = (mshtml.IHTMLDocument2)this.RenderedView.Document;
                     var window = (mshtml.IHTMLWindow3)document.parentWindow;
-                    window.attachEvent("onscroll", new ComEventListener(this.RenderedView_ScrollChanged));
+                    window.attachEvent("onscroll", new ComEventListener(this.RenderedViewScrolled));
+
+                    var md = this.resolver.Resolve<IStringResourceProvider>().Single("test.md");
+                    this.TextEditor.Text = md;
                 };
 
-            this.resolver = new CompositionRoot();
-
             this.InitialiseHtml();
-
-            var md = this.resolver.Resolve<IStringResourceProvider>().Single("test.md");
-            this.TextEditor.Text = md;
-        }
-
-        private void CurrentPosTimer_Tick(object sender, EventArgs e)
-        {
-            Debug.WriteLine(
-                "TextEditor: {0}        WebBrowser: {1}",
-                this.GetTextEditorScrolledRatio(),
-                this.GetWebBrowserScrolledRatio());
         }
 
         private void InitialiseHtml()
@@ -102,7 +88,8 @@ namespace Qujck.MarkdownEditor
 
         private void RefreshView()
         {
-            if (this.textChangedRefreshRenderedViewTimer.IsEnabled && this.textChangedRefreshRenderedViewTimer.Tag == null)
+            if (this.textChangedRefreshRenderedViewTimer.IsEnabled && 
+                this.textChangedRefreshRenderedViewTimer.Tag == null)
             {
                 this.textChangedRefreshRenderedViewTimer.Stop();
                 this.textChangedRefreshRenderedViewTimer.Tag = this;
@@ -117,8 +104,14 @@ namespace Qujck.MarkdownEditor
             }
         }
 
+        private void TextView_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            this.TextEditor.ScrollToVerticalOffset(e.VerticalOffset);
+            this.TextViewScrolled();
+        }
+
         bool scrolling;
-        private void RenderedView_ScrollChanged()
+        private void RenderedViewScrolled()
         {
             if (!this.scrolling)
             {
@@ -128,12 +121,11 @@ namespace Qujck.MarkdownEditor
             }
         }
 
-        private void TextView_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        private void TextViewScrolled()
         {
             if (!this.scrolling)
             {
                 scrolling = true;
-                this.TextEditor.ScrollToVerticalOffset(e.VerticalOffset);
                 this.SetWebBrowserScrolledRatio(this.GetTextEditorScrolledRatio());
                 this.scrolling = false;
             }
@@ -141,9 +133,9 @@ namespace Qujck.MarkdownEditor
 
         private double GetTextEditorScrolledRatio()
         {
-            double ratio = this.TextBoxScrollBarPosition / this.TextBoxScrollBarLength;
-
-            return ratio;
+            return this.TextBoxScrollBarLength == 0
+                ? 0
+                : this.TextBoxScrollBarPosition / this.TextBoxScrollBarLength;
         }
 
         private void SetTextEditorScrolledRatio(double ratio)
@@ -153,21 +145,24 @@ namespace Qujck.MarkdownEditor
 
         private double GetWebBrowserScrolledRatio()
         {
-            double ratio = this.WebBrowserScrollBarPosition / this.WebBrowserScrollBarLength;
-
-            return ratio;
+            return this.WebBrowserScrollBarLength == 0
+                ? 0
+                : this.WebBrowserScrollBarPosition / this.WebBrowserScrollBarLength;
         }
 
         private void SetWebBrowserScrolledRatio(double ratio)
         {
-            this.WebBrowserScrollBarPosition = Convert.ToDouble(this.WebBrowserScrollBarLength) * ratio;
+            if (this.HtmlTag != null)
+            {
+                this.WebBrowserScrollBarPosition = Convert.ToDouble(this.WebBrowserScrollBarLength) * ratio;
+            }
         }
 
         private double TextBoxScrollBarPosition
         {
             get
             {
-                return this.VerticalScrollBar.Value;
+                return this.TextEditorVerticalScrollBar.Value;
             }
         }
 
@@ -176,15 +171,22 @@ namespace Qujck.MarkdownEditor
             get
             {
                 // we need to adjust for the length of the "thumb" because the web browser version of this method works differently
-                var bar = this.VerticalScrollBar;
+                var bar = this.TextEditorVerticalScrollBar;
                 var track = bar.Template.FindName("PART_Track", bar) as Track;
 
-                // http://stackoverflow.com/questions/3116287/setting-the-scrollbar-thumb-size
-                double thumbSize = (track.ViewportSize / (track.Maximum - track.Minimum + track.ViewportSize)) * track.ActualHeight;
+                if (track == null)
+                {
+                    return bar.Maximum;
+                }
+                else
+                {
+                    // http://stackoverflow.com/questions/3116287/setting-the-scrollbar-thumb-size
+                    double thumbSize = (track.ViewportSize / (track.Maximum - track.Minimum + track.ViewportSize)) * track.ViewportSize;
 
-                double proportionOfScreenThatIsTheThumb = thumbSize / track.ViewportSize;
+                    double proportionOfScreenThatIsTheThumb = thumbSize / track.ViewportSize;
 
-                return bar.Maximum + (bar.Maximum * proportionOfScreenThatIsTheThumb);
+                    return bar.Maximum + (bar.Maximum * proportionOfScreenThatIsTheThumb);
+                }
             }
         }
 
@@ -204,7 +206,7 @@ namespace Qujck.MarkdownEditor
         {
             get
             {
-                return Convert.ToDouble(this.HtmlTag.scrollHeight);
+                 return  Convert.ToDouble(this.HtmlTag.scrollHeight);
             }
         }
 
@@ -219,7 +221,7 @@ namespace Qujck.MarkdownEditor
             }
         }
 
-        private ScrollBar VerticalScrollBar
+        private ScrollBar TextEditorVerticalScrollBar
         {
             get
             {

@@ -74,9 +74,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Qujck.MarkdownEditor\Qujck.MarkdownEditor.csproj">
-      <Project>{ba80835d-62ac-483c-84a6-4b179faea5ca}</Project>
-      <Name>Qujck.MarkdownEditor</Name>
+    <ProjectReference Include="..\Qujck.MarkdownEditorWpf\Qujck.MarkdownEditorWpf.csproj">
+      <Project>{1a657895-365a-41f1-8695-3b432c4ff87b}</Project>
+      <Name>Qujck.MarkdownEditorWpf</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

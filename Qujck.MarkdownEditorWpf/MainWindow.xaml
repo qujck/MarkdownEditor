@@ -6,7 +6,7 @@
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:local="clr-namespace:Qujck.MarkdownEditor"
         mc:Ignorable="d"
-        Title="Qujck Markdown Editor" Height="350" Width="530" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Qujck Markdown Editor" Height="350" Width="530" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="Editdatasetwithdesigner_8449.ico">
     <Grid Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -22,7 +22,7 @@
             ScrollViewer.HorizontalScrollBarVisibility="Auto" 
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             ScrollViewer.ScrollChanged="TextView_ScrollChanged"
-            WordWrap="True">
+            WordWrap="True" BorderThickness="0">
         </avalonEdit:TextEditor>
         <WebBrowser 
             Name="RenderedView" 
