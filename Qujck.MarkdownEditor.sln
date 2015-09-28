@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qujck.MarkdownEditor", "Qujck.MarkdownEditor\Qujck.MarkdownEditor.csproj", "{BA80835D-62AC-483C-84A6-4B179FAEA5CA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qujck.MarkdownEditor.Tests.Unit", "Qujck.MarkdownEditor.Tests.Unit\Qujck.MarkdownEditor.Tests.Unit.csproj", "{6105B19A-643B-42B0-B71D-B6AFD4523C4D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4E0A783F-ED57-4BC6-80AA-D472EB9E26B6}"
@@ -18,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qujck.MarkdownEditor.Specs", "Qujck.MarkdownEditor.Specs\Qujck.MarkdownEditor.Specs.csproj", "{C2034779-5A6F-4E12-B82A-7C40D87001CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qujck.MarkdownEditorWpf", "Qujck.MarkdownEditorWpf\Qujck.MarkdownEditorWpf.csproj", "{1A657895-365A-41F1-8695-3B432C4FF87B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qujck.MarkdownEditor", "Qujck.MarkdownEditor\Qujck.MarkdownEditor.csproj", "{1A657895-365A-41F1-8695-3B432C4FF87B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

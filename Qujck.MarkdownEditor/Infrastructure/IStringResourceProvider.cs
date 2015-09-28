@@ -7,7 +7,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
 {
     public interface IStringResourceProvider
     {
-        string Single(params string[] names);
+        string One(params string[] names);
 
         string Many(params string[] prefixes);
     }

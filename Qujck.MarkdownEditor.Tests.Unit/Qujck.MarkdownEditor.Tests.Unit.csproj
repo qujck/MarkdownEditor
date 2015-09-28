@@ -74,7 +74,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Qujck.MarkdownEditorWpf\Qujck.MarkdownEditorWpf.csproj">
+    <ProjectReference Include="..\Qujck.MarkdownEditor\Qujck.MarkdownEditor.csproj">
       <Project>{1a657895-365a-41f1-8695-3b432c4ff87b}</Project>
       <Name>Qujck.MarkdownEditorWpf</Name>
     </ProjectReference>

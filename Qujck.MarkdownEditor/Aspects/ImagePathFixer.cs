@@ -24,7 +24,7 @@ namespace Qujck.MarkdownEditor.Aspects
                 "![image](~",
                 string.Format("![image]({0}", System.IO.Directory.GetCurrentDirectory() + "\\..\\..\\" ));
 
-            this.decorated.Run(command.Document, text);
+            this.decorated.Run(command.Callback, text);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows;
 using Qujck.MarkdownEditor.Infrastructure;
 using Qujck.MarkdownEditor.Queries;
 
@@ -13,23 +13,23 @@ namespace Qujck.MarkdownEditor.Commands
     {
         public static void Run(
             this ICommandHandler<WriteDocument> handler,
-            HtmlDocument document,
+            Action<string, object[]> callback,
             string markdown)
         {
-            handler.Run(new WriteDocument(document, markdown));
+            handler.Run(new WriteDocument(callback, markdown));
         }
 
         public sealed class WriteDocument : ICommand
         {
             internal WriteDocument(
-                HtmlDocument document, 
+                Action<string, object[]> callback, 
                 string markdown)
             {
-                this.Document = document;
+                this.Callback = callback;
                 this.Markdown = markdown;
             }
 
-            public HtmlDocument Document { get; private set; }
+            public Action<string, object[]> Callback { get; private set; }
             public string Markdown { get; private set; }
         }
 
@@ -39,7 +39,7 @@ namespace Qujck.MarkdownEditor.Commands
             {
                 public void Run(WriteDocument command)
                 {
-                    command.Document.InvokeScript("renderMarkdown", new object[] { command.Markdown });
+                    command.Callback("renderMarkdown", new object[] { command.Markdown });
                 }
             }
         }

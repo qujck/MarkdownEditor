@@ -25,7 +25,7 @@ namespace Qujck.MarkdownEditor.Aspects
         {
             string result = this.decorated.Execute(query);
 
-            var scripts = this.stringResourceProvider.Single("Content.stackoverflow.css");
+            var scripts = this.stringResourceProvider.One("Content.stackoverflow.css");
 
             return result + Environment.NewLine + 
                 scripts;

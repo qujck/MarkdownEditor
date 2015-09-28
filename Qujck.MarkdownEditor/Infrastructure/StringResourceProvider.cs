@@ -22,7 +22,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
             return sb.ToString();
         }
 
-        public string Single(params string[] names)
+        public string One(params string[] names)
         {
             return string.Join(Environment.NewLine,
                 from name in names 
