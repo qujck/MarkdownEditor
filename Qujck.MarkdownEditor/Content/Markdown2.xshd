@@ -1,56 +1,81 @@
 ﻿<?xml version="1.0"?>
 <SyntaxDefinition name="MarkDown" extensions=".md" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
-	<Color name="Heading" foreground="Maroon" exampleText="# Title #" />
-	<Color name="Emphasis" fontStyle="italic" exampleText="*this* is important!" />
-	<Color name="StrongEmphasis" fontWeight="bold" exampleText="**this** is more important!" />
-	<Color name="Code" exampleText="this is `int.GetHashCode()`" />
-	<Color name="BlockQuote" foreground="DarkBlue" exampleText="&gt; This is a\r\n&gt; quote." />
-	<Color name="Link" foreground="Blue" exampleText="[text](http://example.com)" />
-	<Color name="Image" foreground="Green" exampleText="[text][http://example.com/test.png]" />
-	<Color name="LineBreak" background="LightGray" exampleText="end of line      \r\n2nd line   " />
-	
-	<RuleSet ignoreCase="true">
-		<Rule color="Heading">
-			^\#.*
-		</Rule>
-		<Rule color="StrongEmphasis">
+  <Color name="Heading1" fontFamily="Tahoma, Geneva, sans-serif" foreground="Maroon" fontSize="36" exampleText="# Title #" />
+  <Color name="Heading2" fontFamily="Tahoma, Geneva, sans-serif" foreground="Maroon" fontSize="28" exampleText="# Title #" />
+  <Color name="Heading3" fontFamily="Arial, Helvetica, sans-serif" foreground="Maroon" fontSize="24" exampleText="# Title #" />
+  <Color name="Heading4" fontFamily="Arial, Helvetica, sans-serif" foreground="Maroon" fontSize="20" exampleText="# Title #" />
+  <Color name="Heading5" fontFamily="Trebuchet MS, Helvetica, sans-serif" foreground="Maroon" fontSize="16" exampleText="# Title #" />
+  <Color name="Heading6" fontFamily="Trebuchet MS, Helvetica, sans-serif" foreground="Maroon" fontSize="12" exampleText="# Title #" />
+  <Color name="Emphasis" fontStyle="italic" exampleText="*this* is important!" />
+  <Color name="StrongEmphasis" fontWeight="bold" exampleText="**this** is more important!" />
+  <Color name="Code" fontSize="12" fontFamily="Lucida Console, Monaco, monospace" foreground="Green" exampleText="this is `int.GetHashCode()`" />
+  <Color name="BlockQuote" fontSize="18" fontFamily="Palatino Linotype, Book Antiqua, Palatino, serif" foreground="DarkBlue" exampleText="&gt; This is a\r\n&gt; quote." />
+  <Color name="Link" foreground="Blue" exampleText="[text](http://example.com)" />
+  <Color name="Image" foreground="Green" exampleText="[text][http://example.com/test.png]" />
+  <Color name="LineBreak" background="LightGray" exampleText="end of line      \r\n2nd line   " />
+  <Color name="default" fontFamily="Verdana, Geneva, sans-serif" fontSize="24"/>
+
+  <RuleSet ignoreCase="true">
+    <Rule color="Heading1">
+        ^(\#){1}\s.*
+    </Rule>
+    <Rule color="Heading2">
+        ^(\#){2}\s.*
+    </Rule>
+    <Rule color="Heading3">
+        ^(\#){3}\s.*
+    </Rule>
+    <Rule color="Heading4">
+        ^(\#){4}\s.*
+    </Rule>
+    <Rule color="Heading5">
+        ^(\#){5}\s.*
+    </Rule>
+    <Rule color="Heading6">
+        ^(\#){6}\s.*
+    </Rule>
+    <Rule color="StrongEmphasis">
 			\*\*.*\*\*
-		</Rule>
-		<Rule color="StrongEmphasis">
-			__.*__
-		</Rule>
-		<Rule color="Emphasis">
-			\*(?![ ]).*\*
-		</Rule>
-		<Rule color="Emphasis">
-			_.*_
-		</Rule>
-		<Rule color="Code">
-			`.*`
-		</Rule>
-		<Span color="Code" ruleSet="C#/" multiline="true">
-			<Begin>^\t</Begin>
-			<End>^(?!\t)</End>
-		</Span>
-		<Span color="Code" ruleSet="C#/" multiline="true">
-			<Begin>^[ ]{4}</Begin>
-			<End>^(?![ ]{4})</End>
-		</Span>
-		<Span color="BlockQuote" multiline="true">
-			<Begin>^&gt;</Begin>
-			<End>^(?!&gt;)</End>
-		</Span>
-		<Rule color="Image">
-			\!\[.*\]\[.*\]
-		</Rule>
-		<Rule color="Link">
-			\[.*\]\(.*\)
-		</Rule>
-		<Rule color="Link">
-			\[.*\]\[.*\]
-		</Rule>
-		<Rule color="LineBreak">
-			[ ]{2}$
-		</Rule>
-	</RuleSet>
+	</Rule>
+	<Rule color="StrongEmphasis">
+		__.*__
+	</Rule>
+	<Rule color="Emphasis">
+		\*(?![ ]).*\*
+	</Rule>
+	<Rule color="Emphasis">
+		_.*_
+	</Rule>
+	<Rule color="Code">
+		`(.+?)`
+	</Rule>
+    <Span color="Code" multiline="true">
+		<Begin>^\t</Begin>
+		<End>^(?!\t)</End>
+	</Span>
+	<Span color="Code" multiline="true">
+		<Begin>^[ ]{4}</Begin>
+		<End>^(?![ ]{4})</End>
+	</Span>
+    <Span color="Code" multiline="true">
+      <Begin>^```</Begin>
+      <End>^```</End>
+    </Span>
+    <Span color="BlockQuote" multiline="true">
+		<Begin>^&gt;</Begin>
+		<End>^(?!&gt;)</End>
+	</Span>
+	<Rule color="Image">
+		\!\[.*\]\[.*\]
+	</Rule>
+	<Rule color="Link">
+		\[.*\]\(.*\)
+	</Rule>
+	<Rule color="Link">
+		\[.*\]\[.*\]
+	</Rule>
+	<Rule color="LineBreak">
+		[ ]{2}$
+	</Rule>
+  </RuleSet>
 </SyntaxDefinition>

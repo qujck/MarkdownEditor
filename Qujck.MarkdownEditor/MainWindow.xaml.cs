@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml;
 using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Highlighting;
 using Qujck.MarkdownEditor.Infrastructure;
 using Qujck.MarkdownEditor.Queries;
 using Qujck.MarkdownEditor.Commands;
@@ -69,6 +72,8 @@ namespace Qujck.MarkdownEditor
                     var md = this.resolver.Resolve<IStringResourceProvider>().One("test.md");
                     this.TextEditor.Text = md;
                 };
+
+            this.LoadHighlighter();
 
             this.InitialiseHtml();
         }
@@ -229,6 +234,22 @@ namespace Qujck.MarkdownEditor
                 ScrollBar bar = scroller.Template.FindName("PART_VerticalScrollBar", scroller) as ScrollBar;
 
                 return bar;
+            }
+        }
+
+        private void LoadHighlighter()
+        {
+            // Load our custom highlighting definition
+            IHighlightingDefinition customHighlighting;
+            string resource = this.resolver.Resolve<IStringResourceProvider>().One("Content.Markdown2.xshd");
+            using (XmlReader reader = XmlReader.Create(new StringReader(resource)))
+            {
+                customHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.
+                    HighlightingLoader.Load(reader, HighlightingManager.Instance);
+
+                HighlightingManager.Instance.RegisterHighlighting("MarkDown2", new string[] { ".md" }, customHighlighting);
+
+                this.TextEditor.SyntaxHighlighting = customHighlighting;
             }
         }
     }
