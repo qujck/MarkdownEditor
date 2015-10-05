@@ -12,6 +12,15 @@ namespace Qujck.MarkdownEditor
 {
     public sealed class CompositionRoot
     {
+        private static CompositionRoot _instance;
+        public static CompositionRoot Instance
+        {
+            get
+            {
+                return _instance ?? (_instance = new CompositionRoot());
+            }
+        }
+
         private readonly ICommandHandler<Command.WriteDocument> writeDocumentHandler;
 
         private readonly IQueryHandler<Query.Html, string> htmlHandler;
