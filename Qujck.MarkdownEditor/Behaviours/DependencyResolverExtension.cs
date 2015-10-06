@@ -16,7 +16,7 @@ namespace Qujck.MarkdownEditor
             var target = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
             var targetProperty = target.TargetProperty as PropertyInfo;
 
-            if (target == null)
+            if (targetProperty == null)
             {
                 throw new InvalidProgramException();
             }
