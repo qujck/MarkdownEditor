@@ -8,13 +8,13 @@ using Qujck.MarkdownEditor.Queries;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    public sealed class PrettifyStyles : IQueryHandler<Query.Styles, string>
+    public sealed class PrettifyStyles : IQueryService<Query.Styles, string>
     {
-        private readonly IQueryHandler<Query.Styles, string> decorated;
+        private readonly IQueryService<Query.Styles, string> decorated;
         private readonly IStringResourceProvider stringResourceProvider;
 
         public PrettifyStyles(
-            IQueryHandler<Query.Styles, string> decorated,
+            IQueryService<Query.Styles, string> decorated,
             IStringResourceProvider stringResourceProvider)
         {
             this.decorated = decorated;

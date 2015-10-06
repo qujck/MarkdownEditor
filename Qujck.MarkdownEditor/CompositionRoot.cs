@@ -22,11 +22,11 @@ namespace Qujck.MarkdownEditor
             }
         }
 
-        private readonly ICommandHandler<Command.WriteDocument> writeDocumentHandler;
+        private readonly ICommandService<Command.WriteDocument> writeDocumentService;
 
-        private readonly IQueryHandler<Query.Html, string> htmlHandler;
-        private readonly IQueryHandler<Query.Scripts, string> scriptsHandler;
-        private readonly IQueryHandler<Query.Styles, string> stylesHandler;
+        private readonly IQueryService<Query.Html, string> htmlQueryService;
+        private readonly IQueryService<Query.Scripts, string> scriptsQueryService;
+        private readonly IQueryService<Query.Styles, string> stylesQueryService;
 
         private readonly IStringResourceProvider stringResourceProvider;
 
@@ -34,23 +34,23 @@ namespace Qujck.MarkdownEditor
         {
             this.stringResourceProvider = new StringResourceProvider();
 
-            this.scriptsHandler = new PrettifyScripts(
+            this.scriptsQueryService = new PrettifyScripts(
                 new Query.Handlers.ScriptsHandler(
                     this.stringResourceProvider),
                 this.stringResourceProvider);
 
-            this.stylesHandler = new PrettifyStyles(
+            this.stylesQueryService = new PrettifyStyles(
                 new Query.Handlers.StylesHandler(
                     this.stringResourceProvider),
                 this.stringResourceProvider);
 
-            this.htmlHandler = new PrepareHtml(
+            this.htmlQueryService = new PrepareHtml(
                 new Query.Handlers.HtmlHandler(
                     this.stringResourceProvider),
-                this.stylesHandler,
-                this.scriptsHandler);
+                this.stylesQueryService,
+                this.scriptsQueryService);
 
-            this.writeDocumentHandler = new ImagePathFixer(
+            this.writeDocumentService = new ImagePathFixer(
                 new PrettifyInvoke(
                     new Command.Handlers.WriteDocumentHandler()));
         }
@@ -62,13 +62,13 @@ namespace Qujck.MarkdownEditor
 
         public object Resolve(Type serviceType)
         {
-            if (serviceType == typeof(IQueryHandler<Query.Html, string>))
+            if (serviceType == typeof(IQueryService<Query.Html, string>))
             {
-                return this.htmlHandler;
+                return this.htmlQueryService;
             }
-            else if (serviceType == typeof(ICommandHandler<Command.WriteDocument>))
+            else if (serviceType == typeof(ICommandService<Command.WriteDocument>))
             {
-                return this.writeDocumentHandler;
+                return this.writeDocumentService;
             }
             else if (serviceType == typeof(IStringResourceProvider))
             {

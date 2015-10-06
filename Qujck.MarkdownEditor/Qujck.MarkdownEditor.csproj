@@ -80,8 +80,8 @@
     </Compile>
     <Compile Include="Infrastructure\ComEventListener.cs" />
     <Compile Include="Queries\Html.cs" />
-    <Compile Include="Queries\IQuery.cs" />
-    <Compile Include="Queries\IQueryHandler.cs" />
+    <Compile Include="Queries\IQueryParameter.cs" />
+    <Compile Include="Queries\IQueryService.cs" />
     <Compile Include="Queries\Scripts.cs" />
     <Compile Include="Queries\Styles.cs" />
     <Page Include="DocumentView.xaml">
@@ -101,8 +101,8 @@
     <Compile Include="Aspects\PrettifyInvoke.cs" />
     <Compile Include="Aspects\PrettifyScripts.cs" />
     <Compile Include="Aspects\PrettifyStyles.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\ICommandHandler.cs" />
+    <Compile Include="Commands\ICommandParameter.cs" />
+    <Compile Include="Commands\ICommandService.cs" />
     <Compile Include="Commands\WriteDocument.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="Infrastructure\IStringResourceProvider.cs" />

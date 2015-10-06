@@ -8,16 +8,16 @@ using Qujck.MarkdownEditor.Queries;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    public sealed class PrepareHtml : IQueryHandler<Query.Html, string>
+    public sealed class PrepareHtml : IQueryService<Query.Html, string>
     {
-        private readonly IQueryHandler<Query.Html, string> decorated;
-        private readonly IQueryHandler<Query.Styles, string> stylesQuery;
-        private readonly IQueryHandler<Query.Scripts, string> scriptsQuery;
+        private readonly IQueryService<Query.Html, string> decorated;
+        private readonly IQueryService<Query.Styles, string> stylesQuery;
+        private readonly IQueryService<Query.Scripts, string> scriptsQuery;
 
         public PrepareHtml(
-            IQueryHandler<Query.Html, string> decorated,
-            IQueryHandler<Query.Styles, string> styles,
-            IQueryHandler<Query.Scripts, string> scripts)
+            IQueryService<Query.Html, string> decorated,
+            IQueryService<Query.Styles, string> styles,
+            IQueryService<Query.Scripts, string> scripts)
         {
             this.decorated = decorated;
             this.stylesQuery = styles;

@@ -9,19 +9,19 @@ namespace Qujck.MarkdownEditor.Queries
 {
     public static partial class Query
     {
-        public static string Execute(this IQueryHandler<Scripts, string> handler)
+        public static string Execute(this IQueryService<Scripts, string> handler)
         {
             return handler.Execute(new Scripts());
         }
 
-        public sealed class Scripts : IQuery<string>
+        public sealed class Scripts : IQueryParameter<string>
         {
             internal Scripts() { }
         }
 
         public static partial class Handlers
         {
-            public sealed class ScriptsHandler : IQueryHandler<Scripts, string>
+            public sealed class ScriptsHandler : IQueryService<Scripts, string>
             {
                 private readonly IStringResourceProvider stringResourceProvider;
 

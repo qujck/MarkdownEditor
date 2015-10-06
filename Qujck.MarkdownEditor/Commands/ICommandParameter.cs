@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Qujck.MarkdownEditor.Commands
 {
-    public interface ICommand
+    public interface ICommandParameter
     {
     }
 }

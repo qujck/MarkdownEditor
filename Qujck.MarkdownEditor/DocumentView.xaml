@@ -13,18 +13,23 @@
     d:DesignHeight="300" d:DesignWidth="300">
     <i:Interaction.Behaviors>
         <behaviours:DocumentViewInitialiseAvalonEdit StringResourceProvider="{local:DependencyResolver}"/>
-        <behaviours:DocumentViewInitialiseRenderedView HtmlQueryHandler="{local:DependencyResolver}"/>
+        <behaviours:DocumentViewInitialiseRenderedView HtmlQueryService="{local:DependencyResolver}"/>
         <behaviours:DocumentViewScrollBehaviour/>
-        <behaviours:DocumentViewRefreshBehaviour WriteDocumentCommandHandler="{local:DependencyResolver}"/>
+        <behaviours:DocumentViewRefreshBehaviour WriteDocumentService="{local:DependencyResolver}"/>
     </i:Interaction.Behaviors>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition x:Name="LeftColumn" Width="1*"/>
+            <ColumnDefinition x:Name="RightColumn" Width="1*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="TopRow" Height="1*"/>
+            <RowDefinition x:Name="BottomRow" Height="0"/>
+        </Grid.RowDefinitions>
         <avalonEdit:TextEditor
 			x:Name="TextEditor"
 			Grid.Column="0"
+            Grid.Row="0"
 			FontFamily="Segoe UI"
 			FontSize="12pt"
 			ScrollViewer.CanContentScroll="True" 
@@ -37,6 +42,7 @@
         <WebBrowser 
 			x:Name="RenderedView" 
 			Grid.Column="1"
+            Grid.Row="0"
 			ScrollViewer.VerticalScrollBarVisibility="Auto"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
     </Grid>
