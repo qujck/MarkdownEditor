@@ -33,7 +33,7 @@
 			WordWrap="True" 
 			BorderThickness="0" 
 			Margin="0"
-			Padding="25"/>
+			Padding="20"/>
         <WebBrowser 
 			x:Name="RenderedView" 
 			Grid.Column="1"
