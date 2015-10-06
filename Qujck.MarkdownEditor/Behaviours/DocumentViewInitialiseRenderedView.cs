@@ -17,8 +17,31 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
-    public sealed class DocumentViewInitialiseRenderedView : BehaviourWithResolver<DocumentView>
+    public sealed class DocumentViewInitialiseRenderedView : Behavior<DocumentView>
     {
+        public static readonly DependencyProperty DependencyResolverProperty =
+            DependencyProperty.Register(
+                "IQueryHandler<Query.Html, string>",
+                typeof(IQueryHandler<Query.Html, string>),
+                typeof(DocumentViewInitialiseRenderedView));
+
+        public IQueryHandler<Query.Html, string> HtmlQueryHandler
+        {
+            get
+            {
+                var resolver = this.GetValue(DependencyResolverProperty) as IQueryHandler<Query.Html, string>;
+                if (resolver == null)
+                {
+                    throw new InvalidProgramException();
+                }
+                return resolver;
+            }
+            set
+            {
+                this.SetValue(DependencyResolverProperty, value);
+            }
+        }
+
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -27,9 +50,7 @@ namespace Qujck.MarkdownEditor.Behaviours
 
         private void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
         {
-            var htmlQuery = this.DependencyResolver.Resolve<IQueryHandler<Query.Html, string>>();
-
-            string html = htmlQuery.Execute();
+            string html = this.HtmlQueryHandler.Execute();
             this.AssociatedObject.RenderedView.NavigateToString(html);
         }
     }

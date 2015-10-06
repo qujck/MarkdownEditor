@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 using Qujck.MarkdownEditor.Infrastructure;
 using Qujck.MarkdownEditor.Commands;
 using Qujck.MarkdownEditor.Queries;
@@ -10,15 +11,14 @@ using Qujck.MarkdownEditor.Aspects;
 
 namespace Qujck.MarkdownEditor
 {
-    public sealed class CompositionRoot : IDependencyResolver
+    public sealed class CompositionRoot
     {
-        private static CompositionRoot _instance;
-
-        public static IDependencyResolver DependencyResolver
+        private static CompositionRoot _instance = new CompositionRoot();
+        public static CompositionRoot Instance
         {
             get
             {
-                return _instance ?? (_instance = new CompositionRoot());
+                return _instance;
             }
         }
 
@@ -56,18 +56,23 @@ namespace Qujck.MarkdownEditor
         }
 
         public T Resolve<T>() where T : class
-        { 
-            if (typeof(T) == typeof(IQueryHandler<Query.Html, string>))
+        {
+            return this.Resolve(typeof(T)) as T;
+        }
+
+        public object Resolve(Type serviceType)
+        {
+            if (serviceType == typeof(IQueryHandler<Query.Html, string>))
             {
-                return this.htmlHandler as T;
+                return this.htmlHandler;
             }
-            else if (typeof(T) == typeof(ICommandHandler<Command.WriteDocument>))
+            else if (serviceType == typeof(ICommandHandler<Command.WriteDocument>))
             {
-                return this.writeDocumentHandler as T;
+                return this.writeDocumentHandler;
             }
-            else if (typeof(T) == typeof(IStringResourceProvider))
+            else if (serviceType == typeof(IStringResourceProvider))
             {
-                return this.stringResourceProvider as T;
+                return this.stringResourceProvider;
             }
 
             throw new InvalidOperationException();

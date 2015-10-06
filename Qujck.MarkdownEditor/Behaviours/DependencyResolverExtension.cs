@@ -9,9 +9,16 @@ namespace Qujck.MarkdownEditor
 {
     public sealed class DependencyResolverExtension : MarkupExtension
     {
+        private readonly Type serviceType;
+
+        public DependencyResolverExtension(string typeName)
+        {
+            this.serviceType = Type.GetType(typeName);
+        }
+
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return CompositionRoot.DependencyResolver;
+            return CompositionRoot.Instance.Resolve(serviceType);
         }
     }
 }

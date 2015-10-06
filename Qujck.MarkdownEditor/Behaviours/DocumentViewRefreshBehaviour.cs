@@ -17,8 +17,31 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
-    public sealed class DocumentViewRefreshBehaviour : BehaviourWithResolver<DocumentView>
+    public sealed class DocumentViewRefreshBehaviour : Behavior<DocumentView>
     {
+        public static readonly DependencyProperty DependencyResolverProperty =
+            DependencyProperty.Register(
+                "ICommandHandler<Command.WriteDocument>",
+                typeof(ICommandHandler<Command.WriteDocument>),
+                typeof(DocumentViewRefreshBehaviour));
+
+        public ICommandHandler<Command.WriteDocument> WriteDocumentCommandHandler
+        {
+            get
+            {
+                var resolver = this.GetValue(DependencyResolverProperty) as ICommandHandler<Command.WriteDocument>;
+                if (resolver == null)
+                {
+                    throw new InvalidProgramException();
+                }
+                return resolver;
+            }
+            set
+            {
+                this.SetValue(DependencyResolverProperty, value);
+            }
+        }
+
         private readonly DispatcherTimer textChangedRefreshRenderedViewTimer;
 
         public DocumentViewRefreshBehaviour()
@@ -72,9 +95,8 @@ namespace Qujck.MarkdownEditor.Behaviours
                 this.textChangedRefreshRenderedViewTimer.Stop();
                 this.textChangedRefreshRenderedViewTimer.Tag = this;
 
-                var writeCommand = this.DependencyResolver.Resolve<ICommandHandler<Command.WriteDocument>>();
 
-                writeCommand.Run(
+                this.WriteDocumentCommandHandler.Run(
                     (scriptName, args) => this.AssociatedObject.RenderedView.InvokeScript(scriptName, args),
                     this.AssociatedObject.TextEditor.Text);
 
