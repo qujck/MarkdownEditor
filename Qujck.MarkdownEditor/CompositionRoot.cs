@@ -30,7 +30,7 @@ namespace Qujck.MarkdownEditor
 
         private readonly IStringResourceProvider stringResourceProvider;
 
-        public CompositionRoot()
+        private CompositionRoot()
         {
             this.stringResourceProvider = new StringResourceProvider();
 
