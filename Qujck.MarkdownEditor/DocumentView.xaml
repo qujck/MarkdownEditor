@@ -12,10 +12,10 @@
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300">
     <i:Interaction.Behaviors>
-        <behaviours:DocumentViewInitialiseAvalonEdit StringResourceProvider="{local:DependencyResolver 'Qujck.MarkdownEditor.Infrastructure.IStringResourceProvider'}"/>
-        <behaviours:DocumentViewInitialiseRenderedView HtmlQueryHandler="{local:DependencyResolver 'Qujck.MarkdownEditor.Queries.IQueryHandler`2[[Qujck.MarkdownEditor.Queries.Query+Html],[System.String]]'}"/>
+        <behaviours:DocumentViewInitialiseAvalonEdit StringResourceProvider="{local:DependencyResolver}"/>
+        <behaviours:DocumentViewInitialiseRenderedView HtmlQueryHandler="{local:DependencyResolver}"/>
         <behaviours:DocumentViewScrollBehaviour/>
-        <behaviours:DocumentViewRefreshBehaviour WriteDocumentCommandHandler="{local:DependencyResolver 'Qujck.MarkdownEditor.Commands.ICommandHandler`1[Qujck.MarkdownEditor.Commands.Command+WriteDocument]'}"/>
+        <behaviours:DocumentViewRefreshBehaviour WriteDocumentCommandHandler="{local:DependencyResolver}"/>
     </i:Interaction.Behaviors>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>

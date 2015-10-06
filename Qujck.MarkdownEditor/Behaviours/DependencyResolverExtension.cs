@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xaml;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
@@ -9,16 +11,17 @@ namespace Qujck.MarkdownEditor
 {
     public sealed class DependencyResolverExtension : MarkupExtension
     {
-        private readonly Type serviceType;
-
-        public DependencyResolverExtension(string typeName)
-        {
-            this.serviceType = Type.GetType(typeName);
-        }
-
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return CompositionRoot.Instance.Resolve(serviceType);
+            var target = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
+            var targetProperty = target.TargetProperty as PropertyInfo;
+
+            if (target == null)
+            {
+                throw new InvalidProgramException();
+            }
+
+            return CompositionRoot.Instance.Resolve(targetProperty.PropertyType);
         }
     }
 }

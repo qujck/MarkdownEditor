@@ -95,7 +95,6 @@ namespace Qujck.MarkdownEditor.Behaviours
                 this.textChangedRefreshRenderedViewTimer.Stop();
                 this.textChangedRefreshRenderedViewTimer.Tag = this;
 
-
                 this.WriteDocumentCommandHandler.Run(
                     (scriptName, args) => this.AssociatedObject.RenderedView.InvokeScript(scriptName, args),
                     this.AssociatedObject.TextEditor.Text);
