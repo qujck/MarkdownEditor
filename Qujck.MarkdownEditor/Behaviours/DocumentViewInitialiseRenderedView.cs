@@ -17,7 +17,7 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
-    public sealed class DocumentViewInitialiseRenderedView : Behavior<DocumentView>
+    public sealed class DocumentViewInitialiseRenderedView : BehaviourWithResolver<DocumentView>
     {
         protected override void OnAttached()
         {
@@ -27,7 +27,7 @@ namespace Qujck.MarkdownEditor.Behaviours
 
         private void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
         {
-            var htmlQuery = CompositionRoot.Instance.Resolve<IQueryHandler<Query.Html, string>>();
+            var htmlQuery = this.DependencyResolver.Resolve<IQueryHandler<Query.Html, string>>();
 
             string html = htmlQuery.Execute();
             this.AssociatedObject.RenderedView.NavigateToString(html);

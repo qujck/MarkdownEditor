@@ -69,6 +69,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviours\BehaviourWithResolver.cs" />
+    <Compile Include="Behaviours\DependencyResolverExtension.cs" />
     <Compile Include="Behaviours\DocumentViewInitialiseAvalonEdit.cs" />
     <Compile Include="Behaviours\DocumentViewInitialiseRenderedView.cs" />
     <Compile Include="Behaviours\DocumentViewRefreshBehaviour.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="DocumentView.xaml.cs">
       <DependentUpon>DocumentView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IDependencyResolver.cs" />
     <Compile Include="Infrastructure\ComEventListener.cs" />
     <Compile Include="Queries\Html.cs" />
     <Compile Include="Queries\IQuery.cs" />
@@ -131,7 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="test.md" />
     <Resource Include="fonts\glyphicons-halflings-regular.ttf" />
-    <EmbeddedResource Include="Content\Markdown2.xshd" />
+    <EmbeddedResource Include="Content\Markdown2.xshd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="fonts\glyphicons-halflings-regular.woff2" />

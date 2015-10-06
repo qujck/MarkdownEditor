@@ -12,10 +12,10 @@
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300">
     <i:Interaction.Behaviors>
-        <behaviours:DocumentViewInitialiseAvalonEdit/>
-        <behaviours:DocumentViewInitialiseRenderedView/>
+        <behaviours:DocumentViewInitialiseAvalonEdit DependencyResolver="{local:DependencyResolverExtension}"/>
+        <behaviours:DocumentViewInitialiseRenderedView DependencyResolver="{local:DependencyResolverExtension}"/>
         <behaviours:DocumentViewScrollBehaviour/>
-        <behaviours:DocumentViewRefreshBehaviour/>
+        <behaviours:DocumentViewRefreshBehaviour DependencyResolver="{local:DependencyResolverExtension}"/>
     </i:Interaction.Behaviors>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>

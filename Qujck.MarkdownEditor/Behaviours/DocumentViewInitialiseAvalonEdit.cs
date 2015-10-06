@@ -20,7 +20,7 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
-    public sealed class DocumentViewInitialiseAvalonEdit : Behavior<DocumentView>
+    public sealed class DocumentViewInitialiseAvalonEdit : BehaviourWithResolver<DocumentView>
     {
         protected override void OnAttached()
         {
@@ -35,9 +35,11 @@ namespace Qujck.MarkdownEditor.Behaviours
 
         private void LoadHighlighter()
         {
+            var resourceProvider = this.DependencyResolver.Resolve<IStringResourceProvider>();
+
             // Load our custom highlighting definition
             IHighlightingDefinition customHighlighting;
-            string resource = CompositionRoot.Instance.Resolve<IStringResourceProvider>().One("Content.Markdown2.xshd");
+            string resource = resourceProvider.One("Content.Markdown2.xshd");
             using (XmlReader reader = XmlReader.Create(new StringReader(resource)))
             {
                 customHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.

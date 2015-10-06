@@ -1,10 +1,11 @@
-﻿<Window x:Class="Qujck.MarkdownEditor.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:local="clr-namespace:Qujck.MarkdownEditor"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:Behaviours="clr-namespace:Qujck.MarkdownEditor.Behaviours" x:Class="Qujck.MarkdownEditor.MainWindow"
         mc:Ignorable="d"
         Title="Qujck Markdown Editor" Height="350" Width="530" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="Editdatasetwithdesigner_8449.ico">
     <local:DocumentView x:Name="DocumentView" Margin="0" Loaded="DocumentView_Loaded"/>

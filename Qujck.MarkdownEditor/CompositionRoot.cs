@@ -10,10 +10,11 @@ using Qujck.MarkdownEditor.Aspects;
 
 namespace Qujck.MarkdownEditor
 {
-    public sealed class CompositionRoot
+    public sealed class CompositionRoot : IDependencyResolver
     {
         private static CompositionRoot _instance;
-        public static CompositionRoot Instance
+
+        public static IDependencyResolver DependencyResolver
         {
             get
             {
