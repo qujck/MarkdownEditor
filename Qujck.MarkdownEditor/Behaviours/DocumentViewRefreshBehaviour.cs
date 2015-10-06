@@ -29,12 +29,7 @@ namespace Qujck.MarkdownEditor.Behaviours
         {
             get
             {
-                var resolver = this.GetValue(DependencyResolverProperty) as ICommandHandler<Command.WriteDocument>;
-                if (resolver == null)
-                {
-                    throw new InvalidProgramException();
-                }
-                return resolver;
+                return this.GetValue(DependencyResolverProperty) as ICommandHandler<Command.WriteDocument>;
             }
             set
             {

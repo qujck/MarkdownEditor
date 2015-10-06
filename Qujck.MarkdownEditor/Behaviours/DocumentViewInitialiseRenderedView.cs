@@ -29,12 +29,7 @@ namespace Qujck.MarkdownEditor.Behaviours
         {
             get
             {
-                var resolver = this.GetValue(DependencyResolverProperty) as IQueryHandler<Query.Html, string>;
-                if (resolver == null)
-                {
-                    throw new InvalidProgramException();
-                }
-                return resolver;
+                return this.GetValue(DependencyResolverProperty) as IQueryHandler<Query.Html, string>;
             }
             set
             {
