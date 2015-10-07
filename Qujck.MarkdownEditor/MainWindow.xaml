@@ -8,8 +8,5 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:Behaviours="clr-namespace:Qujck.MarkdownEditor.Behaviours" x:Class="Qujck.MarkdownEditor.MainWindow"
         mc:Ignorable="d"
         Title="Qujck Markdown Editor" Height="350" Width="530" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="Editdatasetwithdesigner_8449.ico">
-    <Window.InputBindings>
-        <KeyBinding Modifiers="" Key="F5" Command="{Binding }"/>
-    </Window.InputBindings>
     <local:DocumentView x:Name="DocumentView" Margin="0" Loaded="DocumentView_Loaded"/>
 </Window>
