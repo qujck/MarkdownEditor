@@ -12,10 +12,10 @@
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300">
     <i:Interaction.Behaviors>
-        <behaviours:DocumentViewInitialiseAvalonEdit StringResourceProvider="{ioc:Inject}"/>
-        <behaviours:DocumentViewInitialiseRenderedView HtmlQueryHandler="{ioc:Inject}"/>
+        <behaviours:DocumentViewInitialiseAvalonEdit StringResourceProvider="{ioc:Container}"/>
+        <behaviours:DocumentViewInitialiseRenderedView HtmlQueryHandler="{ioc:Container}"/>
         <behaviours:DocumentViewScrollBehaviour/>
-        <behaviours:DocumentViewRefreshBehaviour WriteDocumentHandler="{ioc:Inject}"/>
+        <behaviours:DocumentViewRefreshBehaviour WriteDocumentHandler="{ioc:Container}"/>
     </i:Interaction.Behaviors>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>

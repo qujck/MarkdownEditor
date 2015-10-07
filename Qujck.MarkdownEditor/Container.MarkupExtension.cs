@@ -9,7 +9,7 @@ using System.Windows.Markup;
 
 namespace Qujck.MarkdownEditor
 {
-    public sealed partial class InjectExtension : MarkupExtension
+    public sealed partial class Container : MarkupExtension
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
@@ -21,7 +21,7 @@ namespace Qujck.MarkdownEditor
                 throw new InvalidProgramException();
             }
 
-            return CompositionRoot.Instance.Resolve(targetProperty.PropertyType);
+            return _instance.Resolve(targetProperty.PropertyType);
         }
     }
 }

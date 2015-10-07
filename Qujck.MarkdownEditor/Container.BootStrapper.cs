@@ -11,30 +11,60 @@ using Qujck.MarkdownEditor.Aspects;
 
 namespace Qujck.MarkdownEditor
 {
-    public partial class InjectExtension
+    public sealed partial class Container
     {
-        public sealed class CompositionRoot
+        private static DependencyResolver _instance;
+        static Container()
         {
-            private static CompositionRoot _instance = new CompositionRoot();
+            _instance = DependencyResolver.Build();
+        }
 
-            public static CompositionRoot Instance
+        public static IStringResourceProvider StringResourceProvider
+        {
+            get
             {
-                get
-                {
-                    return _instance;
-                }
+                return _instance.Resolve<IStringResourceProvider>();
+            }
+        }
+
+        private sealed class DependencyResolver
+        {
+            private ICommandHandler<Command.WriteDocument> writeDocumentHandler;
+            private IQueryHandler<Query.Html, string> htmlQueryHandler;
+            private IQueryHandler<Query.Scripts, string> scriptsQueryHandler;
+            private IQueryHandler<Query.Styles, string> stylesQueryHandler;
+            private IStringResourceProvider stringResourceProvider;
+
+            private DependencyResolver()
+            {
             }
 
-            private readonly ICommandHandler<Command.WriteDocument> writeDocumentHandler;
-            private readonly IQueryHandler<Query.Html, string> htmlQueryHandler;
-            private readonly IQueryHandler<Query.Scripts, string> scriptsQueryHandler;
-            private readonly IQueryHandler<Query.Styles, string> stylesQueryHandler;
-            private readonly IStringResourceProvider stringResourceProvider;
+            internal static DependencyResolver Build()
+            {
+                return new DependencyResolver()
+                    .RegisterProviders()
+                    .RegisterCommandHandlers()
+                    .RegisterQueryHandlers();
+            }
 
-            private CompositionRoot()
+            private DependencyResolver RegisterProviders()
             {
                 this.stringResourceProvider = new StringResourceProvider();
 
+                return this;
+            }
+
+            private DependencyResolver RegisterCommandHandlers()
+            {
+                this.writeDocumentHandler = new ImagePathFixer(
+                    new PrettifyInvoke(
+                        new Command.Handlers.WriteDocumentHandler()));
+
+                return this;
+            }
+
+            private DependencyResolver RegisterQueryHandlers()
+            {
                 this.scriptsQueryHandler = new PrettifyScripts(
                     new Query.Handlers.ScriptsHandler(
                         this.stringResourceProvider),
@@ -51,17 +81,15 @@ namespace Qujck.MarkdownEditor
                     this.stylesQueryHandler,
                     this.scriptsQueryHandler);
 
-                this.writeDocumentHandler = new ImagePathFixer(
-                    new PrettifyInvoke(
-                        new Command.Handlers.WriteDocumentHandler()));
+                return this;
             }
 
-            public T Resolve<T>() where T : class
+            internal T Resolve<T>() where T : class
             {
                 return this.Resolve(typeof(T)) as T;
             }
 
-            public object Resolve(Type serviceType)
+            internal object Resolve(Type serviceType)
             {
                 if (serviceType == typeof(IQueryHandler<Query.Html, string>))
                 {
