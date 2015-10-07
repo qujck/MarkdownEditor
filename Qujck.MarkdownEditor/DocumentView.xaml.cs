@@ -21,6 +21,8 @@ namespace Qujck.MarkdownEditor
 {
     public partial class DocumentView : UserControl
     {
+        public bool HtmlIsLoaded;
+
         public DocumentView()
         {
             InitializeComponent();

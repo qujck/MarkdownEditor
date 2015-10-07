@@ -85,7 +85,8 @@ namespace Qujck.MarkdownEditor.Behaviours
         private void RefreshView()
         {
             if (this.textChangedRefreshRenderedViewTimer.IsEnabled &&
-                this.textChangedRefreshRenderedViewTimer.Tag == null)
+                this.textChangedRefreshRenderedViewTimer.Tag == null &&
+                this.AssociatedObject.HtmlIsLoaded)
             {
                 this.textChangedRefreshRenderedViewTimer.Stop();
                 this.textChangedRefreshRenderedViewTimer.Tag = this;
