@@ -12,12 +12,12 @@ namespace Qujck.MarkdownEditor
     {
         private IDictionary<string, object> dictionary { get; set; }
 
-        public AbstractDynamicObject(params KeyValuePair<string, object>[] properties)
+        public AbstractDynamicObject(params string[] properties)
         {
             this.dictionary = new Dictionary<string, object>();
             foreach(var property in properties)
             {
-                this.dictionary.Add(property.Key, property.Value);
+                this.dictionary.Add(property, null);
             }
         }
 
