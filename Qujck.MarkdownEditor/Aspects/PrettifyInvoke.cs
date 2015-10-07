@@ -8,11 +8,11 @@ using Qujck.MarkdownEditor.Commands;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    public sealed class PrettifyInvoke : ICommandService<Command.WriteDocument>
+    public sealed class PrettifyInvoke : ICommandHandler<Command.WriteDocument>
     {
-        private readonly ICommandService<Command.WriteDocument> decorated;
+        private readonly ICommandHandler<Command.WriteDocument> decorated;
 
-        public PrettifyInvoke(ICommandService<Command.WriteDocument> decorated)
+        public PrettifyInvoke(ICommandHandler<Command.WriteDocument> decorated)
         {
             this.decorated = decorated;
         }

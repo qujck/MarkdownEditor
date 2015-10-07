@@ -12,7 +12,7 @@ namespace Qujck.MarkdownEditor.Commands
     public static partial class Command
     {
         public static void Run(
-            this ICommandService<WriteDocument> handler,
+            this ICommandHandler<WriteDocument> handler,
             Action<string, object[]> callback,
             string markdown)
         {
@@ -35,7 +35,7 @@ namespace Qujck.MarkdownEditor.Commands
 
         public static partial class Handlers
         {
-            public sealed class WriteDocumentHandler : ICommandService<WriteDocument>
+            public sealed class WriteDocumentHandler : ICommandHandler<WriteDocument>
             {
                 public void Run(WriteDocument command)
                 {

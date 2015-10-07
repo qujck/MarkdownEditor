@@ -9,11 +9,11 @@ using Qujck.MarkdownEditor.Commands;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    public sealed class ImagePathFixer : ICommandService<Command.WriteDocument>
+    public sealed class ImagePathFixer : ICommandHandler<Command.WriteDocument>
     {
-        private readonly ICommandService<Command.WriteDocument> decorated;
+        private readonly ICommandHandler<Command.WriteDocument> decorated;
 
-        public ImagePathFixer(ICommandService<Command.WriteDocument> decorated)
+        public ImagePathFixer(ICommandHandler<Command.WriteDocument> decorated)
         {
             this.decorated = decorated;
         }

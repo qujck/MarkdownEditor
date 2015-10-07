@@ -34,7 +34,7 @@ namespace Qujck.MarkdownEditor
 
         private void DocumentView_Loaded(object sender, RoutedEventArgs e)
         {
-            var md = CompositionRoot.Instance.Resolve<IStringResourceProvider>().One("test.md");
+            var md = InjectExtension.CompositionRoot.Instance.Resolve<IStringResourceProvider>().One("test.md");
             this.DocumentView.TextEditor.Text = md;
         }
     }

@@ -22,14 +22,14 @@ namespace Qujck.MarkdownEditor.Behaviours
         public static readonly DependencyProperty DependencyResolverProperty =
             DependencyProperty.Register(
                 "ICommandHandler<Command.WriteDocument>",
-                typeof(ICommandService<Command.WriteDocument>),
+                typeof(ICommandHandler<Command.WriteDocument>),
                 typeof(DocumentViewRefreshBehaviour));
 
-        public ICommandService<Command.WriteDocument> WriteDocumentService
+        public ICommandHandler<Command.WriteDocument> WriteDocumentHandler
         {
             get
             {
-                return this.GetValue(DependencyResolverProperty) as ICommandService<Command.WriteDocument>;
+                return this.GetValue(DependencyResolverProperty) as ICommandHandler<Command.WriteDocument>;
             }
             set
             {
@@ -90,7 +90,7 @@ namespace Qujck.MarkdownEditor.Behaviours
                 this.textChangedRefreshRenderedViewTimer.Stop();
                 this.textChangedRefreshRenderedViewTimer.Tag = this;
 
-                this.WriteDocumentService.Run(
+                this.WriteDocumentHandler.Run(
                     (scriptName, args) => this.AssociatedObject.RenderedView.InvokeScript(scriptName, args),
                     this.AssociatedObject.TextEditor.Text);
 

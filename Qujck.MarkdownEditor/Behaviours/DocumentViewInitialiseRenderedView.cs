@@ -22,14 +22,14 @@ namespace Qujck.MarkdownEditor.Behaviours
         public static readonly DependencyProperty DependencyResolverProperty =
             DependencyProperty.Register(
                 "IQueryHandler<Query.Html, string>",
-                typeof(IQueryService<Query.Html, string>),
+                typeof(IQueryHandler<Query.Html, string>),
                 typeof(DocumentViewInitialiseRenderedView));
 
-        public IQueryService<Query.Html, string> HtmlQueryService
+        public IQueryHandler<Query.Html, string> HtmlQueryHandler
         {
             get
             {
-                return this.GetValue(DependencyResolverProperty) as IQueryService<Query.Html, string>;
+                return this.GetValue(DependencyResolverProperty) as IQueryHandler<Query.Html, string>;
             }
             set
             {
@@ -45,7 +45,7 @@ namespace Qujck.MarkdownEditor.Behaviours
 
         private void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
         {
-            string html = this.HtmlQueryService.Execute();
+            string html = this.HtmlQueryHandler.Execute();
             this.AssociatedObject.RenderedView.NavigateToString(html);
         }
     }

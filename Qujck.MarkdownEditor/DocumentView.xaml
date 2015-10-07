@@ -4,7 +4,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-    xmlns:local="clr-namespace:Qujck.MarkdownEditor"
+    xmlns:ioc="clr-namespace:Qujck.MarkdownEditor"
     xmlns:behaviours="clr-namespace:Qujck.MarkdownEditor.Behaviours"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
@@ -12,10 +12,10 @@
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300">
     <i:Interaction.Behaviors>
-        <behaviours:DocumentViewInitialiseAvalonEdit StringResourceProvider="{local:DependencyResolver}"/>
-        <behaviours:DocumentViewInitialiseRenderedView HtmlQueryService="{local:DependencyResolver}"/>
+        <behaviours:DocumentViewInitialiseAvalonEdit StringResourceProvider="{ioc:Inject}"/>
+        <behaviours:DocumentViewInitialiseRenderedView HtmlQueryHandler="{ioc:Inject}"/>
         <behaviours:DocumentViewScrollBehaviour/>
-        <behaviours:DocumentViewRefreshBehaviour WriteDocumentService="{local:DependencyResolver}"/>
+        <behaviours:DocumentViewRefreshBehaviour WriteDocumentHandler="{ioc:Inject}"/>
     </i:Interaction.Behaviors>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>

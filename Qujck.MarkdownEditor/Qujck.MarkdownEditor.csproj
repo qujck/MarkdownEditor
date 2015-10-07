@@ -69,19 +69,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Behaviours\DependencyResolverExtension.cs" />
+    <Compile Include="InjectExtension.cs" />
     <Compile Include="Behaviours\DocumentViewInitialiseAvalonEdit.cs" />
     <Compile Include="Behaviours\DocumentViewInitialiseRenderedView.cs" />
     <Compile Include="Behaviours\DocumentViewRefreshBehaviour.cs" />
     <Compile Include="Behaviours\DocumentViewScrollBehaviour.cs" />
-    <Compile Include="CompositionRoot.cs" />
+    <Compile Include="InjectExtension.CompositionRoot.cs" />
     <Compile Include="DocumentView.xaml.cs">
       <DependentUpon>DocumentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ComEventListener.cs" />
     <Compile Include="Queries\Html.cs" />
     <Compile Include="Queries\IQueryParameter.cs" />
-    <Compile Include="Queries\IQueryService.cs" />
+    <Compile Include="Queries\IQueryHandler.cs" />
     <Compile Include="Queries\Scripts.cs" />
     <Compile Include="Queries\Styles.cs" />
     <Page Include="DocumentView.xaml">
@@ -102,7 +102,7 @@
     <Compile Include="Aspects\PrettifyScripts.cs" />
     <Compile Include="Aspects\PrettifyStyles.cs" />
     <Compile Include="Commands\ICommandParameter.cs" />
-    <Compile Include="Commands\ICommandService.cs" />
+    <Compile Include="Commands\ICommandHandler.cs" />
     <Compile Include="Commands\WriteDocument.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="Infrastructure\IStringResourceProvider.cs" />
