@@ -30,6 +30,7 @@ namespace Qujck.MarkdownEditor
         private sealed class DependencyResolver
         {
             private ICommandHandler<Command.RenderMarkdown> renderMarkdownHandler;
+            private ICommandHandler<Command.SaveFile> saveFileHandler;
             private IQueryHandler<Query.Html, string> htmlQueryHandler;
             private IQueryHandler<Query.Scripts, string> scriptsQueryHandler;
             private IQueryHandler<Query.Styles, string> stylesQueryHandler;
@@ -59,6 +60,8 @@ namespace Qujck.MarkdownEditor
                 this.renderMarkdownHandler = new ImagePathFixer(
                     new PrettifyInvoke(
                         new Command.Handlers.RenderMarkdownHandler()));
+
+                this.saveFileHandler = new Command.Handlers.SaveFileHandler();
 
                 return this;
             }
@@ -98,6 +101,10 @@ namespace Qujck.MarkdownEditor
                 else if (serviceType == typeof(ICommandHandler<Command.RenderMarkdown>))
                 {
                     return this.renderMarkdownHandler;
+                }
+                else if (serviceType == typeof(ICommandHandler<Command.SaveFile>))
+                {
+                    return this.saveFileHandler;
                 }
                 else if (serviceType == typeof(IStringResourceProvider))
                 {

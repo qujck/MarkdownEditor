@@ -27,6 +27,8 @@ namespace Qujck.MarkdownEditor
         const string RenderedViewRow = "RenderedViewRow";
         const string BorderThickness = "BorderThickness";
         const string CurrentView = "CurrentView";
+        public const string OpeningText = "OpeningText";
+        const string CurrentText = "CurrentText";
 
         private enum View
         {

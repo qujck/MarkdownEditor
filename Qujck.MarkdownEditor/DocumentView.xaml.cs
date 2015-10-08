@@ -27,5 +27,15 @@ namespace Qujck.MarkdownEditor
         {
             InitializeComponent();
         }
+
+        private void DataModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == DocumentViewModel.OpeningText)
+            {
+                var model = sender as DocumentViewModel;
+
+                this.TextEditor.Text = model[DocumentViewModel.OpeningText] as string;
+            }
+        }
     }
 }
