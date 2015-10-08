@@ -11,21 +11,19 @@ namespace Qujck.MarkdownEditor.Infrastructure
     public class ViewModelCommandAdapter : MarkupExtension, ICommand
     {
         private FrameworkElement frameworkElement;
+        private readonly string canExecuteMethodName;
+        private readonly string executeMethodName;
 
-        private readonly string canExecute;
-
-        private readonly string executed;
-
-        public ViewModelCommandAdapter(string executed)
+        public ViewModelCommandAdapter(string executeMethodName)
         {
-            this.canExecute = null;
-            this.executed = executed;
+            this.executeMethodName = executeMethodName;
+            this.canExecuteMethodName = null;
         }
 
-        public ViewModelCommandAdapter(string executed, string canExecute)
+        public ViewModelCommandAdapter(string executeMethodName, string canExecuteMethodName)
         {
-            this.executed = executed;
-            this.canExecute = canExecute;
+            this.executeMethodName = executeMethodName;
+            this.canExecuteMethodName = canExecuteMethodName;
         }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
@@ -33,7 +31,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
             if (this.frameworkElement == null)
             {
                 var rootProvider = (IRootObjectProvider)serviceProvider
-                           .GetService(typeof(IRootObjectProvider));
+                    .GetService(typeof(IRootObjectProvider));
                 this.frameworkElement = rootProvider.RootObject as FrameworkElement;
             }
 
@@ -54,6 +52,22 @@ namespace Qujck.MarkdownEditor.Infrastructure
             }
         }
 
+        private Func<bool> CanExecuteMethod
+        {
+            get
+            {
+                return this.DataContext[this.canExecuteMethodName] as Func<bool>;
+            }
+        }
+
+        private Action ExecuteMethod
+        {
+            get
+            {
+                return this.DataContext[this.executeMethodName] as Action;
+            }
+        }
+
         event EventHandler ICommand.CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
@@ -62,14 +76,14 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
         bool ICommand.CanExecute(object parameter)
         {
-            return this.canExecute == null
+            return this.canExecuteMethodName == null
                 ? true
-                : (this.DataContext[this.canExecute] as Func<bool>)();
+                : this.CanExecuteMethod();
         }
 
         void ICommand.Execute(object parameter)
         {
-            (this.DataContext[this.executed] as Action)();
+            this.ExecuteMethod();
         }
     }
 }

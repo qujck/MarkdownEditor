@@ -13,7 +13,8 @@ namespace Qujck.MarkdownEditor
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            var provideValueTarget = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
+            var provideValueTarget = (IProvideValueTarget)serviceProvider
+                .GetService(typeof(IProvideValueTarget));
             var targetProperty = provideValueTarget.TargetProperty as PropertyInfo;
 
             if (targetProperty == null)
