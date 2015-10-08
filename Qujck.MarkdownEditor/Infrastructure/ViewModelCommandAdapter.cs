@@ -79,6 +79,11 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
         bool ICommand.CanExecute(object parameter)
         {
+            if (parameter != null)
+            {
+                throw new ArgumentException();
+            }
+
             return this.canExecuteMethodName == null
                 ? true
                 : this.CanExecuteMethod();
@@ -86,6 +91,11 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
         void ICommand.Execute(object parameter)
         {
+            if (parameter != null)
+            {
+                throw new ArgumentException();
+            }
+
             this.ExecuteMethod();
         }
     }

@@ -22,6 +22,7 @@ namespace Qujck.MarkdownEditor
         const string TextEditorRow = "TextEditorRow";
         const string RenderedViewColumn = "RenderedViewColumn";
         const string RenderedViewRow = "RenderedViewRow";
+        const string BorderThickness = "BorderThickness";
         const string CurrentView = "CurrentView";
 
         private enum View
@@ -46,6 +47,7 @@ namespace Qujck.MarkdownEditor
                     { TextEditorRow, 0 },
                     { RenderedViewColumn, 1 },
                     { RenderedViewRow, 0 },
+                    { BorderThickness, "0,0,1,0" },
                     { CurrentView, View.Vertical }
                 };
             }
@@ -65,6 +67,7 @@ namespace Qujck.MarkdownEditor
                     { TextEditorRow, 0 },
                     { RenderedViewColumn, 0 },
                     { RenderedViewRow, 1 },
+                    { BorderThickness, "0,0,0,1" },
                     { CurrentView, View.Horizontal }
                 };
             }
@@ -84,6 +87,7 @@ namespace Qujck.MarkdownEditor
                     { TextEditorRow, 0 },
                     { RenderedViewColumn, 1 },
                     { RenderedViewRow, 0 },
+                    { BorderThickness, "0,0,0,0" },
                     { CurrentView, View.TextEditor }
                 };
             }
@@ -103,6 +107,7 @@ namespace Qujck.MarkdownEditor
                     { TextEditorRow, 0 },
                     { RenderedViewColumn, 1 },
                     { RenderedViewRow, 0 },
+                    { BorderThickness, "0,0,0,0" },
                     { CurrentView, View.RenderedView }
                 };
             }
