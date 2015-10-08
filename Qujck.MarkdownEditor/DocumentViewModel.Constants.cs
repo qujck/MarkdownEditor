@@ -11,8 +11,11 @@ namespace Qujck.MarkdownEditor
 {
     public sealed partial class DocumentViewModel
     {
-        const string ON = "1*";
-        const string OFF = "0";
+        const string On = "1*";
+        const string Off = "0";
+        const string BorderOff = "0,0,0,0";
+        const string BorderRight = "0,0,1,0";
+        const string BorderBottom = "0,0,0,1";
 
         const string LeftColumnWidth = "LeftColumnWidth";
         const string RightColumnWidth = "RightColumnWidth";
@@ -39,15 +42,15 @@ namespace Qujck.MarkdownEditor
             {
                 return new Dictionary<string, object>
                 {
-                    { LeftColumnWidth, ON },
-                    { RightColumnWidth, ON },
-                    { TopRowHeight, ON },
-                    { BottomRowHeight, OFF },
+                    { LeftColumnWidth, On },
+                    { RightColumnWidth, On },
+                    { TopRowHeight, On },
+                    { BottomRowHeight, Off },
                     { TextEditorColumn, 0 },
                     { TextEditorRow, 0 },
                     { RenderedViewColumn, 1 },
                     { RenderedViewRow, 0 },
-                    { BorderThickness, "0,0,1,0" },
+                    { BorderThickness, BorderRight },
                     { CurrentView, View.Vertical }
                 };
             }
@@ -59,15 +62,15 @@ namespace Qujck.MarkdownEditor
             {
                 return new Dictionary<string, object>
                 {
-                    { LeftColumnWidth, ON },
-                    { RightColumnWidth, OFF },
-                    { TopRowHeight, ON },
-                    { BottomRowHeight, ON },
+                    { LeftColumnWidth, On },
+                    { RightColumnWidth, Off },
+                    { TopRowHeight, On },
+                    { BottomRowHeight, On },
                     { TextEditorColumn, 0 },
                     { TextEditorRow, 0 },
                     { RenderedViewColumn, 0 },
                     { RenderedViewRow, 1 },
-                    { BorderThickness, "0,0,0,1" },
+                    { BorderThickness, BorderBottom },
                     { CurrentView, View.Horizontal }
                 };
             }
@@ -79,15 +82,15 @@ namespace Qujck.MarkdownEditor
             {
                 return new Dictionary<string, object>
                 {
-                    { LeftColumnWidth, ON },
-                    { RightColumnWidth, OFF },
-                    { TopRowHeight, ON },
-                    { BottomRowHeight, OFF },
+                    { LeftColumnWidth, On },
+                    { RightColumnWidth, Off },
+                    { TopRowHeight, On },
+                    { BottomRowHeight, Off },
                     { TextEditorColumn, 0 },
                     { TextEditorRow, 0 },
                     { RenderedViewColumn, 1 },
                     { RenderedViewRow, 0 },
-                    { BorderThickness, "0,0,0,0" },
+                    { BorderThickness, BorderOff },
                     { CurrentView, View.TextEditor }
                 };
             }
@@ -99,15 +102,15 @@ namespace Qujck.MarkdownEditor
             {
                 return new Dictionary<string, object>
                 {
-                    { LeftColumnWidth, OFF },
-                    { RightColumnWidth, ON },
-                    { TopRowHeight, ON },
-                    { BottomRowHeight, OFF },
+                    { LeftColumnWidth, Off },
+                    { RightColumnWidth, On },
+                    { TopRowHeight, On },
+                    { BottomRowHeight, Off },
                     { TextEditorColumn, 0 },
                     { TextEditorRow, 0 },
                     { RenderedViewColumn, 1 },
                     { RenderedViewRow, 0 },
-                    { BorderThickness, "0,0,0,0" },
+                    { BorderThickness, BorderOff },
                     { CurrentView, View.RenderedView }
                 };
             }
