@@ -89,6 +89,7 @@
     <Compile Include="Queries\Html.cs" />
     <Compile Include="Queries\IQueryParameter.cs" />
     <Compile Include="Queries\IQueryHandler.cs" />
+    <Compile Include="Queries\OpenFile.cs" />
     <Compile Include="Queries\Scripts.cs" />
     <Compile Include="Queries\Styles.cs" />
     <Page Include="DocumentView.xaml">

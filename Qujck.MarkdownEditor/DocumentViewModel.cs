@@ -8,12 +8,15 @@ using System.Windows;
 using System.Windows.Input;
 using Qujck.MarkdownEditor.Commands;
 using Qujck.MarkdownEditor.Infrastructure;
+using Qujck.MarkdownEditor.Queries;
 
 namespace Qujck.MarkdownEditor
 {
     public sealed partial class DocumentViewModel : DynamicViewModel
     {
-        public ICommandHandler<Command.SaveFile> SaveFileCommand { private get; set; }
+        public ICommandHandler<Command.SaveFile> SaveFileHandler { private get; set; }
+
+        public IQueryHandler<Query.OpenFile, string> OpenFileHandler { private get; set; }
 
         public DocumentViewModel() : base(VerticalView, Data)
         {
@@ -28,11 +31,24 @@ namespace Qujck.MarkdownEditor
                 () => this.Save(),
                 "_CanSave",
                 () => (string)this[OpeningText] != (string)this[CurrentText]);
+            base.RegisterCommandAction(
+                "_Open",
+                () => Open());
         }
 
         public void Update(string text)
         {
             this[CurrentText] = text;
+        }
+
+        public void Open()
+        {
+            var text = this.OpenFileHandler.Execute();
+            if (text != null)
+            {
+                this[OpeningText] = text;
+                this[CurrentText] = text;
+            }
         }
 
         public void Open(string text)
@@ -43,7 +59,7 @@ namespace Qujck.MarkdownEditor
 
         private void Save()
         {
-            this.SaveFileCommand.Run((string)this[CurrentText]);
+            this.SaveFileHandler.Run((string)this[CurrentText]);
             this[OpeningText] = this[CurrentText];
         }
 

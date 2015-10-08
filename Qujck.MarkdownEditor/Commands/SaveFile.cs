@@ -37,7 +37,7 @@ namespace Qujck.MarkdownEditor.Commands
             {
                 public void Run(SaveFile command)
                 {
-                    SaveFileDialog dialog = new SaveFileDialog()
+                    var dialog = new SaveFileDialog()
                     {
                         Filter = "Markdown Files(*.md)|*.md|All(*.*)|*"
                     };

@@ -32,6 +32,7 @@ namespace Qujck.MarkdownEditor
             private ICommandHandler<Command.RenderMarkdown> renderMarkdownHandler;
             private ICommandHandler<Command.SaveFile> saveFileHandler;
             private IQueryHandler<Query.Html, string> htmlQueryHandler;
+            private IQueryHandler<Query.OpenFile, string> openFileQueryHandler;
             private IQueryHandler<Query.Scripts, string> scriptsQueryHandler;
             private IQueryHandler<Query.Styles, string> stylesQueryHandler;
             private IStringResourceProvider stringResourceProvider;
@@ -73,6 +74,9 @@ namespace Qujck.MarkdownEditor
                         this.stringResourceProvider),
                     this.stringResourceProvider);
 
+
+                this.openFileQueryHandler = new Query.Handlers.OpenFileHandler();
+
                 this.stylesQueryHandler = new PrettifyStyles(
                     new Query.Handlers.StylesHandler(
                         this.stringResourceProvider),
@@ -94,9 +98,17 @@ namespace Qujck.MarkdownEditor
 
             internal object Resolve(Type serviceType)
             {
-                if (serviceType == typeof(IQueryHandler<Query.Html, string>))
+                if (serviceType == typeof(IStringResourceProvider))
+                {
+                    return this.stringResourceProvider;
+                }
+                else if (serviceType == typeof(IQueryHandler<Query.Html, string>))
                 {
                     return this.htmlQueryHandler;
+                }
+                else if (serviceType == typeof(IQueryHandler<Query.OpenFile, string>))
+                {
+                    return this.openFileQueryHandler;
                 }
                 else if (serviceType == typeof(ICommandHandler<Command.RenderMarkdown>))
                 {
@@ -105,10 +117,6 @@ namespace Qujck.MarkdownEditor
                 else if (serviceType == typeof(ICommandHandler<Command.SaveFile>))
                 {
                     return this.saveFileHandler;
-                }
-                else if (serviceType == typeof(IStringResourceProvider))
-                {
-                    return this.stringResourceProvider;
                 }
 
                 throw new InvalidOperationException();

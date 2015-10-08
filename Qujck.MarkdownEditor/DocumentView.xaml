@@ -18,9 +18,13 @@
         <KeyBinding Modifiers="" Key="F5" Command="{inf:ViewModelCommandAdapter _Next}"/>
         <KeyBinding Modifiers="Shift" Key="F5" Command="{inf:ViewModelCommandAdapter _Previous}"/>
         <KeyBinding Modifiers="Ctrl" Key="S" Command="{inf:ViewModelCommandAdapter _Save, _CanSave}"/>
+        <KeyBinding Modifiers="Ctrl" Key="O" Command="{inf:ViewModelCommandAdapter _Open}"/>
     </UserControl.InputBindings>
     <UserControl.DataContext>
-        <local:DocumentViewModel PropertyChanged="DataModel_PropertyChanged" SaveFileCommand="{ioc:Container}"/>
+        <local:DocumentViewModel 
+            PropertyChanged="DataModel_PropertyChanged" 
+            OpenFileHandler="{ioc:Container}"
+            SaveFileHandler="{ioc:Container}"/>
     </UserControl.DataContext>
     <i:Interaction.Behaviors>
         <behaviours:DocumentViewInitialiseAvalonEdit StringResourceProvider="{ioc:Container}"/>
