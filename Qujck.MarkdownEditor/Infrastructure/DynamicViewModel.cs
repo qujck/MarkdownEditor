@@ -8,26 +8,36 @@ using System.Dynamic;
 
 namespace Qujck.MarkdownEditor.Infrastructure
 {
+    /// <summary>
+    /// Provides a base class for specifying dynamic behavior at run time. This class
+    /// must be inherited from; you cannot instantiate it directly.
+    /// </summary>
     public abstract class DynamicViewModel : DynamicObject, INotifyPropertyChanged
     {
         private IDictionary<string, object> dictionary { get; set; }
 
+        /// <summary>
+        /// Enables derived types to initialize a new instance of the DynamicViewModel
+        /// type with one or more Dictionaries of prepared property names and values.
+        /// </summary>
         protected DynamicViewModel(params IDictionary<string, object>[] propertySets)
         {
             this.dictionary = new Dictionary<string, object>();
             this.Update(propertySets);
         }
 
+        /// <summary>
+        /// Enables derived types to initialize a new instance of the DynamicViewModel
+        /// type with a list of predefined property names.
+        /// </summary>
         protected DynamicViewModel(params string[] properties)
         {
             this.dictionary = new Dictionary<string, object>();
             foreach (var property in properties)
             {
-                this.dictionary.Add(property, null);
+                this[property] = null;
             }
         }
-
-        public int Count { get { return this.dictionary.Keys.Count; } }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
@@ -36,7 +46,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 throw new InvalidProgramException(this.PropertyNotFoundException(binder.Name));
             }
 
-            result = this.GetValue(binder.Name);
+            result = this[binder.Name];
 
             return true;
         }
@@ -48,7 +58,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 throw new InvalidProgramException(this.PropertyNotFoundException(binder.Name));
             }
 
-            this.SetValue(binder.Name, value);
+            this[binder.Name] = value;
 
             return true;
         }
@@ -104,7 +114,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
             {
                 foreach (var property in properties)
                 {
-                    this.SetValue(property.Key, property.Value);
+                    this[property.Key] = property.Value;
                 }
             }
         }
@@ -122,7 +132,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
         public bool CanExecute(string name)
         {
-            var canExecute = this.dictionary[name] as Func<bool>;
+            var canExecute = this[name] as Func<bool>;
             if (canExecute == null)
             {
                 throw new ArgumentNullException();
@@ -133,10 +143,10 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
         public void Execute(string name)
         {
-            var execute = this.dictionary[name] as Action;
+            var execute = this[name] as Action;
             if (execute == null)
             {
-                throw new ArgumentException();
+                throw new ArgumentNullException();
             }
 
             execute();

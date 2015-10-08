@@ -25,6 +25,8 @@ namespace Qujck.MarkdownEditor.Behaviours
                 typeof(ICommandHandler<Command.WriteDocument>),
                 typeof(DocumentViewRefreshBehaviour));
 
+        private readonly DispatcherTimer textChangedRefreshRenderedViewTimer;
+
         public ICommandHandler<Command.WriteDocument> WriteDocumentHandler
         {
             get
@@ -36,8 +38,6 @@ namespace Qujck.MarkdownEditor.Behaviours
                 this.SetValue(DependencyResolverProperty, value);
             }
         }
-
-        private readonly DispatcherTimer textChangedRefreshRenderedViewTimer;
 
         public DocumentViewRefreshBehaviour()
         {
