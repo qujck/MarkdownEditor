@@ -32,60 +32,80 @@ namespace Qujck.MarkdownEditor
             RenderedView
         }
 
-        private static readonly IDictionary<string, object> VerticalView =
-            new Dictionary<string, object>
+        private static IDictionary<string, object> VerticalView
+        {
+            get
             {
-                { LeftColumnWidth, ON },
-                { RightColumnWidth, ON },
-                { TopRowHeight, ON },
-                { BottomRowHeight, OFF },
-                { TextEditorColumn, 0 },
-                { TextEditorRow, 0 },
-                { RenderedViewColumn, 1 },
-                { RenderedViewRow, 0 },
-                { CurrentView, View.Vertical }
-            };
+                return new Dictionary<string, object>
+                {
+                    { LeftColumnWidth, ON },
+                    { RightColumnWidth, ON },
+                    { TopRowHeight, ON },
+                    { BottomRowHeight, OFF },
+                    { TextEditorColumn, 0 },
+                    { TextEditorRow, 0 },
+                    { RenderedViewColumn, 1 },
+                    { RenderedViewRow, 0 },
+                    { CurrentView, View.Vertical }
+                };
+            }
+        }
 
-        private static readonly IDictionary<string, object> HorizontalView =
-            new Dictionary<string, object>
+        private static IDictionary<string, object> HorizontalView
+        {
+            get
             {
-                { LeftColumnWidth, ON },
-                { RightColumnWidth, OFF },
-                { TopRowHeight, ON },
-                { BottomRowHeight, OFF },
-                { TextEditorColumn, 0 },
-                { TextEditorRow, 0 },
-                { RenderedViewColumn, 0 },
-                { RenderedViewRow, 1 },
-                { CurrentView, View.Horizontal }
-            };
+                return new Dictionary<string, object>
+                {
+                    { LeftColumnWidth, ON },
+                    { RightColumnWidth, OFF },
+                    { TopRowHeight, ON },
+                    { BottomRowHeight, ON },
+                    { TextEditorColumn, 0 },
+                    { TextEditorRow, 0 },
+                    { RenderedViewColumn, 0 },
+                    { RenderedViewRow, 1 },
+                    { CurrentView, View.Horizontal }
+                };
+            }
+        }
 
-        private static readonly IDictionary<string, object> TextEditorView =
-            new Dictionary<string, object>
+        private static IDictionary<string, object> TextEditorView
+        {
+            get
             {
-                { LeftColumnWidth, ON },
-                { RightColumnWidth, OFF },
-                { TopRowHeight, ON },
-                { BottomRowHeight, OFF },
-                { TextEditorColumn, 0 },
-                { TextEditorRow, 0 },
-                { RenderedViewColumn, 1 },
-                { RenderedViewRow, 0 },
-                { CurrentView, View.TextEditor }
-            };
+                return new Dictionary<string, object>
+                {
+                    { LeftColumnWidth, ON },
+                    { RightColumnWidth, OFF },
+                    { TopRowHeight, ON },
+                    { BottomRowHeight, OFF },
+                    { TextEditorColumn, 0 },
+                    { TextEditorRow, 0 },
+                    { RenderedViewColumn, 1 },
+                    { RenderedViewRow, 0 },
+                    { CurrentView, View.TextEditor }
+                };
+            }
+        }
 
-        private static readonly IDictionary<string, object> RenderedViewView =
-            new Dictionary<string, object>
+        private static IDictionary<string, object> RenderedViewView
+        {
+            get
             {
-                { LeftColumnWidth, OFF },
-                { RightColumnWidth, ON },
-                { TopRowHeight, ON },
-                { BottomRowHeight, OFF },
-                { TextEditorColumn, 0 },
-                { TextEditorRow, 0 },
-                { RenderedViewColumn, 1 },
-                { RenderedViewRow, 0 },
-                { CurrentView, View.RenderedView }
-            };
+                return new Dictionary<string, object>
+                {
+                    { LeftColumnWidth, OFF },
+                    { RightColumnWidth, ON },
+                    { TopRowHeight, ON },
+                    { BottomRowHeight, OFF },
+                    { TextEditorColumn, 0 },
+                    { TextEditorRow, 0 },
+                    { RenderedViewColumn, 1 },
+                    { RenderedViewRow, 0 },
+                    { CurrentView, View.RenderedView }
+                };
+            }
+        }
     }
 }

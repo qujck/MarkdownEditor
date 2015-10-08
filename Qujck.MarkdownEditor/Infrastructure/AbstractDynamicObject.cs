@@ -30,7 +30,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
         {
             foreach (var property in properties)
             {
-                this.dictionary[property.Key] = property.Value;
+                this.SetValue(property.Key, property.Value);
             }
         }
 
@@ -43,7 +43,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 throw new InvalidProgramException(this.PropertyNotFoundException(binder.Name));
             }
 
-            result = this.dictionary[binder.Name];
+            result = this.GetValue(binder.Name);
 
             return true;
         }
@@ -55,11 +55,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 throw new InvalidProgramException(this.PropertyNotFoundException(binder.Name));
             }
 
-            if (!EqualityComparer<object>.Default.Equals(this.dictionary[binder.Name], value))
-            {
-                this.dictionary[binder.Name] = value;
-                this.OnPropertyChanged(binder.Name);
-            }
+            this.SetValue(binder.Name, value);
 
             return true;
         }
@@ -99,11 +95,11 @@ namespace Qujck.MarkdownEditor.Infrastructure
         {
             get
             {
-                return this.dictionary[key];
+                return this.GetValue(key);
             }
             set
             {
-                this.dictionary[key] = value;
+                this.SetValue(key, value);
             }
         }
 
@@ -121,6 +117,20 @@ namespace Qujck.MarkdownEditor.Infrastructure
         private string PropertyNotFoundException(string name)
         {
             return string.Format("Property `{0}` not found.", name);
+        }
+
+        private object GetValue(string name)
+        {
+            return this.dictionary[name];
+        }
+
+        private void SetValue(string name, object value)
+        {
+            if (!EqualityComparer<object>.Default.Equals(this.dictionary[name], value))
+            {
+                this.dictionary[name] = value;
+                this.OnPropertyChanged(name);
+            }
         }
     }
 }

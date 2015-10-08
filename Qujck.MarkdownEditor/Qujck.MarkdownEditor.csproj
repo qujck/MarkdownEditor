@@ -82,6 +82,8 @@
     <Compile Include="DocumentViewModel.cs" />
     <Compile Include="Infrastructure\AbstractDynamicObject.cs" />
     <Compile Include="Infrastructure\ComEventListener.cs" />
+    <Compile Include="Infrastructure\CommandExecutionManager.cs" />
+    <Compile Include="Infrastructure\DataContextCommandAdapter.cs" />
     <Compile Include="Queries\Html.cs" />
     <Compile Include="Queries\IQueryParameter.cs" />
     <Compile Include="Queries\IQueryHandler.cs" />

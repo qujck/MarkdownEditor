@@ -6,6 +6,7 @@
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
     xmlns:ioc="clr-namespace:Qujck.MarkdownEditor"
     xmlns:local="clr-namespace:Qujck.MarkdownEditor"
+    xmlns:inf="clr-namespace:Qujck.MarkdownEditor.Infrastructure"
     xmlns:behaviours="clr-namespace:Qujck.MarkdownEditor.Behaviours"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
@@ -13,7 +14,8 @@
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.InputBindings>
-        <KeyBinding Modifiers="" Key="F5" Command=""/>
+        <KeyBinding Modifiers="" Key="F5" Command="{inf:DataContextCommandAdapter Next, CanExecute}"/>
+        <KeyBinding Modifiers="Shift" Key="F5" Command="{inf:DataContextCommandAdapter Previous, CanExecute}"/>
     </UserControl.InputBindings>
     <UserControl.DataContext>
         <local:DocumentViewModel/>

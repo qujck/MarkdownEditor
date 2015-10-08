@@ -25,6 +25,11 @@ namespace Qujck.MarkdownEditor
             this.Update(WhatsPrevious((View)this[CurrentView]));
         }
 
+        public bool CanExecute()
+        {
+            return true;
+        }
+
         private static IDictionary<string, object> WhatsNext(View currentView)
         {
             switch (currentView)
