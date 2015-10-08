@@ -41,17 +41,17 @@ namespace Qujck.MarkdownEditor.Infrastructure
             return this;
         }
 
-        private AbstractViewModel ViewModel
+        private DynamicViewModel ViewModel
         {
             get
             {
                 if (this.frameworkElement.DataContext == null ||
-                    !typeof(AbstractViewModel).IsAssignableFrom(this.frameworkElement.DataContext.GetType()))
+                    !typeof(DynamicViewModel).IsAssignableFrom(this.frameworkElement.DataContext.GetType()))
                 {
                     throw new InvalidProgramException();
                 }
 
-                return this.frameworkElement.DataContext as AbstractViewModel;
+                return this.frameworkElement.DataContext as DynamicViewModel;
             }
         }
 

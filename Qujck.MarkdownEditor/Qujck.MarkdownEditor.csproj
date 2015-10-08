@@ -81,7 +81,7 @@
       <DependentUpon>DocumentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="DocumentViewModel.cs" />
-    <Compile Include="Infrastructure\AbstractViewModel.cs" />
+    <Compile Include="Infrastructure\DynamicViewModel.cs" />
     <Compile Include="Infrastructure\ComEventListener.cs" />
     <Compile Include="Infrastructure\ViewModelCommandAdapter.cs" />
     <Compile Include="Queries\Html.cs" />

@@ -8,16 +8,17 @@ using System.Dynamic;
 
 namespace Qujck.MarkdownEditor.Infrastructure
 {
-    public abstract class AbstractViewModel : DynamicObject, INotifyPropertyChanged
+    public abstract class DynamicViewModel : DynamicObject, INotifyPropertyChanged
     {
         private IDictionary<string, object> dictionary { get; set; }
 
-        protected AbstractViewModel(IDictionary<string, object> properties)
+        protected DynamicViewModel(params IDictionary<string, object>[] propertySets)
         {
-            this.dictionary = properties;
+            this.dictionary = new Dictionary<string, object>();
+            this.Update(propertySets);
         }
 
-        protected AbstractViewModel(params string[] properties)
+        protected DynamicViewModel(params string[] properties)
         {
             this.dictionary = new Dictionary<string, object>();
             foreach (var property in properties)
@@ -97,11 +98,14 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void Update(IDictionary<string, object> properties)
+        protected void Update(params IDictionary<string, object>[] propertySets)
         {
-            foreach (var property in properties)
+            foreach (var properties in propertySets)
             {
-                this.SetValue(property.Key, property.Value);
+                foreach (var property in properties)
+                {
+                    this.SetValue(property.Key, property.Value);
+                }
             }
         }
 

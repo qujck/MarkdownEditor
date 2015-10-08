@@ -9,7 +9,7 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor
 {
-    public sealed partial class DocumentViewModel : AbstractViewModel
+    public sealed partial class DocumentViewModel : DynamicViewModel
     {
         public DocumentViewModel() : base(VerticalView)
         {
