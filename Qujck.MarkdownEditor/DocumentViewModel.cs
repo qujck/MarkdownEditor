@@ -13,21 +13,20 @@ namespace Qujck.MarkdownEditor
     {
         public DocumentViewModel() : base(VerticalView)
         {
+            Action next = () => _Next();
+            this["Next"] = next;
+            Action previous = () => _Previous();
+            this["Previous"] = previous;
         }
 
-        public void Next()
+        private void _Next()
         {
             this.Update(WhatsNext((View)this[CurrentView]));
         }
 
-        public void Previous()
+        private void _Previous()
         {
             this.Update(WhatsPrevious((View)this[CurrentView]));
-        }
-
-        public bool CanExecute()
-        {
-            return true;
         }
 
         private static IDictionary<string, object> WhatsNext(View currentView)

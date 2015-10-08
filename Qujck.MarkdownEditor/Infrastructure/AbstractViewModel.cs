@@ -91,13 +91,13 @@ namespace Qujck.MarkdownEditor.Infrastructure
             }
         }
 
-        protected virtual object this[string key]
+        public virtual object this[string key]
         {
             get
             {
                 return this.GetValue(key);
             }
-            set
+            protected set
             {
                 this.SetValue(key, value);
             }
@@ -126,7 +126,8 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
         private void SetValue(string name, object value)
         {
-            if (!EqualityComparer<object>.Default.Equals(this.dictionary[name], value))
+            if (!this.dictionary.ContainsKey(name) ||
+                !EqualityComparer<object>.Default.Equals(this.dictionary[name], value))
             {
                 this.dictionary[name] = value;
                 this.OnPropertyChanged(name);
