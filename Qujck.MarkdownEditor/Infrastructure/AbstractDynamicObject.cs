@@ -6,18 +6,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Dynamic;
 
-namespace Qujck.MarkdownEditor
+namespace Qujck.MarkdownEditor.Infrastructure
 {
-    public abstract class AbstractDynamicObject : DynamicObject, INotifyPropertyChanged
+    public abstract class AbstractViewModel : DynamicObject, INotifyPropertyChanged
     {
         private IDictionary<string, object> dictionary { get; set; }
 
-        public AbstractDynamicObject(params string[] properties)
+        protected AbstractViewModel(IDictionary<string, object> properties)
+        {
+            this.dictionary = properties;
+        }
+
+        protected AbstractViewModel(params string[] properties)
         {
             this.dictionary = new Dictionary<string, object>();
-            foreach(var property in properties)
+            foreach (var property in properties)
             {
                 this.dictionary.Add(property, null);
+            }
+        }
+
+        protected void Update(IDictionary<string, object> properties)
+        {
+            foreach (var property in properties)
+            {
+                this.dictionary[property.Key] = property.Value;
             }
         }
 
@@ -82,7 +95,7 @@ namespace Qujck.MarkdownEditor
             }
         }
 
-        public virtual object this[string key]
+        protected virtual object this[string key]
         {
             get
             {

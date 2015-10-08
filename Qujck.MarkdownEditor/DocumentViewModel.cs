@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor
 {
-    public sealed class DocumentViewModel : AbstractDynamicObject
+    public sealed class DocumentViewModel : AbstractViewModel
     {
         const string ON = "1*";
         const string OFF = "0";
@@ -21,6 +22,7 @@ namespace Qujck.MarkdownEditor
         const string TextEditorRow = "TextEditorRow";
         const string RenderedViewColumn = "RenderedViewColumn";
         const string RenderedViewRow = "RenderedViewRow";
+        const string CurrentView = "CurrentView";
 
         private enum View
         {
@@ -30,109 +32,128 @@ namespace Qujck.MarkdownEditor
             RenderedView
         }
 
-        private View current;
-
-        public DocumentViewModel() : base(
-            LeftColumnWidth,
-            RightColumnWidth,
-            TopRowHeight,
-            BottomRowHeight,
-            TextEditorColumn,
-            TextEditorRow,
-            RenderedViewColumn,
-            RenderedViewRow)
+        public DocumentViewModel() : base(VerticalView)
         {
-            this.Vertical();
         }
 
         public void Next()
         {
-            switch (this.current)
-            {
-                case View.Vertical:
-                    this.Horizontal();
-                    break;
-                case View.Horizontal:
-                    this.TextEditor();
-                    break;
-                case View.TextEditor:
-                    this.RenderedView();
-                    break;
-                case View.RenderedView:
-                    this.Vertical();
-                    break;
-            }
+            this.Update(WhatsNext((View)this[CurrentView]));
         }
 
         public void Previous()
         {
-            switch (this.current)
+            this.Update(WhatsPrevious((View)this[CurrentView]));
+        }
+
+        private static IDictionary<string, object> WhatsNext(View currentView)
+        {
+            switch (currentView)
             {
-                case View.RenderedView:
-                    this.TextEditor();
-                    break;
-                case View.TextEditor:
-                    this.Horizontal();
-                    break;
-                case View.Horizontal:
-                    this.Vertical();
-                    break;
                 case View.Vertical:
-                    this.RenderedView();
-                    break;
+                    return HorizontalView;
+                case View.Horizontal:
+                    return TextEditorView;
+                case View.TextEditor:
+                    return RenderedViewView;
+                case View.RenderedView:
+                    return VerticalView;
+                default:
+                    throw new InvalidOperationException();
             }
         }
 
-        private void Vertical()
+        private static IDictionary<string, object> WhatsPrevious(View currentView)
         {
-            this[LeftColumnWidth] = ON;
-            this[RightColumnWidth] = ON;
-            this[TopRowHeight] = ON;
-            this[BottomRowHeight] = OFF;
-            this[TextEditorColumn] = 0;
-            this[TextEditorRow] = 0;
-            this[RenderedViewColumn] = 1;
-            this[RenderedViewRow] = 0;
-            this.current = View.Vertical;
+            switch (currentView)
+            {
+                case View.RenderedView:
+                    return TextEditorView;
+                case View.TextEditor:
+                    return HorizontalView;
+                case View.Horizontal:
+                    return VerticalView;
+                case View.Vertical:
+                    return RenderedViewView;
+                default:
+                    throw new InvalidOperationException();
+            }
         }
 
-        private void Horizontal()
+        private static IDictionary<string, object> VerticalView
         {
-            this[LeftColumnWidth] = ON;
-            this[RightColumnWidth] = OFF;
-            this[TopRowHeight] = ON;
-            this[BottomRowHeight] = ON;
-            this[TextEditorColumn] = 0;
-            this[TextEditorRow] = 0;
-            this[RenderedViewColumn] = 0;
-            this[RenderedViewRow] = 1;
-            this.current = View.Horizontal;
+            get
+            {
+                return new Dictionary<string, object>
+                {
+                    { LeftColumnWidth, ON },
+                    { RightColumnWidth, ON },
+                    { TopRowHeight, ON },
+                    { BottomRowHeight, OFF },
+                    { TextEditorColumn, 0 },
+                    { TextEditorRow, 0 },
+                    { RenderedViewColumn, 1 },
+                    { RenderedViewRow, 0 },
+                    { CurrentView, View.Vertical }
+                };
+            }
         }
 
-        private void TextEditor()
+        private static IDictionary<string, object> HorizontalView
         {
-            this[LeftColumnWidth] = ON;
-            this[RightColumnWidth] = OFF;
-            this[TopRowHeight] = ON;
-            this[BottomRowHeight] = OFF;
-            this[TextEditorColumn] = 0;
-            this[TextEditorRow] = 0;
-            this[RenderedViewColumn] = 1;
-            this[RenderedViewRow] = 0;
-            this.current = View.TextEditor;
+            get
+            {
+                return new Dictionary<string, object>
+                {
+                    { LeftColumnWidth, ON },
+                    { RightColumnWidth, OFF },
+                    { TopRowHeight, ON },
+                    { BottomRowHeight, OFF },
+                    { TextEditorColumn, 0 },
+                    { TextEditorRow, 0 },
+                    { RenderedViewColumn, 0 },
+                    { RenderedViewRow, 1 },
+                    { CurrentView, View.Horizontal }
+                };
+            }
         }
 
-        private void RenderedView()
+        private static IDictionary<string, object> TextEditorView
         {
-            this[LeftColumnWidth] = OFF;
-            this[RightColumnWidth] = ON;
-            this[TopRowHeight] = ON;
-            this[BottomRowHeight] = OFF;
-            this[TextEditorColumn] = 0;
-            this[TextEditorRow] = 0;
-            this[RenderedViewColumn] = 1;
-            this[RenderedViewRow] = 0;
-            this.current = View.RenderedView;
+            get
+            {
+                return new Dictionary<string, object>
+                {
+                    { LeftColumnWidth, ON },
+                    { RightColumnWidth, OFF },
+                    { TopRowHeight, ON },
+                    { BottomRowHeight, OFF },
+                    { TextEditorColumn, 0 },
+                    { TextEditorRow, 0 },
+                    { RenderedViewColumn, 1 },
+                    { RenderedViewRow, 0 },
+                    { CurrentView, View.TextEditor }
+                };
+            }
+        }
+
+        private static IDictionary<string, object> RenderedViewView
+        {
+            get
+            {
+                return new Dictionary<string, object>
+                {
+                    { LeftColumnWidth, OFF },
+                    { RightColumnWidth, ON },
+                    { TopRowHeight, ON },
+                    { BottomRowHeight, OFF },
+                    { TextEditorColumn, 0 },
+                    { TextEditorRow, 0 },
+                    { RenderedViewColumn, 1 },
+                    { RenderedViewRow, 0 },
+                    { CurrentView, View.RenderedView }
+                };
+            }
         }
     }
 }
