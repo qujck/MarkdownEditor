@@ -108,7 +108,7 @@
     <Compile Include="Aspects\PrettifyStyles.cs" />
     <Compile Include="Commands\ICommandParameter.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
-    <Compile Include="Commands\WriteDocument.cs" />
+    <Compile Include="Commands\RenderMarkdown.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="Infrastructure\IStringResourceProvider.cs" />
     <Compile Include="Infrastructure\StringResourceProvider.cs" />

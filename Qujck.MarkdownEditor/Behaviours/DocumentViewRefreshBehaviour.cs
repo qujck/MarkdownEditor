@@ -21,7 +21,7 @@ namespace Qujck.MarkdownEditor.Behaviours
     {
         private readonly DispatcherTimer textChangedRefreshRenderedViewTimer;
 
-        public ICommandHandler<Command.WriteDocument> WriteDocumentHandler { private get; set; }
+        public ICommandHandler<Command.RenderMarkdown> RenderMarkdownHandler { private get; set; }
 
         public DocumentViewRefreshBehaviour()
         {
@@ -75,7 +75,7 @@ namespace Qujck.MarkdownEditor.Behaviours
                 this.textChangedRefreshRenderedViewTimer.Stop();
                 this.textChangedRefreshRenderedViewTimer.Tag = this;
 
-                this.WriteDocumentHandler.Run(
+                this.RenderMarkdownHandler.Run(
                     (scriptName, args) => this.AssociatedObject.RenderedView.InvokeScript(scriptName, args),
                     this.AssociatedObject.TextEditor.Text);
 

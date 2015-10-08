@@ -24,7 +24,7 @@
         <behaviours:DocumentViewInitialiseAvalonEdit StringResourceProvider="{ioc:Container}"/>
         <behaviours:DocumentViewInitialiseRenderedView HtmlQueryHandler="{ioc:Container}"/>
         <behaviours:DocumentViewScrollBehaviour/>
-        <behaviours:DocumentViewRefreshBehaviour WriteDocumentHandler="{ioc:Container}"/>
+        <behaviours:DocumentViewRefreshBehaviour RenderMarkdownHandler="{ioc:Container}"/>
         <behaviours:DocumentViewFocusBehaviour/>
     </i:Interaction.Behaviors>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

@@ -9,16 +9,16 @@ using Qujck.MarkdownEditor.Commands;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    public sealed class ImagePathFixer : ICommandHandler<Command.WriteDocument>
+    public sealed class ImagePathFixer : ICommandHandler<Command.RenderMarkdown>
     {
-        private readonly ICommandHandler<Command.WriteDocument> decorated;
+        private readonly ICommandHandler<Command.RenderMarkdown> decorated;
 
-        public ImagePathFixer(ICommandHandler<Command.WriteDocument> decorated)
+        public ImagePathFixer(ICommandHandler<Command.RenderMarkdown> decorated)
         {
             this.decorated = decorated;
         }
 
-        public void Run(Command.WriteDocument command)
+        public void Run(Command.RenderMarkdown command)
         {
             string text = command.Markdown.Replace(
                 "![image](~",
