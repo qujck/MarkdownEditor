@@ -25,6 +25,7 @@
         <behaviours:DocumentViewInitialiseRenderedView HtmlQueryHandler="{ioc:Container}"/>
         <behaviours:DocumentViewScrollBehaviour/>
         <behaviours:DocumentViewRefreshBehaviour WriteDocumentHandler="{ioc:Container}"/>
+        <behaviours:DocumentViewFocusBehaviour/>
     </i:Interaction.Behaviors>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
@@ -52,7 +53,8 @@
 			Grid.Column="{Binding RenderedViewColumn}"
             Grid.Row="{Binding RenderedViewRow}"
 			ScrollViewer.VerticalScrollBarVisibility="Auto"
-			ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        </WebBrowser>
         <Border Grid.Column="0" Grid.Row="0" BorderThickness="{Binding BorderThickness}" BorderBrush="Gray"/>
     </Grid>
 </UserControl>
