@@ -138,6 +138,7 @@
     <EmbeddedResource Include="Content\Markdown2.xshd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="DocumentViewModel.Constants.cs" />
     <None Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="fonts\glyphicons-halflings-regular.woff2" />
