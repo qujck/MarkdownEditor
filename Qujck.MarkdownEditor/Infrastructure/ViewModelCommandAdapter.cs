@@ -32,9 +32,10 @@ namespace Qujck.MarkdownEditor.Infrastructure
             {
                 var rootProvider = (IRootObjectProvider)serviceProvider
                     .GetService(typeof(IRootObjectProvider));
-                return rootProvider == null
-                    ? null
-                    : this.frameworkElement = rootProvider.RootObject as FrameworkElement;
+                if (rootProvider != null)
+                {
+                    this.frameworkElement = rootProvider.RootObject as FrameworkElement;
+                }
             }
 
             return this;
