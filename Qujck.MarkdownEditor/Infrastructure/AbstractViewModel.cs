@@ -26,14 +26,6 @@ namespace Qujck.MarkdownEditor.Infrastructure
             }
         }
 
-        protected void Update(IDictionary<string, object> properties)
-        {
-            foreach (var property in properties)
-            {
-                this.SetValue(property.Key, property.Value);
-            }
-        }
-
         public int Count { get { return this.dictionary.Keys.Count; } }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
@@ -91,7 +83,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
             }
         }
 
-        public virtual object this[string key]
+        public object this[string key]
         {
             get
             {
@@ -104,6 +96,47 @@ namespace Qujck.MarkdownEditor.Infrastructure
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void Update(IDictionary<string, object> properties)
+        {
+            foreach (var property in properties)
+            {
+                this.SetValue(property.Key, property.Value);
+            }
+        }
+
+        protected void RegisterCommandAction(string name, Action action)
+        {
+            this[name] = action;
+        }
+
+        protected void RegisterCommandAction(string name, Action action, string canName, Func<bool> canAction)
+        {
+            this[canName] = canAction;
+            this.RegisterCommandAction(name, action);
+        }
+
+        public bool CanExecute(string name)
+        {
+            var canExecute = this.dictionary[name] as Func<bool>;
+            if (canExecute == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            return canExecute();
+        }
+
+        public void Execute(string name)
+        {
+            var execute = this.dictionary[name] as Action;
+            if (execute == null)
+            {
+                throw new ArgumentException();
+            }
+
+            execute();
+        }
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

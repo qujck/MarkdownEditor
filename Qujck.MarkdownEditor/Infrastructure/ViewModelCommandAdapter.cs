@@ -41,7 +41,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
             return this;
         }
 
-        private AbstractViewModel DataContext
+        private AbstractViewModel ViewModel
         {
             get
             {
@@ -52,22 +52,6 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 }
 
                 return this.frameworkElement.DataContext as AbstractViewModel;
-            }
-        }
-
-        private Func<bool> CanExecuteMethod
-        {
-            get
-            {
-                return this.DataContext[this.canExecuteMethodName] as Func<bool>;
-            }
-        }
-
-        private Action ExecuteMethod
-        {
-            get
-            {
-                return this.DataContext[this.executeMethodName] as Action;
             }
         }
 
@@ -86,7 +70,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
             return this.canExecuteMethodName == null
                 ? true
-                : this.CanExecuteMethod();
+                : this.ViewModel.CanExecute(this.canExecuteMethodName);
         }
 
         void ICommand.Execute(object parameter)
@@ -96,7 +80,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 throw new ArgumentException();
             }
 
-            this.ExecuteMethod();
+            this.ViewModel.Execute(this.executeMethodName);
         }
     }
 }
