@@ -19,25 +19,9 @@ namespace Qujck.MarkdownEditor.Behaviours
 {
     public sealed class DocumentViewRefreshBehaviour : Behavior<DocumentView>
     {
-        public static readonly DependencyProperty DependencyResolverProperty =
-            DependencyProperty.Register(
-                "ICommandHandler<Command.WriteDocument>",
-                typeof(ICommandHandler<Command.WriteDocument>),
-                typeof(DocumentViewRefreshBehaviour));
-
         private readonly DispatcherTimer textChangedRefreshRenderedViewTimer;
 
-        public ICommandHandler<Command.WriteDocument> WriteDocumentHandler
-        {
-            get
-            {
-                return this.GetValue(DependencyResolverProperty) as ICommandHandler<Command.WriteDocument>;
-            }
-            set
-            {
-                this.SetValue(DependencyResolverProperty, value);
-            }
-        }
+        public ICommandHandler<Command.WriteDocument> WriteDocumentHandler { private get; set; }
 
         public DocumentViewRefreshBehaviour()
         {

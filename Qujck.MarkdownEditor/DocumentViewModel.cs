@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Qujck.MarkdownEditor.Infrastructure;
 
@@ -14,10 +15,10 @@ namespace Qujck.MarkdownEditor
         public DocumentViewModel() : base(VerticalView)
         {
             base.RegisterCommandAction(
-                "Next", 
+                "NextView", 
                 () => this.Update(WhatsNext((View)this[CurrentView])));
             base.RegisterCommandAction(
-                "Previous", 
+                "PreviousView", 
                 () => this.Update(WhatsPrior((View)this[CurrentView])));
         }
 

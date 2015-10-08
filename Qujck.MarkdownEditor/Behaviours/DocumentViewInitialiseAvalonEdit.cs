@@ -22,23 +22,7 @@ namespace Qujck.MarkdownEditor.Behaviours
 {
     public sealed class DocumentViewInitialiseAvalonEdit : Behavior<DocumentView>
     {
-        public static readonly DependencyProperty DependencyResolverProperty =
-            DependencyProperty.Register(
-                "IStringResourceProvider",
-                typeof(IStringResourceProvider),
-                typeof(DocumentViewInitialiseAvalonEdit));
-
-        public IStringResourceProvider StringResourceProvider
-        {
-            get
-            {
-                return this.GetValue(DependencyResolverProperty) as IStringResourceProvider;
-            }
-            set
-            {
-                this.SetValue(DependencyResolverProperty, value);
-            }
-        }
+        public IStringResourceProvider StringResourceProvider { private get; set; }
 
         protected override void OnAttached()
         {

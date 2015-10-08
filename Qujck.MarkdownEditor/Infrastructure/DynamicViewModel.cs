@@ -14,7 +14,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
     /// </summary>
     public abstract class DynamicViewModel : DynamicObject, INotifyPropertyChanged
     {
-        private IDictionary<string, object> dictionary { get; set; }
+        private readonly IDictionary<string, object> dictionary;
 
         /// <summary>
         /// Enables derived types to initialize a new instance of the DynamicViewModel

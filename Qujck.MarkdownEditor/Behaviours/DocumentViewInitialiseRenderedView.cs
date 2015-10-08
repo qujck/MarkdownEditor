@@ -19,23 +19,7 @@ namespace Qujck.MarkdownEditor.Behaviours
 {
     public sealed class DocumentViewInitialiseRenderedView : Behavior<DocumentView>
     {
-        public static readonly DependencyProperty DependencyResolverProperty =
-            DependencyProperty.Register(
-                "IQueryHandler<Query.Html, string>",
-                typeof(IQueryHandler<Query.Html, string>),
-                typeof(DocumentViewInitialiseRenderedView));
-
-        public IQueryHandler<Query.Html, string> HtmlQueryHandler
-        {
-            get
-            {
-                return this.GetValue(DependencyResolverProperty) as IQueryHandler<Query.Html, string>;
-            }
-            set
-            {
-                this.SetValue(DependencyResolverProperty, value);
-            }
-        }
+        public IQueryHandler<Query.Html, string> HtmlQueryHandler { private get; set; }
 
         protected override void OnAttached()
         {
