@@ -9,7 +9,7 @@ using Qujck.MarkdownEditor.Commands;
 using Qujck.MarkdownEditor.Queries;
 using Qujck.MarkdownEditor.Aspects;
 
-namespace Qujck.MarkdownEditor
+namespace Qujck.MarkdownEditor.Infrastructure
 {
     public sealed partial class Container
     {

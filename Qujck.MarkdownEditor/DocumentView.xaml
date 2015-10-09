@@ -4,7 +4,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-    xmlns:ioc="clr-namespace:Qujck.MarkdownEditor"
     xmlns:local="clr-namespace:Qujck.MarkdownEditor"
     xmlns:inf="clr-namespace:Qujck.MarkdownEditor.Infrastructure"
     xmlns:behaviours="clr-namespace:Qujck.MarkdownEditor.Behaviours"
@@ -23,14 +22,14 @@
     <UserControl.DataContext>
         <local:DocumentViewModel 
             PropertyChanged="DataModel_PropertyChanged" 
-            OpenFileHandler="{ioc:Container}"
-            SaveFileHandler="{ioc:Container}"/>
+            OpenFileHandler="{inf:Container}"
+            SaveFileHandler="{inf:Container}"/>
     </UserControl.DataContext>
     <i:Interaction.Behaviors>
-        <behaviours:DocumentViewInitialiseAvalonEdit StringResourceProvider="{ioc:Container}"/>
-        <behaviours:DocumentViewInitialiseRenderedView HtmlQueryHandler="{ioc:Container}"/>
+        <behaviours:DocumentViewInitialiseAvalonEdit StringResourceProvider="{inf:Container}"/>
+        <behaviours:DocumentViewInitialiseRenderedView HtmlQueryHandler="{inf:Container}"/>
         <behaviours:DocumentViewScrollBehaviour/>
-        <behaviours:DocumentViewRefreshBehaviour RenderMarkdownHandler="{ioc:Container}"/>
+        <behaviours:DocumentViewRefreshBehaviour RenderMarkdownHandler="{inf:Container}"/>
         <behaviours:DocumentViewFocusBehaviour/>
         <behaviours:DocumentViewTextChangedUpdateModelBehaviour/>
     </i:Interaction.Behaviors>
@@ -54,7 +53,7 @@
 			ScrollViewer.VerticalScrollBarVisibility="Auto"
 			WordWrap="True" 
 			Margin="0"
-			Padding="20"/>
+			Padding="10,0,10,0"/>
         <WebBrowser 
 			x:Name="RenderedView" 
 			Grid.Column="{Binding RenderedViewColumn}"

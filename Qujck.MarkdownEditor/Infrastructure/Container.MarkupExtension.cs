@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
 
-namespace Qujck.MarkdownEditor
+namespace Qujck.MarkdownEditor.Infrastructure
 {
     public sealed partial class Container : MarkupExtension
     {
