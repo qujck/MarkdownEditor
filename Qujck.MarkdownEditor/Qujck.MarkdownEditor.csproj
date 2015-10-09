@@ -78,7 +78,7 @@
     <Compile Include="Behaviours\DocumentViewInitialiseRenderedView.cs" />
     <Compile Include="Behaviours\DocumentViewRefreshBehaviour.cs" />
     <Compile Include="Behaviours\DocumentViewScrollBehaviour.cs" />
-    <Compile Include="Infrastructure\Container.BootStrapper.cs" />
+    <Compile Include="Infrastructure\BootStrapper.cs" />
     <Compile Include="DocumentView.xaml.cs">
       <DependentUpon>DocumentView.xaml</DependentUpon>
     </Compile>

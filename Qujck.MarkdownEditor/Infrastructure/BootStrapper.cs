@@ -11,23 +11,24 @@ using Qujck.MarkdownEditor.Aspects;
 
 namespace Qujck.MarkdownEditor.Infrastructure
 {
-    public sealed partial class Container
+    public static class BootStrapper
     {
-        private static DependencyResolver _instance;
-        static Container()
+        internal static DependencyResolver Resolver { get; private set; }
+
+        static BootStrapper()
         {
-            _instance = DependencyResolver.Build();
+            Resolver = DependencyResolver.Build();
         }
 
-        public static IStringResourceProvider StringResourceProvider
+        internal static IStringResourceProvider StringResourceProvider
         {
             get
             {
-                return _instance.Resolve<IStringResourceProvider>();
+                return Resolver.Resolve<IStringResourceProvider>();
             }
         }
 
-        private sealed class DependencyResolver
+        internal sealed class DependencyResolver
         {
             private ICommandHandler<Command.RenderMarkdown> renderMarkdownHandler;
             private ICommandHandler<Command.SaveFile> saveFileHandler;
