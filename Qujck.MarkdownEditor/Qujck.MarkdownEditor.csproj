@@ -70,7 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Behaviours\DocumentViewFocusBehaviour.cs" />
+    <Compile Include="Behaviours\DocumentViewRenderedViewInterceptKeyDownBehaviour.cs" />
     <Compile Include="Behaviours\DocumentViewTextChangedUpdateModelBehaviour.cs" />
     <Compile Include="Commands\SaveFile.cs" />
     <Compile Include="Infrastructure\Container.MarkupExtension.cs" />
