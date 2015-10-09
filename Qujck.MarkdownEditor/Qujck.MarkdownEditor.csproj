@@ -84,7 +84,9 @@
     </Compile>
     <Compile Include="DocumentViewModel.cs" />
     <Compile Include="Infrastructure\DynamicViewModel.cs" />
+    <Compile Include="Infrastructure\DynamicModel.cs" />
     <Compile Include="Infrastructure\ComEventListener.cs" />
+    <Compile Include="Infrastructure\ForwardingMetaObject.cs" />
     <Compile Include="Infrastructure\ViewModelCommandAdapter.cs" />
     <Compile Include="Queries\Html.cs" />
     <Compile Include="Queries\IQueryParameter.cs" />
