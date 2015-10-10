@@ -9,6 +9,7 @@ using Qujck.MarkdownEditor.Commands;
 using Qujck.MarkdownEditor.Queries;
 using Qujck.MarkdownEditor.Aspects;
 using Qujck.MarkdownEditor.ViewModel;
+using Qujck.MarkdownEditor.ViewModel.Aspects;
 using Qujck.MarkdownEditor.ViewModel.Commands;
 using Qujck.MarkdownEditor.ViewModel.Queries;
 
@@ -29,7 +30,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
             dynamic parameter = Activator.CreateInstance(
                 handler.Item1,
                 viewModel);
-            return ((dynamic)handler.Item2).CanExecute(parameter);
+            return ((dynamic)handler.Item2).Execute(parameter);
         }
 
         internal static void ExecuteViewCommand(string name, DynamicViewModel viewModel)
@@ -38,7 +39,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
             dynamic parameter = Activator.CreateInstance(
                 handler.Item1,
                 viewModel);
-            ((dynamic)handler.Item2).Execute(parameter);
+            ((dynamic)handler.Item2).Run(parameter);
         }
 
         internal sealed class DependencyResolver
@@ -48,8 +49,12 @@ namespace Qujck.MarkdownEditor.Infrastructure
             private IQueryHandler<Query.Scripts, string> scriptsQueryHandler;
             private IQueryHandler<Query.Styles, string> stylesQueryHandler;
             private IStringResourceProvider stringResourceProvider;
-            private IEnumerable<object> viewModelCommands;
-            private IEnumerable<object> viewModelQueries;
+            private IViewModelQuery<CanSaveFile> canSaveFileHandler;
+            private IViewModelCommand<ViewModelParameter> newFileHandler;
+            private NextViewHandler nextViewHandler;
+            private IViewModelCommand<ViewModelParameter> openFileHandler;
+            private PreviousViewHandler previousViewHandler;
+            private SaveFileHandler saveFileHandler;
 
             private DependencyResolver()
             {
@@ -61,8 +66,8 @@ namespace Qujck.MarkdownEditor.Infrastructure
                     .RegisterProviders()
                     .RegisterCommandHandlers()
                     .RegisterQueryHandlers()
-                    .RegisterViewModelCommands()
-                    .RegisterViewModelQueries();
+                    .RegisterViewModelQueries()
+                    .RegisterViewModelCommands();
             }
 
             private DependencyResolver RegisterProviders()
@@ -102,26 +107,20 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 return this;
             }
 
-            private DependencyResolver RegisterViewModelCommands()
+            private DependencyResolver RegisterViewModelQueries()
             {
-                this.viewModelCommands = new object[]
-                {
-                    new NewFileHandler(),
-                    new NextViewHandler(),
-                    new OpenFileViewHandler(),
-                    new PreviousViewHandler(),
-                    new SaveFileHandler()
-                };
+                this.canSaveFileHandler = new CanSaveFileHandler();
 
                 return this;
             }
 
-            private DependencyResolver RegisterViewModelQueries()
+            private DependencyResolver RegisterViewModelCommands()
             {
-                this.viewModelQueries = new object[]
-                {
-                    new CanSaveFileHandler()
-                };
+                this.saveFileHandler = new SaveFileHandler();
+                this.newFileHandler = new SaveChangesHandler(new NewFileHandler(), this.canSaveFileHandler, saveFileHandler);
+                this.nextViewHandler = new NextViewHandler();
+                this.openFileHandler = new SaveChangesHandler(new OpenFileHandler(), this.canSaveFileHandler, saveFileHandler);
+                this.previousViewHandler = new PreviousViewHandler();
 
                 return this;
             }
@@ -151,41 +150,23 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
             internal Tuple<Type, object> ResolveViewModelCommand(string name)
             {
-                return this.FindViewModelHandler(
-                    this.viewModelCommands, 
-                    typeof(IViewModelCommand<>),
-                    name);
+                if (name == "NewFile")
+                    return new Tuple<Type, object>(typeof(NewFile), this.newFileHandler);
+                else if (name == "NextView")
+                    return new Tuple<Type, object>(typeof(NextView), this.nextViewHandler);
+                else if (name == "OpenFile")
+                    return new Tuple<Type, object>(typeof(OpenFile), this.openFileHandler);
+                else if (name == "PreviousView")
+                    return new Tuple<Type, object>(typeof(PreviousView), this.previousViewHandler);
+                else if (name == "SaveFile")
+                    return new Tuple<Type, object>(typeof(SaveFile), this.saveFileHandler);
+                else
+                    throw new ArgumentNullException();
             }
 
             internal Tuple<Type, object> ResolveViewModelQuery(string name)
             {
-                return this.FindViewModelHandler(
-                    this.viewModelQueries,
-                    typeof(IViewModelQuery<>),
-                    name);
-            }
-
-            private Tuple<Type, object> FindViewModelHandler(IEnumerable<object> handlers, Type service, string name)
-            {
-                var found =
-                    from command in handlers
-                    let type = command.GetType()
-                    let @interface = type.GetInterface(service.Name)
-                    let typename = @interface.GenericTypeArguments[0].FullName
-                    where typename.EndsWith(string.Format(".{0}", name))
-                    select new Tuple<Type, object>(
-                        @interface.GenericTypeArguments[0],
-                        command);
-
-                switch (found.Count())
-                {
-                    case 0:
-                        throw new ArgumentNullException();
-                    case 1:
-                        return found.Single();
-                    default:
-                        throw new ArgumentException();
-                }
+                return new Tuple<Type, object>(typeof(CanSaveFile), this.canSaveFileHandler);
             }
         }
     }

@@ -16,7 +16,7 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
 
     internal sealed class NextViewHandler : IViewModelCommand<NextView>
     {
-        public void Execute(NextView viewModelParameter)
+        public void Run(NextView viewModelParameter)
         {
             int next = WhatsNext(viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentView]);
             viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentView] = next;

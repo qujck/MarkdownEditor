@@ -16,7 +16,7 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
 
     internal sealed class NewFileHandler : IViewModelCommand<NewFile>
     {
-        public void Execute(NewFile viewModelParameter)
+        public void Run(NewFile viewModelParameter)
         {
             viewModelParameter.ViewModel[Constants.DocumentViewModel.OpeningText] = string.Empty;
             viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText] = string.Empty;

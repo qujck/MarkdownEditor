@@ -16,7 +16,7 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
 
     internal sealed class PreviousViewHandler : IViewModelCommand<PreviousView>
     {
-        public void Execute(PreviousView viewModelParameter)
+        public void Run(PreviousView viewModelParameter)
         {
             int prior = WhatsPrior(viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentView]);
             viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentView] = prior;

@@ -67,28 +67,6 @@ namespace Qujck.MarkdownEditor.Infrastructure
             this.RegisterCommandAction(name, action);
         }
 
-        public bool CanExecute(string name)
-        {
-            var canExecute = this[name] as Func<bool>;
-            if (canExecute == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            return canExecute();
-        }
-
-        public void Execute(string name)
-        {
-            var execute = this[name] as Action;
-            if (execute == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            execute();
-        }
-
         protected class InternalDynamicViewModel : DynamicModel
         {
             private INotifyPropertyChanged parent;

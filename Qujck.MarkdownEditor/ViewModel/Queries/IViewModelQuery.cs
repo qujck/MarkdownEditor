@@ -9,6 +9,6 @@ namespace Qujck.MarkdownEditor.ViewModel.Queries
 {
     internal interface IViewModelQuery<TViewModelParameter> where TViewModelParameter : ViewModelParameter
     {
-        bool CanExecute(TViewModelParameter viewModelParameter);
+        bool Execute(TViewModelParameter viewModelParameter);
     }
 }

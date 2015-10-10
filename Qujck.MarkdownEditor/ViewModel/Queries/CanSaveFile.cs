@@ -15,7 +15,7 @@ namespace Qujck.MarkdownEditor.ViewModel.Queries
 
     internal sealed class CanSaveFileHandler : IViewModelQuery<CanSaveFile>
     {
-        public bool CanExecute(CanSaveFile viewModelParameter)
+        public bool Execute(CanSaveFile viewModelParameter)
         {
             return (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.OpeningText] !=
                 (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText];

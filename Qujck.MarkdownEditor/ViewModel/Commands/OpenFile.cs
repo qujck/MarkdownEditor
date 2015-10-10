@@ -16,9 +16,9 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
         }
     }
 
-    internal sealed class OpenFileViewHandler : IViewModelCommand<OpenFile>
+    internal sealed class OpenFileHandler : IViewModelCommand<OpenFile>
     {
-        public void Execute(OpenFile viewModelParameter)
+        public void Run(OpenFile viewModelParameter)
         {
             string text;
             string fileName = this.OpenFile(out text);

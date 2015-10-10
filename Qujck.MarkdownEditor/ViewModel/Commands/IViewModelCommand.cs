@@ -8,6 +8,6 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
 {
     internal interface IViewModelCommand<TViewModelParameter> where TViewModelParameter : ViewModelParameter
     {
-        void Execute(TViewModelParameter viewModelParameter);
+        void Run(TViewModelParameter viewModelParameter);
     }
 }

@@ -18,7 +18,7 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
 
     internal sealed class SaveFileHandler : IViewModelCommand<SaveFile>
     {
-        public void Execute(SaveFile viewModelParameter)
+        public void Run(SaveFile viewModelParameter)
         {
             string filePath = (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.FilePath];
             string fileName = Path.GetFileName(filePath);
@@ -34,8 +34,10 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
                 File.WriteAllText(
                     dialog.FileName, 
                     (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText]);
+
                 viewModelParameter.ViewModel[Constants.DocumentViewModel.OpeningText] = 
                     viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText];
+
                 viewModelParameter.ViewModel[Constants.DocumentViewModel.FilePath] = dialog.FileName;
             }
         }
