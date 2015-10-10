@@ -82,6 +82,7 @@
       <DependentUpon>DocumentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Commands\IViewModelCommand.cs" />
+    <Compile Include="ViewModel\Commands\NewFile.cs" />
     <Compile Include="ViewModel\Commands\NextView.cs" />
     <Compile Include="ViewModel\Commands\OpenFile.cs" />
     <Compile Include="ViewModel\Commands\SaveFile.cs" />

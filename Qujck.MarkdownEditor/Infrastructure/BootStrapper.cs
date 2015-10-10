@@ -106,9 +106,10 @@ namespace Qujck.MarkdownEditor.Infrastructure
             {
                 this.viewModelCommands = new object[]
                 {
+                    new NewFileHandler(),
                     new NextViewHandler(),
-                    new PreviousViewHandler(),
                     new OpenFileViewHandler(),
+                    new PreviousViewHandler(),
                     new SaveFileHandler()
                 };
 

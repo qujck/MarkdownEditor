@@ -18,11 +18,6 @@ namespace Qujck.MarkdownEditor.ViewModel
         {
         }
 
-        public void Update(string text)
-        {
-            this[Constants.DocumentViewModel.CurrentText] = text;
-        }
-
         private readonly static IDictionary<string, object> Data =
             new Dictionary<string, object>
             {

@@ -38,7 +38,7 @@ namespace Qujck.MarkdownEditor.Behaviours
         private void TextEditor_TextChanged(object sender, EventArgs e)
         {
             var viewModel = this.AssociatedObject.DataContext as DocumentViewModel;
-            viewModel.Update(this.AssociatedObject.TextEditor.Text);
+            viewModel[Constants.DocumentViewModel.CurrentText] = this.AssociatedObject.TextEditor.Text;
         }
     }
 }

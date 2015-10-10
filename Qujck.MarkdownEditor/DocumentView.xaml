@@ -16,8 +16,9 @@
     <UserControl.InputBindings>
         <KeyBinding Modifiers="" Key="F5" Command="{inf:ViewModelCommandAdapter NextView}"/>
         <KeyBinding Modifiers="Shift" Key="F5" Command="{inf:ViewModelCommandAdapter PreviousView}"/>
-        <KeyBinding Modifiers="Ctrl" Key="S" Command="{inf:ViewModelCommandAdapter SaveFile, CanSaveFile}"/>
+        <KeyBinding Modifiers="Ctrl" Key="N" Command="{inf:ViewModelCommandAdapter NewFile}"/>
         <KeyBinding Modifiers="Ctrl" Key="O" Command="{inf:ViewModelCommandAdapter OpenFile}"/>
+        <KeyBinding Modifiers="Ctrl" Key="S" Command="{inf:ViewModelCommandAdapter SaveFile, CanSaveFile}"/>
     </UserControl.InputBindings>
     <UserControl.DataContext>
         <vm:DocumentViewModel PropertyChanged="DataModel_PropertyChanged"/>

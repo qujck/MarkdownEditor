@@ -35,7 +35,17 @@ namespace Qujck.MarkdownEditor
             {
                 var model = sender as DocumentViewModel;
 
-                this.TextEditor.Text = model[Constants.DocumentViewModel.OpeningText] as string;
+                this.TextEditor.Text = (string)model[Constants.DocumentViewModel.OpeningText];
+            }
+            else if (e.PropertyName == Constants.DocumentViewModel.CurrentText)
+            {
+                var model = sender as DocumentViewModel;
+                string currentText = (string)model[Constants.DocumentViewModel.CurrentText];
+
+                if (this.TextEditor.Text != currentText)
+                {
+                    this.TextEditor.Text = currentText;
+                }
             }
         }
     }
