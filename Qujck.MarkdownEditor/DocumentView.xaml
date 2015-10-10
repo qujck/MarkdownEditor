@@ -4,7 +4,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-    xmlns:local="clr-namespace:Qujck.MarkdownEditor"
+    xmlns:vm="clr-namespace:Qujck.MarkdownEditor.ViewModel"
     xmlns:inf="clr-namespace:Qujck.MarkdownEditor.Infrastructure"
     xmlns:behaviours="clr-namespace:Qujck.MarkdownEditor.Behaviours"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -20,7 +20,7 @@
         <KeyBinding Modifiers="Ctrl" Key="O" Command="{inf:ViewModelCommandAdapter _Open}"/>
     </UserControl.InputBindings>
     <UserControl.DataContext>
-        <local:DocumentViewModel 
+        <vm:DocumentViewModel 
             PropertyChanged="DataModel_PropertyChanged" 
             OpenFileHandler="{inf:Container}"
             SaveFileHandler="{inf:Container}"/>

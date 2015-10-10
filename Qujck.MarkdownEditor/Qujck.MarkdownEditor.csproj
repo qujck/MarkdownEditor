@@ -82,7 +82,8 @@
     <Compile Include="DocumentView.xaml.cs">
       <DependentUpon>DocumentView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DocumentViewModel.cs" />
+    <Compile Include="ViewModel\Commands\IViewModelCommand.cs" />
+    <Compile Include="ViewModel\DocumentViewModel.cs" />
     <Compile Include="Infrastructure\DynamicViewModel.cs" />
     <Compile Include="Infrastructure\DynamicModel.cs" />
     <Compile Include="Infrastructure\ComEventListener.cs" />
@@ -94,6 +95,8 @@
     <Compile Include="Queries\OpenFile.cs" />
     <Compile Include="Queries\Scripts.cs" />
     <Compile Include="Queries\Styles.cs" />
+    <Compile Include="ViewModel\Queries\IViewModelQuery.cs" />
+    <Compile Include="ViewModel\ViewModelParameter.cs" />
     <Page Include="DocumentView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -145,7 +148,7 @@
     <EmbeddedResource Include="Content\Markdown2.xshd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="DocumentViewModel.Constants.cs" />
+    <Compile Include="ViewModel\Constants.DocumentViewModel.cs" />
     <None Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -202,6 +205,7 @@
     <EmbeddedResource Include="Scripts\Prettify\lang-yaml.js" />
     <EmbeddedResource Include="Scripts\Prettify\prettify.js" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

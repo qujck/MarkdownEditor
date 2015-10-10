@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml;
+using Qujck.MarkdownEditor.ViewModel;
 
 namespace Qujck.MarkdownEditor
 {
@@ -30,11 +31,11 @@ namespace Qujck.MarkdownEditor
 
         private void DataModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == DocumentViewModel.OpeningText)
+            if (e.PropertyName == Constants.DocumentViewModel.OpeningText)
             {
                 var model = sender as DocumentViewModel;
 
-                this.TextEditor.Text = model[DocumentViewModel.OpeningText] as string;
+                this.TextEditor.Text = model[Constants.DocumentViewModel.OpeningText] as string;
             }
         }
     }

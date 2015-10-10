@@ -75,7 +75,6 @@ namespace Qujck.MarkdownEditor.Infrastructure
                         this.stringResourceProvider),
                     this.stringResourceProvider);
 
-
                 this.openFileQueryHandler = new Query.Handlers.OpenFileHandler();
 
                 this.stylesQueryHandler = new PrettifyStyles(

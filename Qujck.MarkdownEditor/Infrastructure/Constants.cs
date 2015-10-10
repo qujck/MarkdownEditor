@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qujck.MarkdownEditor.Infrastructure
+namespace Qujck.MarkdownEditor
 {
-    public static class Constants
+    public static partial class Constants
     {
         public struct Content
         {

@@ -17,8 +17,7 @@ using System.Windows.Threading;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Highlighting;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Queries;
-using Qujck.MarkdownEditor.Commands;
+using Qujck.MarkdownEditor.ViewModel;
 
 namespace Qujck.MarkdownEditor
 {
