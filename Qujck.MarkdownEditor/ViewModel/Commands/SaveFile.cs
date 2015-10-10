@@ -20,9 +20,12 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
     {
         public void Execute(SaveFile viewModelParameter)
         {
+            string filePath = (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.FilePath];
+            string fileName = Path.GetFileName(filePath);
+
             var dialog = new SaveFileDialog()
             {
-                FileName = (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.FileName],
+                FileName = fileName,
                 Filter = "Markdown Files(*.md)|*.md|All(*.*)|*"
             };
 
@@ -33,7 +36,7 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
                     (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText]);
                 viewModelParameter.ViewModel[Constants.DocumentViewModel.OpeningText] = 
                     viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText];
-                viewModelParameter.ViewModel[Constants.DocumentViewModel.FileName] = dialog.FileName;
+                viewModelParameter.ViewModel[Constants.DocumentViewModel.FilePath] = dialog.FileName;
             }
         }
     }

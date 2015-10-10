@@ -23,14 +23,6 @@ namespace Qujck.MarkdownEditor.Infrastructure
             Resolver = DependencyResolver.Build();
         }
 
-        internal static IStringResourceProvider StringResourceProvider
-        {
-            get
-            {
-                return Resolver.Resolve<IStringResourceProvider>();
-            }
-        }
-
         internal static bool ExecuteViewQuery(string name, DynamicViewModel viewModel)
         {
             var handler = Resolver.ResolveViewModelQuery(name);

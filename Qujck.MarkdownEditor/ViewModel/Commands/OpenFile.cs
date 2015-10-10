@@ -24,7 +24,7 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
             string fileName = this.OpenFile(out text);
             if (fileName != null)
             {
-                viewModelParameter.ViewModel[Constants.DocumentViewModel.FileName] = fileName;
+                viewModelParameter.ViewModel[Constants.DocumentViewModel.FilePath] = fileName;
                 viewModelParameter.ViewModel[Constants.DocumentViewModel.OpeningText] = text;
                 viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText] = text;
             }

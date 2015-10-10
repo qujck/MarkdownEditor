@@ -30,12 +30,5 @@ namespace Qujck.MarkdownEditor
         {
             InitializeComponent();
         }
-
-        private void DocumentView_Loaded(object sender, RoutedEventArgs e)
-        {
-            var md = BootStrapper.StringResourceProvider.One("test.md");
-            var model = this.DocumentView.DataContext as DocumentViewModel;
-            model.Open(md);
-        }
     }
 }

@@ -23,19 +23,13 @@ namespace Qujck.MarkdownEditor.ViewModel
             this[Constants.DocumentViewModel.CurrentText] = text;
         }
 
-        public void Open(string text)
-        {
-            this[Constants.DocumentViewModel.OpeningText] = text;
-            this[Constants.DocumentViewModel.CurrentText] = text;
-        }
-
         private readonly static IDictionary<string, object> Data =
             new Dictionary<string, object>
             {
                 { Constants.DocumentViewModel.OpeningText, null },
                 { Constants.DocumentViewModel.CurrentText, null },
                 { Constants.DocumentViewModel.CurrentView, 0 },
-                { Constants.DocumentViewModel.FileName, null }
+                { Constants.DocumentViewModel.FilePath, null }
             };
 
         private static int WhatsNext(object currentView)
