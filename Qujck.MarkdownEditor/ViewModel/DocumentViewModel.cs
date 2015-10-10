@@ -34,7 +34,8 @@ namespace Qujck.MarkdownEditor.ViewModel
             {
                 { Constants.DocumentViewModel.OpeningText, null },
                 { Constants.DocumentViewModel.CurrentText, null },
-                { Constants.DocumentViewModel.CurrentView, 0 }
+                { Constants.DocumentViewModel.CurrentView, 0 },
+                { Constants.DocumentViewModel.FileName, null }
             };
 
         private static int WhatsNext(object currentView)

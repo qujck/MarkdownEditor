@@ -31,6 +31,7 @@ namespace Qujck.MarkdownEditor
             public const string CurrentView = "CurrentView";
             public const string OpeningText = "OpeningText";
             public const string CurrentText = "CurrentText";
+            public const string FileName = "FileName";
 
             public static readonly IDictionary<string, object>[] Views =
                 new IDictionary<string, object>[]

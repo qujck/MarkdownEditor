@@ -20,24 +20,33 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
     {
         public void Execute(OpenFile viewModelParameter)
         {
-            var text = this.OpenFile();
-            if (text != null)
+            string text;
+            string fileName = this.OpenFile(out text);
+            if (fileName != null)
             {
+                viewModelParameter.ViewModel[Constants.DocumentViewModel.FileName] = fileName;
                 viewModelParameter.ViewModel[Constants.DocumentViewModel.OpeningText] = text;
                 viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText] = text;
             }
         }
 
-        public string OpenFile()
+        public string OpenFile(out string text)
         {
             var dialog = new OpenFileDialog()
             {
                 Filter = "Markdown Files(*.md)|*.md|All(*.*)|*"
             };
 
-            return dialog.ShowDialog() == true
-                ? File.ReadAllText(dialog.FileName)
-                : null;
+            if (dialog.ShowDialog() == true)
+            {
+                text = File.ReadAllText(dialog.FileName);
+                return dialog.FileName;
+            }
+            else
+            {
+                text = null;
+                return null;
+            }
         }
     }
 }
