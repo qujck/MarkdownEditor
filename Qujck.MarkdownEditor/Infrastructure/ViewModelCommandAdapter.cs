@@ -70,7 +70,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
             return this.canExecuteMethodName == null
                 ? true
-                : this.ViewModel.CanExecute(this.canExecuteMethodName);
+                : BootStrapper.ExecuteViewQuery(this.canExecuteMethodName, this.ViewModel);
         }
 
         void ICommand.Execute(object parameter)
@@ -80,7 +80,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 throw new ArgumentException();
             }
 
-            this.ViewModel.Execute(this.executeMethodName);
+            BootStrapper.ExecuteViewCommand(this.executeMethodName, this.ViewModel);
         }
     }
 }

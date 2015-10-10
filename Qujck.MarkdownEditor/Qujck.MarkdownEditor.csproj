@@ -72,7 +72,6 @@
     </ApplicationDefinition>
     <Compile Include="Behaviours\DocumentViewRenderedViewInterceptKeyDownBehaviour.cs" />
     <Compile Include="Behaviours\DocumentViewTextChangedUpdateModelBehaviour.cs" />
-    <Compile Include="Commands\SaveFile.cs" />
     <Compile Include="Infrastructure\Container.MarkupExtension.cs" />
     <Compile Include="Behaviours\DocumentViewInitialiseAvalonEdit.cs" />
     <Compile Include="Behaviours\DocumentViewInitialiseRenderedView.cs" />
@@ -83,6 +82,9 @@
       <DependentUpon>DocumentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Commands\IViewModelCommand.cs" />
+    <Compile Include="ViewModel\Commands\NextView.cs" />
+    <Compile Include="ViewModel\Commands\OpenFile.cs" />
+    <Compile Include="ViewModel\Commands\SaveFile.cs" />
     <Compile Include="ViewModel\DocumentViewModel.cs" />
     <Compile Include="Infrastructure\DynamicViewModel.cs" />
     <Compile Include="Infrastructure\DynamicModel.cs" />
@@ -92,9 +94,10 @@
     <Compile Include="Queries\Html.cs" />
     <Compile Include="Queries\IQueryParameter.cs" />
     <Compile Include="Queries\IQueryHandler.cs" />
-    <Compile Include="Queries\OpenFile.cs" />
     <Compile Include="Queries\Scripts.cs" />
     <Compile Include="Queries\Styles.cs" />
+    <Compile Include="ViewModel\Commands\PreviousView.cs" />
+    <Compile Include="ViewModel\Queries\CanSaveFile.cs" />
     <Compile Include="ViewModel\Queries\IViewModelQuery.cs" />
     <Compile Include="ViewModel\ViewModelParameter.cs" />
     <Page Include="DocumentView.xaml">

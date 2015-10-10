@@ -45,13 +45,13 @@ namespace Qujck.MarkdownEditor.Infrastructure
             {
                 return this.child[key];
             }
-            protected set
+            set
             {
                 this.child[key] = value;
             }
         }
 
-        protected void Update(params IDictionary<string, object>[] propertySets)
+        public void Update(params IDictionary<string, object>[] propertySets)
         {
             this.child.Update(propertySets);
         }
