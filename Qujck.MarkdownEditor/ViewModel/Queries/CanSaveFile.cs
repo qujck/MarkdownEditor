@@ -17,8 +17,11 @@ namespace Qujck.MarkdownEditor.ViewModel.Queries
     {
         public bool Execute(CanSaveFile viewModelParameter)
         {
-            return (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.OpeningText] !=
-                (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText];
+            string openingText = (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.OpeningText];
+            string currentText = (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText];
+
+
+            return openingText != currentText;
         }
     }
 }

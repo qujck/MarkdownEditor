@@ -35,6 +35,7 @@ namespace Qujck.MarkdownEditor.ViewModel.Aspects
 
         public void Run(ViewModelParameter viewModelParameter)
         {
+            bool @continue = true;
             if (this.CanSave(viewModelParameter.ViewModel as DocumentViewModel))
             {
                 var result = MessageBox.Show(
@@ -47,17 +48,22 @@ namespace Qujck.MarkdownEditor.ViewModel.Aspects
                 {
                     case MessageBoxResult.Yes:
                         this.Save(viewModelParameter.ViewModel as DocumentViewModel);
-                        if (!this.CanSave(viewModelParameter.ViewModel as DocumentViewModel))
+                        if (this.CanSave(viewModelParameter.ViewModel as DocumentViewModel))
                         {
-                            this.decorated.Run((dynamic)viewModelParameter);
+                            @continue = false;
                         }
                         break;
                     case MessageBoxResult.No:
-                        this.decorated.Run((dynamic)viewModelParameter);
                         break;
                     default:
+                        @continue = false;
                         break;
                 }
+            }
+
+            if (@continue)
+            {
+                this.decorated.Run((dynamic)viewModelParameter);
             }
         }
 
