@@ -56,7 +56,7 @@ namespace Qujck.MarkdownEditor.Behaviours
                 {
                     RoutedEvent = Keyboard.KeyDownEvent,
                 };
-                var x = this.AssociatedObject.InputBindings;
+
                 this.AssociatedObject.RaiseEvent(e1);
             }
         }
