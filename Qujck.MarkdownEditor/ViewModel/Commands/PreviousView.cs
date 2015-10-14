@@ -27,8 +27,8 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
         {
             int prior = (int)currentView - 1;
             return prior < 0
-                ? 0
-                : Constants.DocumentViewModel.Views.Length - 1;
+                ? Constants.DocumentViewModel.Views.Length - 1
+                : prior;
         }
     }
 }
