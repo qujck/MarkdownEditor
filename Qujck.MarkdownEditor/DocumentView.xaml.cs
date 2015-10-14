@@ -27,6 +27,7 @@ namespace Qujck.MarkdownEditor
         public DocumentView()
         {
             InitializeComponent();
+            this.TextEditor.Focus();
         }
 
         private void DataModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
