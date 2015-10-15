@@ -8,6 +8,6 @@ I was inspired to start this project after paying for MarkdownPad and then findi
 |---|------|
 |F5|Change view|
 |SHIFT+F5|Reverse change view|
-|CTRL_N|New document|
-|CTRL_O|Open document|
-|CTRL_S|Save document|
+|CTRL+N|New document|
+|CTRL+O|Open document|
+|CTRL+S|Save document|
