@@ -33,20 +33,20 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
 
                 if (dialog.ShowDialog() == true)
                 {
-                    fileName = dialog.FileName;
+                    filePath = dialog.FileName;
                 }
             }
 
-            if (!string.IsNullOrEmpty(fileName))
+            if (!string.IsNullOrEmpty(filePath))
             { 
                 File.WriteAllText(
-                    fileName, 
+                    filePath, 
                     (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText]);
 
                 viewModelParameter.ViewModel[Constants.DocumentViewModel.OpeningText] = 
                     viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText];
 
-                viewModelParameter.ViewModel[Constants.DocumentViewModel.FilePath] = fileName;
+                viewModelParameter.ViewModel[Constants.DocumentViewModel.FilePath] = filePath;
             }
         }
     }
