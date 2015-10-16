@@ -9,8 +9,8 @@
   <Color name="Emphasis" fontStyle="italic" exampleText="*this* is important!" />
   <Color name="StrongEmphasis" fontWeight="bold" exampleText="**this** is more important!" />
   <Color name="Code" fontSize="12" fontFamily="Lucida Console, Monaco, monospace" foreground="Green" exampleText="this is `int.GetHashCode()`" />
-  <Color name="BlockQuote" fontSize="18" fontFamily="Palatino Linotype, Book Antiqua, Palatino, serif" foreground="DarkBlue" exampleText="&gt; This is a\r\n&gt; quote." />
-  <Color name="Link" foreground="Blue" exampleText="[text](http://example.com)" />
+  <Color name="BlockQuote" fontSize="18" fontFamily="Palatino Linotype, Book Antiqua, Palatino, serif" foreground="DarkGray" exampleText="&gt; This is a\r\n&gt; quote." />
+  <Color name="Link" foreground="DarkBlue" exampleText="[text](http://example.com)" />
   <Color name="Image" foreground="Green" exampleText="[text][http://example.com/test.png]" />
   <Color name="LineBreak" background="LightGray" exampleText="end of line      \r\n2nd line   " />
   <Color name="default" fontFamily="Verdana, Geneva, sans-serif" fontSize="24"/>
