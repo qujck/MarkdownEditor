@@ -1,122 +1,84 @@
-﻿.prettyprint {
-    color: #393318;
-    display: block;
-}
-.str {
-    color: #800000;
-}
-.kwd {
-    color: #00008b;
-}
-.com {
-    color: #808080;
-}
-.typ {
-    color: #2b91af;
-}
-.lit {
-    color: #800000;
-}
-.pun {
-    color: #000;
-}
-.pln {
-    color: #000;
-}
-.tag {
-    color: #800000;
-}
-.atn {
-    color: #f00;
-}
-.atv {
-    color: #00f;
-}
-.dec {
-    color: #800080;
+﻿.prettyprint .com       { color: #008000; }
+.prettyprint .str, .tag { color: #A31515; }
+.prettyprint .kwd, .atv { color: #0000FF; }
+.prettyprint .typ       { color: #2B91AF; }
+.prettyprint .lit, .atn { color: #FF0000; }
+.prettyprint .pun, .pln { color: #000000; }
+.prettyprint .dec       { color: #800080; }
+
+pre.prettyprint, 
+code.prettyprint, 
+pre.prettyprint code,
+.post-content pre.prettyprint,
+.post-content code.prettyprint,
+.post-content pre.prettyprint code,
+.comment-content pre.prettyprint,
+.comment-content code.prettyprint,
+.comment-content pre.prettyprint code  {
+	background-color: #F6F6F6; display: block;
 }
 
-@media print
-{
-    .container, body {
-        font-size: 10pt !important;
-        height: auto;
-        overflow: visible !important;
-    }
+.comment-content pre.prettyprint code,
+.post-content pre.prettyprint code,
+pre.prettyprint code { padding: 0; margin: 0; border: none; display: block; white-space: pre;}
 
-    .container {
-        width: 710px;
-        float: none !important;
-        overflow: visible !important;
-        width: 100%;
-    }
+pre.prettyprint, 
+code.prettyprint, 
+.post-content pre.prettyprint,
+.post-content code.prettyprint,
+.comment-content pre.prettyprint,
+.comment-content code.prettyprint { overflow: auto; word-wrap: normal; -moz-tab-size: 2; -o-tab-size: 2; tab-size: 2;}
 
-    .str
-    {
-        color: #060;
-    }
-
-    .kwd
-    {
-        color: #006;
-        font-weight: bold;
-    }
-
-    .com
-    {
-        color: #600;
-        font-style: italic;
-    }
-
-    .typ
-    {
-        color: #404;
-        font-weight: bold;
-    }
-
-    .lit
-    {
-        color: #044;
-    }
-
-    .pun
-    {
-        color: #440;
-    }
-
-    .pln
-    {
-        color: #000;
-    }
-
-    .tag
-    {
-        color: #006;
-        font-weight: bold;
-    }
-
-    .atn
-    {
-        color: #404;
-    }
-
-    .atv
-    {
-        color: #060;
-    }
-
-    pre {
-        clear: both;
-        display: block;
-        height: auto;
-        max-height: none;
-        overflow-x: auto;
-        white-space: pre-wrap;
-        width: 600px;
-        word-wrap: break-word;
-    }
-
-    pre, code {
-        font-size: 9pt !important;
-    }
+pre.prettyprint, 
+code.prettyprint, 
+.post-content pre.prettyprint,
+.post-content code.prettyprint,
+.comment-content pre.prettyprint,
+.comment-content code.prettyprint {
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	border-radius: 8px;
 }
+
+
+pre.prettyprint {
+	width: 95%;
+	margin: 1em auto;
+	padding: 1em;
+	white-space: pre-wrap;
+}
+
+.prettyprint li, .prettyprint ol { margin: 0; padding: 0; }
+
+/* Specify class=linenums on a pre to get line numbering */
+.prettyprint ol.linenums { margin-top: 0; margin-bottom: 0; padding-left: 3em; color: #AEAEAE; } /* IE indents via margin-left */
+.prettyprint li.L0,
+.prettyprint li.L1,
+.prettyprint li.L2,
+.prettyprint li.L3,
+.prettyprint li.L5,
+.prettyprint li.L6,
+.prettyprint li.L7,
+.prettyprint li.L8 { list-style-type: none }
+/* Alternate shading for lines */
+.prettyprint li.L1,
+.prettyprint li.L3,
+.prettyprint li.L5,
+.prettyprint li.L7,
+.prettyprint li.L9 { }
+
+@media print {
+  .prettyprint .str { color: #060; }
+  .prettyprint .kwd { color: #006; font-weight: bold; }
+  .prettyprint .com { color: #600; font-style: italic; }
+  .prettyprint .typ { color: #404; font-weight: bold; }
+  .prettyprint .lit { color: #044; }
+  .prettyprint .pun { color: #440; }
+  .prettyprint .pln { color: #000; }
+  .prettyprint .tag { color: #006; font-weight: bold; }
+  .prettyprint .atn { color: #404; }
+  .prettyprint .atv { color: #060; }
+}	
