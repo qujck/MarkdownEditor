@@ -27,6 +27,18 @@ namespace Qujck.MarkdownEditor.ViewModel
                 { Constants.DocumentViewModel.FilePath, null }
             };
 
+        public string CurrentText
+        {
+            get
+            {
+                return (string)this[Constants.DocumentViewModel.CurrentText];
+            }
+            set
+            {
+                this[Constants.DocumentViewModel.CurrentText] = value;
+            }
+        }
+
         private static int WhatsNext(object currentView)
         {
             int next = (int)currentView + 1;
