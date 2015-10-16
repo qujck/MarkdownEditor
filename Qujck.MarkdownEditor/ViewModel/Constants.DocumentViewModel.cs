@@ -32,6 +32,7 @@ namespace Qujck.MarkdownEditor
             public const string OpeningText = "OpeningText";
             public const string CurrentText = "CurrentText";
             public const string FilePath = "FileName";
+            public const string HtmlIsLoaded = "HtmlIsLoaded";
 
             public static readonly IDictionary<string, object>[] Views =
                 new IDictionary<string, object>[]

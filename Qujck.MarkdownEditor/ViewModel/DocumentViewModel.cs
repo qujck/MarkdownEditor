@@ -24,7 +24,8 @@ namespace Qujck.MarkdownEditor.ViewModel
                 { Constants.DocumentViewModel.OpeningText, null },
                 { Constants.DocumentViewModel.CurrentText, null },
                 { Constants.DocumentViewModel.CurrentView, 0 },
-                { Constants.DocumentViewModel.FilePath, null }
+                { Constants.DocumentViewModel.FilePath, null },
+                { Constants.DocumentViewModel.HtmlIsLoaded, null }
             };
 
         public string CurrentText
@@ -36,6 +37,21 @@ namespace Qujck.MarkdownEditor.ViewModel
             set
             {
                 this[Constants.DocumentViewModel.CurrentText] = value;
+            }
+        }
+
+        public bool HtmlIsLoaded
+        {
+            get
+            {
+                bool result = this[Constants.DocumentViewModel.HtmlIsLoaded] == null
+                    ? false
+                    : (bool)this[Constants.DocumentViewModel.HtmlIsLoaded];
+                return result;
+            }
+            set
+            {
+                this[Constants.DocumentViewModel.HtmlIsLoaded] = value;
             }
         }
 

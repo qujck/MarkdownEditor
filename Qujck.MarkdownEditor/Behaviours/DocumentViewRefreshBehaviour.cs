@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using ICSharpCode.AvalonEdit;
 using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.ViewModel;
 using Qujck.MarkdownEditor.Commands;
 using Qujck.MarkdownEditor.Infrastructure;
 
@@ -70,7 +71,7 @@ namespace Qujck.MarkdownEditor.Behaviours
         {
             if (this.textChangedRefreshRenderedViewTimer.IsEnabled &&
                 this.textChangedRefreshRenderedViewTimer.Tag == null &&
-                this.AssociatedObject.HtmlIsLoaded)
+                HtmlIsLoaded)
             {
                 this.textChangedRefreshRenderedViewTimer.Stop();
                 this.textChangedRefreshRenderedViewTimer.Tag = this;
@@ -80,6 +81,15 @@ namespace Qujck.MarkdownEditor.Behaviours
                     this.AssociatedObject.TextEditor.Text);
 
                 this.textChangedRefreshRenderedViewTimer.Tag = null;
+            }
+        }
+
+        private bool HtmlIsLoaded
+        {
+            get
+            {
+                var model = (DocumentViewModel)this.AssociatedObject.DataContext;
+                return model.HtmlIsLoaded;
             }
         }
     }

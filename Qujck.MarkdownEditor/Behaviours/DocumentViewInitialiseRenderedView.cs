@@ -12,8 +12,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using ICSharpCode.AvalonEdit;
 using Qujck.MarkdownEditor.Queries;
-using Qujck.MarkdownEditor.Commands;
-using Qujck.MarkdownEditor.Infrastructure;
+using Qujck.MarkdownEditor.ViewModel;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
@@ -36,7 +35,16 @@ namespace Qujck.MarkdownEditor.Behaviours
 
         private void RenderedView_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            this.AssociatedObject.HtmlIsLoaded = true;
+            this.HtmlIsLoaded = true;
+        }
+
+        private bool HtmlIsLoaded
+        {
+            set
+            {
+                var model = (DocumentViewModel)this.AssociatedObject.DataContext;
+                model.HtmlIsLoaded = value;
+            }
         }
     }
 }
