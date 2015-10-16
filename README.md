@@ -2,5 +2,12 @@
 
 I was inspired to start this project after paying for MarkdownPad and then finding out there was basically zero support. Feature requests promised and not delivered, app did not work on Windows 8 for ages and currently does not work on Windows 10. 
 
+## Keyboard Shortcuts
 
-Not much else to say ATM, let's see where it goes ...
+|Key|Action|
+|---|------|
+|F5|Change view|
+|SHIFT+F5|Reverse change view|
+|CTRL+N|New document|
+|CTRL+O|Open document|
+|CTRL+S|Save document|
