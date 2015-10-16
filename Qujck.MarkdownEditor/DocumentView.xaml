@@ -32,10 +32,10 @@
         <behaviours:DocumentViewTextChangedUpdateModelBehaviour/>
     </i:Interaction.Behaviors>
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Unloaded" SourceName="MainGrid">
+        <i:EventTrigger EventName="Unloaded" SourceName="TextEditor">
             <i:InvokeCommandAction Command="{inf:ViewModelCommandAdapter NewFile}"/>
         </i:EventTrigger>
-        <i:EventTrigger EventName="Unloaded" SourceName="MainGrid">
+        <i:EventTrigger EventName="Unloaded" SourceName="TextEditor">
             <i:InvokeCommandAction Command="{inf:ViewModelCommandAdapter Shutdown}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
