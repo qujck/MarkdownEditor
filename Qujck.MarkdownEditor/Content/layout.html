@@ -9,6 +9,14 @@
             function renderMarkdown(text) {
                 var result = marked(text);
                 document.getElementById('content').innerHTML = result; 
+                disableLinks();
+            }
+
+            function disableLinks() {
+                var as = document.getElementsByTagName('a');
+                for(var i = 0; i < as.length; i++){
+                    as[i].onclick = 'window.open("' + as[i].href + '", "Links"); return false;';
+                }            
             }
         </script>
         <style>${style}</style>
