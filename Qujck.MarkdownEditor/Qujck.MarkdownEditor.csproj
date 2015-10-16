@@ -87,6 +87,7 @@
     <Compile Include="ViewModel\Commands\NextView.cs" />
     <Compile Include="ViewModel\Commands\OpenFile.cs" />
     <Compile Include="ViewModel\Commands\SaveFile.cs" />
+    <Compile Include="ViewModel\Commands\Shutdown.cs" />
     <Compile Include="ViewModel\DocumentViewModel.cs" />
     <Compile Include="Infrastructure\DynamicViewModel.cs" />
     <Compile Include="Infrastructure\DynamicModel.cs" />

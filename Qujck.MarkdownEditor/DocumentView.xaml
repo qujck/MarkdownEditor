@@ -31,6 +31,14 @@
         <behaviours:DocumentViewScrollBehaviour/>
         <behaviours:DocumentViewTextChangedUpdateModelBehaviour/>
     </i:Interaction.Behaviors>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Unloaded" SourceName="MainGrid">
+            <i:InvokeCommandAction Command="{inf:ViewModelCommandAdapter NewFile}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded" SourceName="MainGrid">
+            <i:InvokeCommandAction Command="{inf:ViewModelCommandAdapter Shutdown}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="LeftColumn" Width="{Binding LeftColumnWidth}"/>

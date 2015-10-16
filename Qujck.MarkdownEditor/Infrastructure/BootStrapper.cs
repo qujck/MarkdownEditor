@@ -55,6 +55,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
             private IViewModelCommand<ViewModelParameter> openFileHandler;
             private PreviousViewHandler previousViewHandler;
             private SaveFileHandler saveFileHandler;
+            private ShutdownHandler shutdownHandler;
 
             private DependencyResolver()
             {
@@ -121,6 +122,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 this.nextViewHandler = new NextViewHandler();
                 this.openFileHandler = new SaveChangesHandler(new OpenFileHandler(), this.canSaveFileHandler, saveFileHandler);
                 this.previousViewHandler = new PreviousViewHandler();
+                this.shutdownHandler = new ShutdownHandler();
 
                 return this;
             }
@@ -160,6 +162,8 @@ namespace Qujck.MarkdownEditor.Infrastructure
                     return new Tuple<Type, object>(typeof(PreviousView), this.previousViewHandler);
                 else if (name == "SaveFile")
                     return new Tuple<Type, object>(typeof(SaveFile), this.saveFileHandler);
+                else if (name == "Shutdown")
+                    return new Tuple<Type, object>(typeof(Shutdown), this.shutdownHandler);
                 else
                     throw new ArgumentNullException();
             }
