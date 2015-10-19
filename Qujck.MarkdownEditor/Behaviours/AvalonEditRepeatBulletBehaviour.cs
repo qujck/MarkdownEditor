@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,8 +24,7 @@ namespace Qujck.MarkdownEditor.Behaviours
         private readonly NextBulletLineTracker tracker;
         private ISegment currentLine;
         private ISegment newLine;
-        private bool insertingBullet;
-        private bool removingBullet;
+        private bool processing;
 
         public AvalonEditRepeatBulletBehaviour()
         {
@@ -66,27 +65,25 @@ namespace Qujck.MarkdownEditor.Behaviours
 
         private void TextEditor_TextChanged(object sender, EventArgs e)
         {
-            if (!this.insertingBullet && 
-                !this.removingBullet &&
-                this.currentLine != null)
+            if (!this.processing && this.currentLine != null)
             {
                 string text = this.AssociatedObject.TextEditor.Document.GetText(this.currentLine);
                 if (text == Bullet)
                 {
-                    this.removingBullet = true;
+                    this.processing = true;
                     this.AssociatedObject.TextEditor.Document.Remove(this.currentLine);
                 }
                 else if (text.StartsWith(Bullet))
                 {
-                    this.insertingBullet = true;
+                    this.processing = true;
                     this.AssociatedObject.TextEditor.Document.Insert(this.newLine.Offset, Bullet);
                 }
+
                 this.currentLine = null;
             }
             else
             {
-                this.insertingBullet = false;
-                this.removingBullet = false;
+                this.processing = false;
             }
         }
 
