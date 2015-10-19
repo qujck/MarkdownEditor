@@ -71,8 +71,8 @@ namespace Qujck.MarkdownEditor.Behaviours
             if (!this.processing && this.currentLine != null)
             {
                 string text = this.AssociatedObject.TextEditor.Document.GetText(this.currentLine);
-                string allText = this.AssociatedObject.TextEditor.Document.Text;
                 Match match;
+
                 if ((match = Regex.Match(text, End)).Success)
                 {
                     this.processing = true;
