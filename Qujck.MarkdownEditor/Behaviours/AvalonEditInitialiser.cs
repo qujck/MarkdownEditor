@@ -32,8 +32,11 @@ namespace Qujck.MarkdownEditor.Behaviours
 
         private void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
         {
-            this.LoadHighlighter();
             base.AssociatedObject.Loaded -= AssociatedObject_Loaded;
+            this.LoadHighlighter();
+            this.AssociatedObject.TextEditor.Options.EnableHyperlinks = false;
+            this.AssociatedObject.TextEditor.Options.EnableEmailHyperlinks = false;
+            this.AssociatedObject.TextEditor.Options.ConvertTabsToSpaces = true;
         }
 
         private void LoadHighlighter()
