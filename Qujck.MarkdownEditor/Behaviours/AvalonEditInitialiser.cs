@@ -20,7 +20,7 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
-    public sealed class DocumentViewInitialiseAvalonEdit : Behavior<DocumentView>
+    public sealed class AvalonEditInitialiser : Behavior<DocumentView>
     {
         public IStringResourceProvider StringResourceProvider { private get; set; }
 
@@ -33,6 +33,7 @@ namespace Qujck.MarkdownEditor.Behaviours
         private void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
         {
             this.LoadHighlighter();
+            base.AssociatedObject.Loaded -= AssociatedObject_Loaded;
         }
 
         private void LoadHighlighter()

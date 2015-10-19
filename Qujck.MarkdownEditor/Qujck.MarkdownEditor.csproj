@@ -70,10 +70,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Behaviours\DocumentViewRenderedViewInterceptKeyDownBehaviour.cs" />
+    <Compile Include="Behaviours\AvalonEditRepeatBulletBehaviour.cs" />
+    <Compile Include="Behaviours\RenderedViewInterceptKeyDownBehaviour.cs" />
     <Compile Include="Infrastructure\Container.MarkupExtension.cs" />
-    <Compile Include="Behaviours\DocumentViewInitialiseAvalonEdit.cs" />
-    <Compile Include="Behaviours\DocumentViewInitialiseRenderedView.cs" />
+    <Compile Include="Behaviours\AvalonEditInitialiser.cs" />
+    <Compile Include="Behaviours\RenderedViewInitialiser.cs" />
     <Compile Include="Behaviours\DocumentViewRefreshBehaviour.cs" />
     <Compile Include="Behaviours\DocumentViewScrollBehaviour.cs" />
     <Compile Include="Infrastructure\BootStrapper.cs" />

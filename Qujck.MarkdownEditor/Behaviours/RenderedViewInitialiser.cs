@@ -16,7 +16,7 @@ using Qujck.MarkdownEditor.ViewModel;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
-    public sealed class DocumentViewInitialiseRenderedView : Behavior<DocumentView>
+    public sealed class RenderedViewInitialiser : Behavior<DocumentView>
     {
         public IQueryHandler<Query.Html, string> HtmlQueryHandler { private get; set; }
 

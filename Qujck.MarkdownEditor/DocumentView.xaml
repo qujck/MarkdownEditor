@@ -24,11 +24,12 @@
         <vm:DocumentViewModel PropertyChanged="DataModel_PropertyChanged"/>
     </UserControl.DataContext>
     <i:Interaction.Behaviors>
-        <behaviours:DocumentViewInitialiseAvalonEdit StringResourceProvider="{inf:Container}"/>
-        <behaviours:DocumentViewInitialiseRenderedView HtmlQueryHandler="{inf:Container}"/>
+        <behaviours:AvalonEditInitialiser StringResourceProvider="{inf:Container}"/>
+        <behaviours:RenderedViewInitialiser HtmlQueryHandler="{inf:Container}"/>
         <behaviours:DocumentViewRefreshBehaviour RenderMarkdownHandler="{inf:Container}"/>
-        <behaviours:DocumentViewRenderedViewInterceptKeyDownBehaviour/>
+        <behaviours:RenderedViewInterceptKeyDownBehaviour/>
         <behaviours:DocumentViewScrollBehaviour/>
+        <behaviours:AvalonEditRepeatBulletBehaviour/>
     </i:Interaction.Behaviors>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Unloaded" SourceName="TextEditor">

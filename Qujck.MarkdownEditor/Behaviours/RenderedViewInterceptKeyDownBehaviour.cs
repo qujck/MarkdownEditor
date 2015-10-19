@@ -17,7 +17,7 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
-    public sealed class DocumentViewRenderedViewInterceptKeyDownBehaviour : Behavior<DocumentView>
+    public sealed class RenderedViewInterceptKeyDownBehaviour : Behavior<DocumentView>
     {
         protected override void OnAttached()
         {
