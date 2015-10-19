@@ -25,11 +25,11 @@
     </UserControl.DataContext>
     <i:Interaction.Behaviors>
         <behaviours:AvalonEditInitialiser StringResourceProvider="{inf:Container}"/>
-        <behaviours:RenderedViewInitialiser HtmlQueryHandler="{inf:Container}"/>
-        <behaviours:DocumentViewRefreshBehaviour RenderMarkdownHandler="{inf:Container}"/>
-        <behaviours:RenderedViewInterceptKeyDownBehaviour/>
-        <behaviours:DocumentViewScrollBehaviour/>
         <behaviours:AvalonEditRepeatBulletBehaviour/>
+        <behaviours:DocumentViewRefreshBehaviour RenderMarkdownHandler="{inf:Container}"/>
+        <behaviours:DocumentViewScrollBehaviour/>
+        <behaviours:RenderedViewInitialiser HtmlQueryHandler="{inf:Container}"/>
+        <behaviours:RenderedViewInterceptKeyDownBehaviour/>
     </i:Interaction.Behaviors>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Unloaded" SourceName="TextEditor">

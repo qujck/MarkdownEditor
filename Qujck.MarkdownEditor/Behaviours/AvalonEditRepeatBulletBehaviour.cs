@@ -20,7 +20,10 @@ namespace Qujck.MarkdownEditor.Behaviours
 {
     public sealed class AvalonEditRepeatBulletBehaviour : Behavior<DocumentView>
     {
-        const string Bullet = "- ";
+        const string Continue = @"^(\- |\* |\+ |\d+\. )";
+        const string End = @"^(\- |\* |\+ |\d+\. )$";
+        const string Number = @"^\d+";
+        const string NextNumber = @"{0}. ";
         private readonly NextBulletLineTracker tracker;
         private ISegment currentLine;
         private ISegment newLine;
@@ -68,15 +71,26 @@ namespace Qujck.MarkdownEditor.Behaviours
             if (!this.processing && this.currentLine != null)
             {
                 string text = this.AssociatedObject.TextEditor.Document.GetText(this.currentLine);
-                if (text == Bullet)
+                string allText = this.AssociatedObject.TextEditor.Document.Text;
+                Match match;
+                if ((match = Regex.Match(text, End)).Success)
                 {
                     this.processing = true;
                     this.AssociatedObject.TextEditor.Document.Remove(this.currentLine);
                 }
-                else if (text.StartsWith(Bullet))
+                else if ((match = Regex.Match(text, Continue)).Success)
                 {
                     this.processing = true;
-                    this.AssociatedObject.TextEditor.Document.Insert(this.newLine.Offset, Bullet);
+                    var findNumber = Regex.Match(match.Value, Number);
+                    if (findNumber.Success)
+                    {
+                        int i = int.Parse(findNumber.Value);
+                        this.AssociatedObject.TextEditor.Document.Insert(this.newLine.Offset, string.Format(NextNumber, i + 1));
+                    }
+                    else
+                    {
+                        this.AssociatedObject.TextEditor.Document.Insert(this.newLine.Offset, match.Value);
+                    }
                 }
 
                 this.currentLine = null;
