@@ -53,6 +53,7 @@
         </Grid.RowDefinitions>
         <avalonEdit:TextEditor
 			x:Name="TextEditor"
+            x:FieldModifier="public"
 			Grid.Column="{Binding TextEditorColumn}"
             Grid.Row="{Binding TextEditorRow}"
 			FontFamily="Segoe UI"

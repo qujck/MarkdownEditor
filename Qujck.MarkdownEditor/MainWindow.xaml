@@ -14,5 +14,5 @@
     WindowStartupLocation="CenterScreen" 
     WindowState="Maximized" 
     Icon="Editdatasetwithdesigner_8449.ico">
-    <local:DocumentView x:Name="DocumentView" Margin="0"/>
+    <local:DocumentView x:Name="DocumentView" x:FieldModifier="public" Margin="0"/>
 </Window>

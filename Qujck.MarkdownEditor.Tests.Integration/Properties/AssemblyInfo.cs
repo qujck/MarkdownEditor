@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Qujck.MarkdownEditor.Specs")]
+[assembly: AssemblyTitle("Qujck.MarkdownEditor.Tests.Integration")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Qujck.MarkdownEditor.Specs")]
+[assembly: AssemblyProduct("Qujck.MarkdownEditor.Tests.Integration")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c2034779-5a6f-4e12-b82a-7c40d87001cb")]
+[assembly: Guid("103d874d-284d-45f9-b881-1583f39dff60")]
 
 // Version information for an assembly consists of the following four values:
 //

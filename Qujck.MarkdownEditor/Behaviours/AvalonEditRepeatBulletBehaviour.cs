@@ -60,40 +60,44 @@ namespace Qujck.MarkdownEditor.Behaviours
             this.AssociatedObject.TextEditor.TextChanged -= TextEditor_TextChanged;
         }
 
-        private void LineInsertedCallBack(ISegment currentLine, ISegment newLine)
+        public void LineInsertedCallBack(ISegment currentLine, ISegment newLine)
         {
             this.currentLine = currentLine;
             this.newLine = newLine;
         }
 
-        private void TextEditor_TextChanged(object sender, EventArgs e)
+        public void TextEditor_TextChanged(object sender, EventArgs e)
         {
-            if (!this.processing && this.currentLine != null)
+            var textEditor = (TextEditor)sender;
+            if (!this.processing)
             {
-                string text = this.AssociatedObject.TextEditor.Document.GetText(this.currentLine);
-                Match match;
-
-                if ((match = Regex.Match(text, End)).Success)
+                if (this.currentLine != null)
                 {
-                    this.processing = true;
-                    this.AssociatedObject.TextEditor.Document.Remove(this.currentLine);
-                }
-                else if ((match = Regex.Match(text, Continue)).Success)
-                {
-                    this.processing = true;
-                    var findNumber = Regex.Match(match.Value, Number);
-                    if (findNumber.Success)
-                    {
-                        int i = int.Parse(findNumber.Value);
-                        this.AssociatedObject.TextEditor.Document.Insert(this.newLine.Offset, string.Format(NextNumber, i + 1));
-                    }
-                    else
-                    {
-                        this.AssociatedObject.TextEditor.Document.Insert(this.newLine.Offset, match.Value);
-                    }
-                }
+                    string text = textEditor.Document.GetText(this.currentLine);
+                    Match match;
 
-                this.currentLine = null;
+                    if ((match = Regex.Match(text, End)).Success)
+                    {
+                        this.processing = true;
+                        textEditor.Document.Remove(this.currentLine);
+                    }
+                    else if ((match = Regex.Match(text, Continue)).Success)
+                    {
+                        this.processing = true;
+                        var findNumber = Regex.Match(match.Value, Number);
+                        if (findNumber.Success)
+                        {
+                            int i = int.Parse(findNumber.Value);
+                            textEditor.Document.Insert(this.newLine.Offset, string.Format(NextNumber, i + 1));
+                        }
+                        else
+                        {
+                            textEditor.Document.Insert(this.newLine.Offset, match.Value);
+                        }
+                    }
+
+                    this.currentLine = null;
+                }
             }
             else
             {
