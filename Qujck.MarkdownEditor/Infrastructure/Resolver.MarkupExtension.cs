@@ -9,7 +9,7 @@ using System.Windows.Markup;
 
 namespace Qujck.MarkdownEditor.Infrastructure
 {
-    public sealed class Container : MarkupExtension
+    public sealed class Resolver : MarkupExtension
     {
         public override object ProvideValue(IServiceProvider serviceProvider)
         {

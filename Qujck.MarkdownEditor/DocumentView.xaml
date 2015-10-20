@@ -24,11 +24,11 @@
         <vm:DocumentViewModel PropertyChanged="DataModel_PropertyChanged"/>
     </UserControl.DataContext>
     <i:Interaction.Behaviors>
-        <behaviours:AvalonEditInitialiser StringResourceProvider="{inf:Container}"/>
+        <behaviours:AvalonEditInitialiser StringResourceProvider="{inf:Resolver}"/>
         <behaviours:AvalonEditRepeatBulletBehaviour/>
-        <behaviours:DocumentViewRefreshBehaviour RenderMarkdownHandler="{inf:Container}"/>
+        <behaviours:DocumentViewRefreshBehaviour RenderMarkdownHandler="{inf:Resolver}"/>
         <behaviours:DocumentViewScrollBehaviour/>
-        <behaviours:RenderedViewInitialiser HtmlQueryHandler="{inf:Container}"/>
+        <behaviours:RenderedViewInitialiser HtmlQueryHandler="{inf:Resolver}"/>
         <behaviours:RenderedViewInterceptKeyDownBehaviour/>
     </i:Interaction.Behaviors>
     <i:Interaction.Triggers>

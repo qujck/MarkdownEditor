@@ -72,7 +72,7 @@
     </ApplicationDefinition>
     <Compile Include="Behaviours\AvalonEditRepeatBulletBehaviour.cs" />
     <Compile Include="Behaviours\RenderedViewInterceptKeyDownBehaviour.cs" />
-    <Compile Include="Infrastructure\Container.MarkupExtension.cs" />
+    <Compile Include="Infrastructure\Resolver.MarkupExtension.cs" />
     <Compile Include="Behaviours\AvalonEditInitialiser.cs" />
     <Compile Include="Behaviours\RenderedViewInitialiser.cs" />
     <Compile Include="Behaviours\DocumentViewRefreshBehaviour.cs" />
