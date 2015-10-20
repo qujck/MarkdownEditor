@@ -67,16 +67,34 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
             documentView.TextEditor.Text.Should().Be(expected);
         }
 
+        [TestCase, STAThread]
+        public void TextEditor_Only_ProcessesBulletsWithNewLineAtEnd()
+        {
+            string entered = "any text" + Environment.NewLine + "- any text" + Environment.NewLine;
+            string added = "more text";
+            string expected = entered + "- " + added;
+
+            var documentView = this.RunTest(entered, 1);
+            documentView = this.RunTest(documentView, added, 1);
+
+            documentView.TextEditor.Text.Should().Be(expected);
+        }
+
         private DocumentView RunTest(string startText, int currentLine = 0)
         {
             var documentView = new DocumentView();
 
+            return RunTest(documentView, startText, currentLine);
+        }
+
+        private DocumentView RunTest(DocumentView documentView, string startText, int currentLine = 0)
+        {
             var behaviour = (AvalonEditRepeatBulletBehaviour)(
                 from b in Interaction.GetBehaviors(documentView)
                 where b.GetType() == typeof(AvalonEditRepeatBulletBehaviour)
                 select b).Single();
 
-            documentView.TextEditor.Document.Text = startText;
+            documentView.TextEditor.Document.Text += startText;
             behaviour.LineInsertedCallBack(
                 documentView.TextEditor.Document.Lines[currentLine],
                 documentView.TextEditor.Document.Lines[currentLine + 1]);
