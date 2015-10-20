@@ -67,7 +67,7 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
             documentView.TextEditor.Text.Should().Be(expected);
         }
 
-        private DocumentView RunTest(string startText)
+        private DocumentView RunTest(string startText, int currentLine = 0)
         {
             var documentView = new DocumentView();
 
@@ -78,8 +78,8 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
 
             documentView.TextEditor.Document.Text = startText;
             behaviour.LineInsertedCallBack(
-                documentView.TextEditor.Document.Lines[0],
-                documentView.TextEditor.Document.Lines[1]);
+                documentView.TextEditor.Document.Lines[currentLine],
+                documentView.TextEditor.Document.Lines[currentLine + 1]);
 
             behaviour.TextEditor_TextChanged(documentView.TextEditor, null);
 
