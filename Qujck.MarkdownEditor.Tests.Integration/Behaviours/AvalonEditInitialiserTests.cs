@@ -46,10 +46,9 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
 
         private AvalonEditInitialiser FindBehaviour(DocumentView documentView)
         {
-            return (AvalonEditInitialiser)(
-                from b in Interaction.GetBehaviors(documentView)
-                where b.GetType() == typeof(AvalonEditInitialiser)
-                select b).Single();
+            return Interaction.GetBehaviors(documentView)
+                .OfType<AvalonEditInitialiser>()
+                .Single();
         }
     }
 }

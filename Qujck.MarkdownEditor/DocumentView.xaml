@@ -66,6 +66,7 @@
 			Padding="10,0,10,0"/>
         <WebBrowser 
 			x:Name="RenderedView" 
+            x:FieldModifier="public"
 			Grid.Column="{Binding RenderedViewColumn}"
             Grid.Row="{Binding RenderedViewRow}"
 			ScrollViewer.VerticalScrollBarVisibility="Auto"

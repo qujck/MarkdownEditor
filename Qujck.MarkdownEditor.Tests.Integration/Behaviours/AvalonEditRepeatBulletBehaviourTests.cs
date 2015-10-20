@@ -116,10 +116,9 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
 
         private AvalonEditRepeatBulletBehaviour FindBehaviour(DocumentView documentView)
         {
-            return (AvalonEditRepeatBulletBehaviour)(
-                from b in Interaction.GetBehaviors(documentView)
-                where b.GetType() == typeof(AvalonEditRepeatBulletBehaviour)
-                select b).Single();
+            return Interaction.GetBehaviors(documentView)
+                .OfType<AvalonEditRepeatBulletBehaviour>()
+                .Single();
         }
     }
 }

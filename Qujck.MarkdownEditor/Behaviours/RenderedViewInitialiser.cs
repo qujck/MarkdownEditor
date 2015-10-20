@@ -28,6 +28,12 @@ namespace Qujck.MarkdownEditor.Behaviours
 
         private void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
         {
+            base.AssociatedObject.Loaded -= AssociatedObject_Loaded;
+            this.LoadHtml();
+        }
+
+        public void LoadHtml()
+        {
             string html = this.HtmlQueryHandler.Execute();
             this.AssociatedObject.RenderedView.LoadCompleted += RenderedView_LoadCompleted;
             this.AssociatedObject.RenderedView.NavigateToString(html);
