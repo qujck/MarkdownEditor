@@ -39,7 +39,7 @@ namespace Qujck.MarkdownEditor.Behaviours
             this.AssociatedObject.TextEditor.Options.ConvertTabsToSpaces = true;
         }
 
-        private void LoadHighlighter()
+        public void LoadHighlighter()
         {
             // Load our custom highlighting definition
             IHighlightingDefinition customHighlighting;

@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace Qujck.MarkdownEditor.Tests.Integration
 {
-    public class StubPresentationSource : PresentationSource
+    internal class StubPresentationSource : PresentationSource
     {
         protected override CompositionTarget GetCompositionTargetCore()
         {
