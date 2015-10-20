@@ -20,7 +20,8 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
 {
     public class AvalonEditRepeatBulletBehaviourTests
     {
-        [TestCase, STAThread]
+        [TestCase]
+        [STAThread]
         public void TextEditor_WhenEnteringWithoutBullets_DoesNothing()
         {
             string entered = "not a bullet";
@@ -31,9 +32,11 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
             documentView.TextEditor.Text.Should().Be(expected);
         }
 
-        [TestCase, STAThread]
-        public void TextEditor_NewLineAfterBulletedListItem_PrefixesTheNextLineWithTheBullet(
-            [Values("-", "+", "*")]string bullet)
+        [TestCase("*")]
+        [TestCase("+")]
+        [TestCase("-")]
+        [STAThread]
+        public void TextEditor_NewLineAfterBulletedListItem_PrefixesTheNextLineWithTheBullet(string bullet)
         {
             string entered = bullet + " bullet";
             string expected = entered + Environment.NewLine + bullet + " ";
@@ -43,9 +46,10 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
             documentView.TextEditor.Text.Should().Be(expected);
         }
 
-        [TestCase, STAThread]
-        public void TextEditor_NewLineAfterNumberedListItem_PrefixesTheNextLineWithTheNextNumber(
-            [Values(1, 2)]int number)
+        [TestCase(1)]
+        [TestCase(2)]
+        [STAThread]
+        public void TextEditor_NewLineAfterNumberedListItem_PrefixesTheNextLineWithTheNextNumber(int number)
         {
             string entered = number.ToString() + ". bullet";
             string expected = entered + Environment.NewLine + (number + 1).ToString() + ". ";
@@ -55,9 +59,11 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
             documentView.TextEditor.Text.Should().Be(expected);
         }
 
-        [TestCase, STAThread]
-        public void TextEditor_NewLineAfterAnEmptyBullet_RemovesEmptyBullet(
-            [Values("-", "+", "*")]string bullet)
+        [TestCase("*")]
+        [TestCase("+")]
+        [TestCase("-")]
+        [STAThread]
+        public void TextEditor_NewLineAfterAnEmptyBullet_RemovesEmptyBullet(string bullet)
         {
             string entered = bullet + " ";
             string expected = Environment.NewLine;
@@ -67,7 +73,8 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
             documentView.TextEditor.Text.Should().Be(expected);
         }
 
-        [TestCase, STAThread]
+        [TestCase]
+        [STAThread]
         public void TextEditor_Only_ProcessesBulletsWithNewLineAtEndOnce()
         {
             string entered = "any text" + Environment.NewLine + "- any text";
