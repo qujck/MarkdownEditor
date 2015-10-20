@@ -23,78 +23,70 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
         [TestCase, STAThread]
         public void TextEditor_WhenEnteringWithoutBullets_DoesNothing()
         {
-            string entered = "not a bullet" + Environment.NewLine;
-            string expected = entered;
+            string entered = "not a bullet";
+            string expected = entered + Environment.NewLine;
 
-            var documentView = this.RunTest(entered);
+            var documentView = this.SetTextWithNewLine(entered);
 
             documentView.TextEditor.Text.Should().Be(expected);
         }
 
         [TestCase, STAThread]
-        public void TextEditor_WhenEnteringABulletedList_PrefixesTheNextLineWithTheBullet(
+        public void TextEditor_NewLineAfterBulletedListItem_PrefixesTheNextLineWithTheBullet(
             [Values("-", "+", "*")]string bullet)
         {
-            string entered = bullet + " bullet" + Environment.NewLine;
-            string expected = entered + bullet + " ";
+            string entered = bullet + " bullet";
+            string expected = entered + Environment.NewLine + bullet + " ";
 
-            var documentView = this.RunTest(entered);
+            var documentView = this.SetTextWithNewLine(entered);
 
             documentView.TextEditor.Text.Should().Be(expected);
         }
 
         [TestCase, STAThread]
-        public void TextEditor_WhenEnteringANumberedList_PrefixesTheNextLineWithTheNextNumber(
+        public void TextEditor_NewLineAfterNumberedListItem_PrefixesTheNextLineWithTheNextNumber(
             [Values(1, 2)]int number)
         {
-            string entered = number.ToString() + ". bullet" + Environment.NewLine;
-            string expected = entered + (number + 1).ToString() + ". ";
+            string entered = number.ToString() + ". bullet";
+            string expected = entered + Environment.NewLine + (number + 1).ToString() + ". ";
 
-            var documentView = this.RunTest(entered);
+            var documentView = this.SetTextWithNewLine(entered);
 
             documentView.TextEditor.Text.Should().Be(expected);
         }
 
         [TestCase, STAThread]
-        public void TextEditor_WhenEnteringAfterAnEmptyBullet_RemovesTheEmptyBullet(
+        public void TextEditor_NewLineAfterAnEmptyBullet_RemovesEmptyBullet(
             [Values("-", "+", "*")]string bullet)
         {
-            string entered = bullet + " " + Environment.NewLine + "any text";
-            string expected = Environment.NewLine + "any text";
+            string entered = bullet + " ";
+            string expected = Environment.NewLine;
 
-            var documentView = this.RunTest(entered);
+            var documentView = this.SetTextWithNewLine(entered);
 
             documentView.TextEditor.Text.Should().Be(expected);
         }
 
         [TestCase, STAThread]
-        public void TextEditor_Only_ProcessesBulletsWithNewLineAtEnd()
+        public void TextEditor_Only_ProcessesBulletsWithNewLineAtEndOnce()
         {
-            string entered = "any text" + Environment.NewLine + "- any text" + Environment.NewLine;
-            string added = "more text";
-            string expected = entered + "- " + added;
+            string entered = "any text" + Environment.NewLine + "- any text";
+            string additional = "more text";
+            string expected = entered + Environment.NewLine + "- " + additional;
 
-            var documentView = this.RunTest(entered, 1);
-            documentView = this.RunTest(documentView, added, 1);
+            var documentView = this.SetTextWithNewLine(entered, 1);
+            documentView = this.AppendText(documentView, additional);
 
             documentView.TextEditor.Text.Should().Be(expected);
         }
 
-        private DocumentView RunTest(string startText, int currentLine = 0)
+        private DocumentView SetTextWithNewLine(string startText, int currentLine = 0)
         {
             var documentView = new DocumentView();
+            var behaviour = this.FindBehaviour(documentView);
 
-            return RunTest(documentView, startText, currentLine);
-        }
+            documentView.TextEditor.Document.Text += startText + Environment.NewLine;
 
-        private DocumentView RunTest(DocumentView documentView, string startText, int currentLine = 0)
-        {
-            var behaviour = (AvalonEditRepeatBulletBehaviour)(
-                from b in Interaction.GetBehaviors(documentView)
-                where b.GetType() == typeof(AvalonEditRepeatBulletBehaviour)
-                select b).Single();
-
-            documentView.TextEditor.Document.Text += startText;
             behaviour.LineInsertedCallBack(
                 documentView.TextEditor.Document.Lines[currentLine],
                 documentView.TextEditor.Document.Lines[currentLine + 1]);
@@ -102,6 +94,25 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
             behaviour.TextEditor_TextChanged(documentView.TextEditor, null);
 
             return documentView;
+        }
+
+        private DocumentView AppendText(DocumentView documentView, string extraText)
+        {
+            var behaviour = this.FindBehaviour(documentView);
+
+            documentView.TextEditor.Document.Text += extraText;
+
+            behaviour.TextEditor_TextChanged(documentView.TextEditor, null);
+
+            return documentView;
+        }
+
+        private AvalonEditRepeatBulletBehaviour FindBehaviour(DocumentView documentView)
+        {
+            return (AvalonEditRepeatBulletBehaviour)(
+                from b in Interaction.GetBehaviors(documentView)
+                where b.GetType() == typeof(AvalonEditRepeatBulletBehaviour)
+                select b).Single();
         }
     }
 }
