@@ -13,5 +13,11 @@ namespace Qujck.MarkdownEditor
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            DoesIt();
+        }
+
+        private void DoesIt() { }
     }
 }
