@@ -39,7 +39,7 @@ namespace Qujck.MarkdownEditor.Behaviours
             this.AssociatedObject.RenderedView.NavigateToString(html);
         }
 
-        private void RenderedView_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        public void RenderedView_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             this.HtmlIsLoaded = true;
         }
