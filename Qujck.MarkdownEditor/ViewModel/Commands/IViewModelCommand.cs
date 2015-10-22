@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Qujck.MarkdownEditor.ViewModel.Commands
 {
-    internal interface IViewModelCommand<TViewModelParameter> where TViewModelParameter : ViewModelParameter
+    internal interface IViewModelCommand<TViewModelParameter> where TViewModelParameter : IViewModelParameter
     {
         void Run(TViewModelParameter viewModelParameter);
     }

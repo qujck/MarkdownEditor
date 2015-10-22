@@ -71,6 +71,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Behaviours\AvalonEditRepeatBulletBehaviour.cs" />
+    <Compile Include="Behaviours\AvalonEditTextChangedUpdateModelBehaviour.cs" />
     <Compile Include="Behaviours\RenderedViewInterceptKeyDownBehaviour.cs" />
     <Compile Include="Infrastructure\Resolver.MarkupExtension.cs" />
     <Compile Include="Behaviours\AvalonEditInitialiser.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Queries\Scripts.cs" />
     <Compile Include="Queries\Styles.cs" />
     <Compile Include="ViewModel\Commands\PreviousView.cs" />
+    <Compile Include="ViewModel\IViewModelParameter.cs" />
     <Compile Include="ViewModel\Queries\CanSaveFile.cs" />
     <Compile Include="ViewModel\Queries\IViewModelQuery.cs" />
     <Compile Include="ViewModel\ViewModelParameter.cs" />

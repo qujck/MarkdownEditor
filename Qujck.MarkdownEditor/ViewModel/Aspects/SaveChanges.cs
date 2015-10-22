@@ -10,21 +10,15 @@ using Qujck.MarkdownEditor.ViewModel.Queries;
 
 namespace Qujck.MarkdownEditor.ViewModel.Aspects
 {
-    internal sealed class SaveChanges : ViewModelParameter
+    internal sealed class SaveChangesHandler<TViewModelParameter> : IViewModelCommand<TViewModelParameter>
+        where TViewModelParameter : ViewModelParameter
     {
-        public SaveChanges(DocumentViewModel viewModel) : base(viewModel)
-        {
-        }
-    }
-
-    internal sealed class SaveChangesHandler : IViewModelCommand<ViewModelParameter>
-    {
-        private readonly dynamic decorated;
+        private readonly IViewModelCommand<TViewModelParameter> decorated;
         private readonly IViewModelQuery<CanSaveFile> canSaveFile;
         private readonly IViewModelCommand<SaveFile> saveFile;
 
         public SaveChangesHandler(
-            dynamic decorated,
+            IViewModelCommand<TViewModelParameter> decorated,
             IViewModelQuery<CanSaveFile> canSaveFile,
             IViewModelCommand<SaveFile> saveFile)
         {
@@ -33,10 +27,10 @@ namespace Qujck.MarkdownEditor.ViewModel.Aspects
             this.saveFile = saveFile;
         }
 
-        public void Run(ViewModelParameter viewModelParameter)
+        public void Run(TViewModelParameter viewModelParameter)
         {
             bool @continue = true;
-            if (this.CanSave(viewModelParameter.ViewModel as DocumentViewModel))
+            if (this.CanSave(viewModelParameter.DynamicViewModel as DocumentViewModel))
             {
                 var result = MessageBox.Show(
                     "Do you want to save changes?", 
@@ -47,8 +41,8 @@ namespace Qujck.MarkdownEditor.ViewModel.Aspects
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        this.Save(viewModelParameter.ViewModel as DocumentViewModel);
-                        if (this.CanSave(viewModelParameter.ViewModel as DocumentViewModel))
+                        this.Save(viewModelParameter.DynamicViewModel as DocumentViewModel);
+                        if (this.CanSave(viewModelParameter.DynamicViewModel as DocumentViewModel))
                         {
                             @continue = false;
                         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.ViewModel.Commands
 {
@@ -18,9 +17,9 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
     {
         public void Run(NextView viewModelParameter)
         {
-            int next = WhatsNext(viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentView]);
-            viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentView] = next;
-            viewModelParameter.ViewModel.Update(Constants.DocumentViewModel.Views[next]);
+            int next = WhatsNext(viewModelParameter[Constants.DocumentViewModel.CurrentView]);
+            viewModelParameter[Constants.DocumentViewModel.CurrentView] = next;
+            viewModelParameter.DynamicViewModel.Update(Constants.DocumentViewModel.Views[next]);
         }
 
         private static int WhatsNext(object currentView)

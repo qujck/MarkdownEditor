@@ -26,6 +26,7 @@
     <i:Interaction.Behaviors>
         <behaviours:AvalonEditInitialiser StringResourceProvider="{inf:Resolver}"/>
         <behaviours:AvalonEditRepeatBulletBehaviour/>
+        <behaviours:AvalonEditTextChangedUpdateModelBehaviour/>
         <behaviours:DocumentViewRefreshBehaviour RenderMarkdownHandler="{inf:Resolver}"/>
         <behaviours:DocumentViewScrollBehaviour/>
         <behaviours:RenderedViewInitialiser HtmlQueryHandler="{inf:Resolver}"/>
@@ -37,9 +38,6 @@
         </i:EventTrigger>
         <i:EventTrigger EventName="Unloaded" SourceName="TextEditor">
             <i:InvokeCommandAction Command="{inf:ViewModelCommandAdapter Shutdown}"/>
-        </i:EventTrigger>
-        <i:EventTrigger EventName="TextChanged" SourceName="TextEditor">
-            <ei:ChangePropertyAction TargetObject="{Binding CurrentText}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

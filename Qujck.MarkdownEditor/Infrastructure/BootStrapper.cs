@@ -50,12 +50,12 @@ namespace Qujck.MarkdownEditor.Infrastructure
             private IQueryHandler<Query.Styles, string> stylesQueryHandler;
             private IStringResourceProvider stringResourceProvider;
             private IViewModelQuery<CanSaveFile> canSaveFileHandler;
-            private IViewModelCommand<ViewModelParameter> newFileHandler;
-            private NextViewHandler nextViewHandler;
-            private IViewModelCommand<ViewModelParameter> openFileHandler;
-            private PreviousViewHandler previousViewHandler;
-            private SaveFileHandler saveFileHandler;
-            private ShutdownHandler shutdownHandler;
+            private IViewModelCommand<NewFile> newFileHandler;
+            private IViewModelCommand<NextView> nextViewHandler;
+            private IViewModelCommand<OpenFile> openFileHandler;
+            private IViewModelCommand<PreviousView> previousViewHandler;
+            private IViewModelCommand<SaveFile> saveFileHandler;
+            private IViewModelCommand<Shutdown> shutdownHandler;
 
             private DependencyResolver()
             {
@@ -118,9 +118,9 @@ namespace Qujck.MarkdownEditor.Infrastructure
             private DependencyResolver RegisterViewModelCommands()
             {
                 this.saveFileHandler = new SaveFileHandler();
-                this.newFileHandler = new SaveChangesHandler(new NewFileHandler(), this.canSaveFileHandler, saveFileHandler);
+                this.newFileHandler = new SaveChangesHandler<NewFile>(new NewFileHandler(), this.canSaveFileHandler, saveFileHandler);
                 this.nextViewHandler = new NextViewHandler();
-                this.openFileHandler = new SaveChangesHandler(new OpenFileHandler(), this.canSaveFileHandler, saveFileHandler);
+                this.openFileHandler = new SaveChangesHandler<OpenFile>(new OpenFileHandler(), this.canSaveFileHandler, saveFileHandler);
                 this.previousViewHandler = new PreviousViewHandler();
                 this.shutdownHandler = new ShutdownHandler();
 

@@ -7,7 +7,7 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.ViewModel.Queries
 {
-    internal interface IViewModelQuery<TViewModelParameter> where TViewModelParameter : ViewModelParameter
+    internal interface IViewModelQuery<TViewModelParameter> where TViewModelParameter : IViewModelParameter
     {
         bool Execute(TViewModelParameter viewModelParameter);
     }

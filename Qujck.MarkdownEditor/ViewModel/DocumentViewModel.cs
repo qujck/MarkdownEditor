@@ -28,18 +28,6 @@ namespace Qujck.MarkdownEditor.ViewModel
                 { Constants.DocumentViewModel.HtmlIsLoaded, null }
             };
 
-        public string CurrentText
-        {
-            get
-            {
-                return (string)this[Constants.DocumentViewModel.CurrentText];
-            }
-            set
-            {
-                this[Constants.DocumentViewModel.CurrentText] = value;
-            }
-        }
-
         public bool HtmlIsLoaded
         {
             get

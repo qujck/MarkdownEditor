@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qujck.MarkdownEditor.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,8 @@ namespace Qujck.MarkdownEditor.ViewModel.Queries
     {
         public bool Execute(CanSaveFile viewModelParameter)
         {
-            string openingText = (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.OpeningText];
-            string currentText = (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText];
+            string openingText = (string)viewModelParameter[Constants.DocumentViewModel.OpeningText];
+            string currentText = (string)viewModelParameter[Constants.DocumentViewModel.CurrentText];
 
 
             return openingText != currentText;

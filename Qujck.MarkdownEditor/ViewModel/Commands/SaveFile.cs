@@ -20,7 +20,7 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
     {
         public void Run(SaveFile viewModelParameter)
         {
-            string filePath = (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.FilePath];
+            string filePath = (string)viewModelParameter[Constants.DocumentViewModel.FilePath];
             string fileName = Path.GetFileName(filePath);
 
             if (string.IsNullOrEmpty(fileName))
@@ -41,12 +41,12 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
             { 
                 File.WriteAllText(
                     filePath, 
-                    (string)viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText]);
+                    (string)viewModelParameter[Constants.DocumentViewModel.CurrentText]);
 
-                viewModelParameter.ViewModel[Constants.DocumentViewModel.OpeningText] = 
-                    viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText];
+                viewModelParameter[Constants.DocumentViewModel.OpeningText] = 
+                    viewModelParameter[Constants.DocumentViewModel.CurrentText];
 
-                viewModelParameter.ViewModel[Constants.DocumentViewModel.FilePath] = filePath;
+                viewModelParameter[Constants.DocumentViewModel.FilePath] = filePath;
             }
         }
     }

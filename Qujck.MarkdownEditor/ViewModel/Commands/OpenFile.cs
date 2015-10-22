@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.ViewModel.Commands
 {
@@ -24,9 +23,9 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
             string fileName = this.OpenFile(out text);
             if (fileName != null)
             {
-                viewModelParameter.ViewModel[Constants.DocumentViewModel.FilePath] = fileName;
-                viewModelParameter.ViewModel[Constants.DocumentViewModel.OpeningText] = text;
-                viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentText] = text;
+                viewModelParameter[Constants.DocumentViewModel.FilePath] = fileName;
+                viewModelParameter[Constants.DocumentViewModel.OpeningText] = text;
+                viewModelParameter[Constants.DocumentViewModel.CurrentText] = text;
             }
         }
 

@@ -18,9 +18,9 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
     {
         public void Run(PreviousView viewModelParameter)
         {
-            int prior = WhatsPrior(viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentView]);
-            viewModelParameter.ViewModel[Constants.DocumentViewModel.CurrentView] = prior;
-            viewModelParameter.ViewModel.Update(Constants.DocumentViewModel.Views[prior]);
+            int prior = WhatsPrior(viewModelParameter[Constants.DocumentViewModel.CurrentView]);
+            viewModelParameter[Constants.DocumentViewModel.CurrentView] = prior;
+            viewModelParameter.DynamicViewModel.Update(Constants.DocumentViewModel.Views[prior]);
         }
 
         private static int WhatsPrior(object currentView)
