@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Commands;
+using Qujck.MarkdownEditor.Actions;
 using Qujck.MarkdownEditor.Requests;
 using Qujck.MarkdownEditor.Aspects;
 using Qujck.MarkdownEditor.ViewModel;
@@ -44,7 +44,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
         internal sealed class DependencyResolver
         {
-            private ICommandRequestHandler<Command.RenderMarkdown> renderMarkdownHandler;
+            private IActionRequestHandler<Command.RenderMarkdown> renderMarkdownHandler;
             private IStringRequestHandler<Strings.NamedResources> namedResourcesHandler;
             private IStringRequestHandler<Strings.PrefixedResources> prefixedResourcesHandler;
             private IStringRequestHandler<Strings.Html> htmlHandler;
@@ -139,7 +139,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 {
                     return this.htmlHandler;
                 }
-                else if (serviceType == typeof(ICommandRequestHandler<Command.RenderMarkdown>))
+                else if (serviceType == typeof(IActionRequestHandler<Command.RenderMarkdown>))
                 {
                     return this.renderMarkdownHandler;
                 }

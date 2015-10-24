@@ -7,39 +7,39 @@ using System.Windows;
 using Qujck.MarkdownEditor.Infrastructure;
 using Qujck.MarkdownEditor.Requests;
 
-namespace Qujck.MarkdownEditor.Commands
+namespace Qujck.MarkdownEditor.Actions
 {
     internal static partial class Command
     {
         internal static void Run(
-            this ICommandRequestHandler<RenderMarkdown> handler,
-            Action<string, object[]> callback,
+            this IActionRequestHandler<RenderMarkdown> handler,
+            Action<string, object[]> action,
             string markdown)
         {
-            handler.Run(new RenderMarkdown(callback, markdown));
+            handler.Run(new RenderMarkdown(action, markdown));
         }
 
-        internal sealed class RenderMarkdown : ICommandRequest
+        internal sealed class RenderMarkdown : IActionRequest
         {
             internal RenderMarkdown(
-                Action<string, object[]> callback, 
+                Action<string, object[]> action, 
                 string markdown)
             {
-                this.Callback = callback;
+                this.Action = action;
                 this.Markdown = markdown;
             }
 
-            public Action<string, object[]> Callback { get; private set; }
+            public Action<string, object[]> Action { get; private set; }
             public string Markdown { get; private set; }
         }
 
         internal static partial class Handlers
         {
-            internal sealed class RenderMarkdownHandler : ICommandRequestHandler<RenderMarkdown>
+            internal sealed class RenderMarkdownHandler : IActionRequestHandler<RenderMarkdown>
             {
                 public void Run(RenderMarkdown command)
                 {
-                    command.Callback("renderMarkdown", new object[] { command.Markdown });
+                    command.Action("renderMarkdown", new object[] { command.Markdown });
                 }
             }
         }

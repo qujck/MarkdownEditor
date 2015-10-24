@@ -5,15 +5,15 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Commands;
+using Qujck.MarkdownEditor.Actions;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    internal sealed class ImagePathFixer : ICommandRequestHandler<Command.RenderMarkdown>
+    internal sealed class ImagePathFixer : IActionRequestHandler<Command.RenderMarkdown>
     {
-        private readonly ICommandRequestHandler<Command.RenderMarkdown> decorated;
+        private readonly IActionRequestHandler<Command.RenderMarkdown> decorated;
 
-        public ImagePathFixer(ICommandRequestHandler<Command.RenderMarkdown> decorated)
+        public ImagePathFixer(IActionRequestHandler<Command.RenderMarkdown> decorated)
         {
             this.decorated = decorated;
         }
@@ -24,7 +24,7 @@ namespace Qujck.MarkdownEditor.Aspects
                 "![image](~",
                 string.Format("![image]({0}", System.IO.Directory.GetCurrentDirectory() + "\\..\\..\\" ));
 
-            this.decorated.Run(command.Callback, text);
+            this.decorated.Run(command.Action, text);
         }
     }
 }

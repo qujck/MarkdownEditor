@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qujck.MarkdownEditor.Commands
+namespace Qujck.MarkdownEditor.Actions
 {
-    internal interface ICommandRequest
+    internal interface IActionRequest
     {
     }
 }

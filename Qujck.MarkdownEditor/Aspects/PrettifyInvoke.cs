@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Commands;
+using Qujck.MarkdownEditor.Actions;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    internal sealed class PrettifyInvoke : ICommandRequestHandler<Command.RenderMarkdown>
+    internal sealed class PrettifyInvoke : IActionRequestHandler<Command.RenderMarkdown>
     {
-        private readonly ICommandRequestHandler<Command.RenderMarkdown> decorated;
+        private readonly IActionRequestHandler<Command.RenderMarkdown> decorated;
 
-        public PrettifyInvoke(ICommandRequestHandler<Command.RenderMarkdown> decorated)
+        public PrettifyInvoke(IActionRequestHandler<Command.RenderMarkdown> decorated)
         {
             this.decorated = decorated;
         }
@@ -21,7 +21,7 @@ namespace Qujck.MarkdownEditor.Aspects
         {
             this.decorated.Run(command);
 
-            command.Callback("prettifyCodeSamples", null);
+            command.Action("prettifyCodeSamples", null);
         }
     }
 }

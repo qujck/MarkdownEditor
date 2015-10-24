@@ -13,7 +13,7 @@ using System.Windows.Threading;
 using ICSharpCode.AvalonEdit;
 using Qujck.MarkdownEditor.Requests;
 using Qujck.MarkdownEditor.ViewModel;
-using Qujck.MarkdownEditor.Commands;
+using Qujck.MarkdownEditor.Actions;
 using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Behaviours
@@ -22,7 +22,7 @@ namespace Qujck.MarkdownEditor.Behaviours
     {
         private readonly DispatcherTimer textChangedRefreshRenderedViewTimer;
 
-        public ICommandRequestHandler<Command.RenderMarkdown> RenderMarkdownHandler { private get; set; }
+        public IActionRequestHandler<Command.RenderMarkdown> RenderMarkdownHandler { private get; set; }
 
         public DocumentViewRefreshBehaviour()
         {
