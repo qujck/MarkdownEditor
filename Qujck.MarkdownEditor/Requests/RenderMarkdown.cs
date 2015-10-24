@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Requests;
 
-namespace Qujck.MarkdownEditor.Actions
+namespace Qujck.MarkdownEditor.Requests
 {
-    internal static partial class Command
+    internal static partial class Actions
     {
         internal static void Run(
             this IActionRequestHandler<RenderMarkdown> handler,

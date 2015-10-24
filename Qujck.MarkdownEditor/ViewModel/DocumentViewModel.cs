@@ -6,9 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Qujck.MarkdownEditor.Actions;
-using Qujck.MarkdownEditor.Infrastructure;
 using Qujck.MarkdownEditor.Requests;
+using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.ViewModel
 {

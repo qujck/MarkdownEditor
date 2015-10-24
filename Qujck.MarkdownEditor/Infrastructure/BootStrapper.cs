@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Actions;
 using Qujck.MarkdownEditor.Requests;
 using Qujck.MarkdownEditor.Aspects;
 using Qujck.MarkdownEditor.ViewModel;
@@ -44,7 +43,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
         internal sealed class DependencyResolver
         {
-            private IActionRequestHandler<Command.RenderMarkdown> renderMarkdownHandler;
+            private IActionRequestHandler<Actions.RenderMarkdown> renderMarkdownHandler;
             private IStringRequestHandler<Strings.NamedResources> namedResourcesHandler;
             private IStringRequestHandler<Strings.PrefixedResources> prefixedResourcesHandler;
             private IStringRequestHandler<Strings.Html> htmlHandler;
@@ -65,22 +64,22 @@ namespace Qujck.MarkdownEditor.Infrastructure
             internal static DependencyResolver Build()
             {
                 return new DependencyResolver()
-                    .RegisterCommandHandlers()
-                    .RegisterQueryHandlers()
+                    .RegisterActionRequestHandlers()
+                    .RegisterStringRequestHandlers()
                     .RegisterViewModelQueries()
                     .RegisterViewModelCommands();
             }
 
-            private DependencyResolver RegisterCommandHandlers()
+            private DependencyResolver RegisterActionRequestHandlers()
             {
                 this.renderMarkdownHandler = new ImagePathFixer(
                     new PrettifyInvoke(
-                        new Command.Handlers.RenderMarkdownHandler()));
+                        new Actions.Handlers.RenderMarkdownHandler()));
 
                 return this;
             }
 
-            private DependencyResolver RegisterQueryHandlers()
+            private DependencyResolver RegisterStringRequestHandlers()
             {
                 this.namedResourcesHandler = new Strings.Handlers.NamedResourcesHandler();
                 this.prefixedResourcesHandler = new Strings.Handlers.PrefixedResourcesHandler();
@@ -115,9 +114,11 @@ namespace Qujck.MarkdownEditor.Infrastructure
             private DependencyResolver RegisterViewModelCommands()
             {
                 this.saveFileHandler = new SaveFileHandler();
-                this.newFileHandler = new SaveChangesHandler<NewFile>(new NewFileHandler(), this.canSaveFileHandler, saveFileHandler);
+                this.newFileHandler = new SaveChangesHandler<NewFile>(
+                    new NewFileHandler(), this.canSaveFileHandler, saveFileHandler);
                 this.nextViewHandler = new NextViewHandler();
-                this.openFileHandler = new SaveChangesHandler<OpenFile>(new OpenFileHandler(), this.canSaveFileHandler, saveFileHandler);
+                this.openFileHandler = new SaveChangesHandler<OpenFile>(
+                    new OpenFileHandler(), this.canSaveFileHandler, saveFileHandler);
                 this.previousViewHandler = new PreviousViewHandler();
                 this.shutdownHandler = new ShutdownHandler();
 
@@ -139,7 +140,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 {
                     return this.htmlHandler;
                 }
-                else if (serviceType == typeof(IActionRequestHandler<Command.RenderMarkdown>))
+                else if (serviceType == typeof(IActionRequestHandler<Actions.RenderMarkdown>))
                 {
                     return this.renderMarkdownHandler;
                 }

@@ -124,9 +124,9 @@
     <Compile Include="Aspects\PrettifyInvoke.cs" />
     <Compile Include="Aspects\PrettifyScripts.cs" />
     <Compile Include="Aspects\PrettifyStyles.cs" />
-    <Compile Include="Actions\IActionRequest.cs" />
-    <Compile Include="Actions\IActionRequestHandler.cs" />
-    <Compile Include="Actions\RenderMarkdown.cs" />
+    <Compile Include="Requests\IActionRequest.cs" />
+    <Compile Include="Requests\IActionRequestHandler.cs" />
+    <Compile Include="Requests\RenderMarkdown.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

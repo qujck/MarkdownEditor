@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using ICSharpCode.AvalonEdit;
 using Qujck.MarkdownEditor.Requests;
-using Qujck.MarkdownEditor.Actions;
 using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Behaviours
