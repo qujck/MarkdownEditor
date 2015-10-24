@@ -14,7 +14,7 @@ namespace Qujck.MarkdownEditor.Tests.Unit.Requests
     {
         string[] resources = new string[] 
         {
-            Constants.Scripts.Marked
+            Constants.Content.Scripts.Marked
         };
 
         [Fact]

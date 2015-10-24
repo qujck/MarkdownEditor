@@ -10,14 +10,6 @@ namespace Qujck.MarkdownEditor.Aspects
 {
     internal sealed class PrettifyScripts : IStringRequestHandler<Strings.Scripts>
     {
-        const string prettifyCodeSamples = 
-@"function prettifyCodeSamples() {
-    var text = document.getElementById('content').innerHTML;
-    var result = text.replace(/<pre>/gi, '<pre class=""prettyprint"">');
-    document.getElementById('content').innerHTML = result;
-    prettyPrint();
-}";
-
         private readonly IStringRequestHandler<Strings.Scripts> decorated;
         private readonly IStringRequestHandler<Strings.NamedResources> namedResources;
         private readonly IStringRequestHandler<Strings.PrefixedResources> prefixedResources;
@@ -36,13 +28,13 @@ namespace Qujck.MarkdownEditor.Aspects
         {
             string result = this.decorated.Execute(query);
 
-            string prettify = this.namedResources.Execute("Scripts.Prettify.prettify.js");
-            string prettifyLang = this.prefixedResources.Execute("Scripts.Prettify.lang-");
+            string prettify = this.namedResources.Execute(Constants.Content.Scripts.Prettify);
+            string prettifyLang = this.prefixedResources.Execute(Constants.Content.Scripts.PrettifyLang);
 
             return result + Environment.NewLine +
                 prettify + Environment.NewLine +
                 prettifyLang + Environment.NewLine +
-                prettifyCodeSamples;
+                Constants.Content.Scripts.EmbeddedPrettifyAction;
         }
     }
 }

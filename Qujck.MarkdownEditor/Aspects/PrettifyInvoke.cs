@@ -21,7 +21,7 @@ namespace Qujck.MarkdownEditor.Aspects
         {
             this.decorated.Run(command);
 
-            command.Action("prettifyCodeSamples", null);
+            command.Action(Constants.Content.Scripts.EmbeddedPrettifyActionName, null);
         }
     }
 }
