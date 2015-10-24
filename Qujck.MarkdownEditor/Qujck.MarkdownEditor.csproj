@@ -82,8 +82,10 @@
     <Compile Include="DocumentView.xaml.cs">
       <DependentUpon>DocumentView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Queries\IStringRequest.cs" />
-    <Compile Include="Queries\IStringRequestHandler.cs" />
+    <Compile Include="Requests\IStringRequest.cs" />
+    <Compile Include="Requests\IStringRequestHandler.cs" />
+    <Compile Include="Requests\NamedResources.cs" />
+    <Compile Include="Requests\PrefixedResources.cs" />
     <Compile Include="ViewModel\Aspects\SaveChanges.cs" />
     <Compile Include="ViewModel\Commands\IViewModelCommand.cs" />
     <Compile Include="ViewModel\Commands\NewFile.cs" />
@@ -97,9 +99,9 @@
     <Compile Include="Infrastructure\ComEventListener.cs" />
     <Compile Include="Infrastructure\ForwardingMetaObject.cs" />
     <Compile Include="Infrastructure\ViewModelCommandAdapter.cs" />
-    <Compile Include="Queries\Html.cs" />
-    <Compile Include="Queries\Scripts.cs" />
-    <Compile Include="Queries\Styles.cs" />
+    <Compile Include="Requests\Html.cs" />
+    <Compile Include="Requests\Scripts.cs" />
+    <Compile Include="Requests\Styles.cs" />
     <Compile Include="ViewModel\Commands\PreviousView.cs" />
     <Compile Include="ViewModel\IViewModelParameter.cs" />
     <Compile Include="ViewModel\Queries\CanSaveFile.cs" />
@@ -126,8 +128,6 @@
     <Compile Include="Commands\ICommandRequestHandler.cs" />
     <Compile Include="Commands\RenderMarkdown.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
-    <Compile Include="Infrastructure\IStringResourceProvider.cs" />
-    <Compile Include="Infrastructure\StringResourceProvider.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

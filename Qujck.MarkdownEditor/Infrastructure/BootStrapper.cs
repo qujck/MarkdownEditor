@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Markup;
 using Qujck.MarkdownEditor.Infrastructure;
 using Qujck.MarkdownEditor.Commands;
-using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.Requests;
 using Qujck.MarkdownEditor.Aspects;
 using Qujck.MarkdownEditor.ViewModel;
 using Qujck.MarkdownEditor.ViewModel.Aspects;
@@ -45,10 +45,11 @@ namespace Qujck.MarkdownEditor.Infrastructure
         internal sealed class DependencyResolver
         {
             private ICommandRequestHandler<Command.RenderMarkdown> renderMarkdownHandler;
-            private IStringRequestHandler<Query.Html> htmlHandler;
-            private IStringRequestHandler<Query.Scripts> scriptsHandler;
-            private IStringRequestHandler<Query.Styles> stylesHandler;
-            private IStringResourceProvider stringResourceProvider;
+            private IStringRequestHandler<Strings.NamedResources> namedResourcesHandler;
+            private IStringRequestHandler<Strings.PrefixedResources> prefixedResourcesHandler;
+            private IStringRequestHandler<Strings.Html> htmlHandler;
+            private IStringRequestHandler<Strings.Scripts> scriptsHandler;
+            private IStringRequestHandler<Strings.Styles> stylesHandler;
             private IViewModelQuery<CanSaveFile> canSaveFileHandler;
             private IViewModelCommand<NewFile> newFileHandler;
             private IViewModelCommand<NextView> nextViewHandler;
@@ -64,18 +65,10 @@ namespace Qujck.MarkdownEditor.Infrastructure
             internal static DependencyResolver Build()
             {
                 return new DependencyResolver()
-                    .RegisterProviders()
                     .RegisterCommandHandlers()
                     .RegisterQueryHandlers()
                     .RegisterViewModelQueries()
                     .RegisterViewModelCommands();
-            }
-
-            private DependencyResolver RegisterProviders()
-            {
-                this.stringResourceProvider = new StringResourceProvider();
-
-                return this;
             }
 
             private DependencyResolver RegisterCommandHandlers()
@@ -89,19 +82,23 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
             private DependencyResolver RegisterQueryHandlers()
             {
+                this.namedResourcesHandler = new Strings.Handlers.NamedResourcesHandler();
+                this.prefixedResourcesHandler = new Strings.Handlers.PrefixedResourcesHandler();
+
                 this.scriptsHandler = new PrettifyScripts(
-                    new Query.Handlers.ScriptsHandler(
-                        this.stringResourceProvider),
-                    this.stringResourceProvider);
+                    new Strings.Handlers.ScriptsHandler(
+                        this.namedResourcesHandler),
+                    this.namedResourcesHandler,
+                    this.prefixedResourcesHandler);
 
                 this.stylesHandler = new PrettifyStyles(
-                    new Query.Handlers.StylesHandler(
-                        this.stringResourceProvider),
-                    this.stringResourceProvider);
+                    new Strings.Handlers.StylesHandler(
+                        this.namedResourcesHandler),
+                    this.namedResourcesHandler);
 
                 this.htmlHandler = new PrepareHtml(
-                    new Query.Handlers.HtmlHandler(
-                        this.stringResourceProvider),
+                    new Strings.Handlers.HtmlHandler(
+                        this.namedResourcesHandler),
                     this.stylesHandler,
                     this.scriptsHandler);
 
@@ -134,11 +131,11 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
             internal object Resolve(Type serviceType)
             {
-                if (serviceType == typeof(IStringResourceProvider))
+                if (serviceType == typeof(IStringRequestHandler<Strings.NamedResources>))
                 {
-                    return this.stringResourceProvider;
+                    return this.namedResourcesHandler;
                 }
-                else if (serviceType == typeof(IStringRequestHandler<Query.Html>))
+                else if (serviceType == typeof(IStringRequestHandler<Strings.Html>))
                 {
                     return this.htmlHandler;
                 }

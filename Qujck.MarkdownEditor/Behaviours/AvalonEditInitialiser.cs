@@ -14,7 +14,7 @@ using System.Windows.Threading;
 using System.Xml;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Highlighting;
-using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.Requests;
 using Qujck.MarkdownEditor.Commands;
 using Qujck.MarkdownEditor.Infrastructure;
 
@@ -22,7 +22,7 @@ namespace Qujck.MarkdownEditor.Behaviours
 {
     internal sealed class AvalonEditInitialiser : Behavior<DocumentView>
     {
-        public IStringResourceProvider StringResourceProvider { private get; set; }
+        public IStringRequestHandler<Strings.NamedResources> NamedResources { private get; set; }
 
         protected override void OnAttached()
         {
@@ -43,7 +43,7 @@ namespace Qujck.MarkdownEditor.Behaviours
         {
             // Load our custom highlighting definition
             IHighlightingDefinition customHighlighting;
-            string resource = this.StringResourceProvider.One("Content.Markdown2.xshd");
+            string resource = this.NamedResources.Execute("Content.Markdown2.xshd");
             using (XmlReader reader = XmlReader.Create(new StringReader(resource)))
             {
                 customHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.

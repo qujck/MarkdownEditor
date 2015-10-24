@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.Requests;
 
 namespace Qujck.MarkdownEditor.Tests.Integration
 {

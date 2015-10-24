@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.Requests;
 
 namespace Qujck.MarkdownEditor.Commands
 {

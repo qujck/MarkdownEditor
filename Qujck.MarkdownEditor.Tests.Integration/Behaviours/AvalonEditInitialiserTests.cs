@@ -39,7 +39,7 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
         {
             var documentView = new DocumentView();
             var behaviour = this.FindBehaviour(documentView);
-            behaviour.StringResourceProvider = new StubStringResourceProvider(xshd);
+            behaviour.NamedResources = new StubNamedResourcesProvider(xshd);
 
             return documentView;
         }

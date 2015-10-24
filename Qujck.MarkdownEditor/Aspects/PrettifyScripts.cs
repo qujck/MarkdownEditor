@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.Requests;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    internal sealed class PrettifyScripts : IStringRequestHandler<Query.Scripts>
+    internal sealed class PrettifyScripts : IStringRequestHandler<Strings.Scripts>
     {
         const string prettifyCodeSamples = 
 @"function prettifyCodeSamples() {
@@ -18,23 +18,26 @@ namespace Qujck.MarkdownEditor.Aspects
     prettyPrint();
 }";
 
-        private readonly IStringRequestHandler<Query.Scripts> decorated;
-        private readonly IStringResourceProvider stringResourceProvider;
+        private readonly IStringRequestHandler<Strings.Scripts> decorated;
+        private readonly IStringRequestHandler<Strings.NamedResources> namedResources;
+        private readonly IStringRequestHandler<Strings.PrefixedResources> prefixedResources;
 
         public PrettifyScripts(
-            IStringRequestHandler<Query.Scripts> decorated,
-            IStringResourceProvider stringResourceProvider)
+            IStringRequestHandler<Strings.Scripts> decorated,
+            IStringRequestHandler<Strings.NamedResources> namedResources,
+            IStringRequestHandler<Strings.PrefixedResources> prefixedResources)
         {
             this.decorated = decorated;
-            this.stringResourceProvider = stringResourceProvider;
+            this.namedResources = namedResources;
+            this.prefixedResources = prefixedResources;
         }
 
-        public string Execute(Query.Scripts query)
+        public string Execute(Strings.Scripts query)
         {
             string result = this.decorated.Execute(query);
 
-            string prettify = this.stringResourceProvider.One("Scripts.Prettify.prettify.js");
-            string prettifyLang = this.stringResourceProvider.Many("Scripts.Prettify.lang-");
+            string prettify = this.namedResources.Execute("Scripts.Prettify.prettify.js");
+            string prettifyLang = this.prefixedResources.Execute("Scripts.Prettify.lang-");
 
             return result + Environment.NewLine +
                 prettify + Environment.NewLine +

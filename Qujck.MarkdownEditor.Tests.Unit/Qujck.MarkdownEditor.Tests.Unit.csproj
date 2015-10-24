@@ -65,10 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queries\HtmlTests.cs" />
-    <Compile Include="StubStringResourceProvider.cs" />
-    <Compile Include="Queries\ScriptsTests.cs" />
-    <Compile Include="Queries\StylesTests.cs" />
+    <Compile Include="Requests\HtmlTests.cs" />
+    <Compile Include="StubNamedResourcesProvider.cs" />
+    <Compile Include="Requests\ScriptsTests.cs" />
+    <Compile Include="Requests\StylesTests.cs" />
+    <Compile Include="StubPrefixedResourcesProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

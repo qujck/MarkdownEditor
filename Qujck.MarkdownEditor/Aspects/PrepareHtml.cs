@@ -4,27 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.Requests;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    internal sealed class PrepareHtml : IStringRequestHandler<Query.Html>
+    internal sealed class PrepareHtml : IStringRequestHandler<Strings.Html>
     {
-        private readonly IStringRequestHandler<Query.Html> decorated;
-        private readonly IStringRequestHandler<Query.Styles> stylesQuery;
-        private readonly IStringRequestHandler<Query.Scripts> scriptsQuery;
+        private readonly IStringRequestHandler<Strings.Html> decorated;
+        private readonly IStringRequestHandler<Strings.Styles> stylesQuery;
+        private readonly IStringRequestHandler<Strings.Scripts> scriptsQuery;
 
         public PrepareHtml(
-            IStringRequestHandler<Query.Html> decorated,
-            IStringRequestHandler<Query.Styles> styles,
-            IStringRequestHandler<Query.Scripts> scripts)
+            IStringRequestHandler<Strings.Html> decorated,
+            IStringRequestHandler<Strings.Styles> styles,
+            IStringRequestHandler<Strings.Scripts> scripts)
         {
             this.decorated = decorated;
             this.stylesQuery = styles;
             this.scriptsQuery = scripts;
         }
 
-        public string Execute(Query.Html query)
+        public string Execute(Strings.Html query)
         {
             string result = this.decorated.Execute(query);
 

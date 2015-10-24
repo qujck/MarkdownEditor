@@ -11,14 +11,14 @@ using System.Windows.Interactivity;
 using System.Windows.Media;
 using System.Windows.Threading;
 using ICSharpCode.AvalonEdit;
-using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.Requests;
 using Qujck.MarkdownEditor.ViewModel;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
     internal sealed class RenderedViewInitialiser : Behavior<DocumentView>
     {
-        public IStringRequestHandler<Query.Html> HtmlQueryHandler { private get; set; }
+        public IStringRequestHandler<Strings.Html> HtmlQueryHandler { private get; set; }
 
         protected override void OnAttached()
         {

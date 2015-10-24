@@ -24,7 +24,7 @@
         <vm:DocumentViewModel PropertyChanged="DataModel_PropertyChanged"/>
     </UserControl.DataContext>
     <i:Interaction.Behaviors>
-        <behaviours:AvalonEditInitialiser StringResourceProvider="{inf:Resolver}"/>
+        <behaviours:AvalonEditInitialiser NamedResources="{inf:Resolver}"/>
         <behaviours:AvalonEditRepeatBulletBehaviour/>
         <behaviours:AvalonEditTextChangedUpdateModelBehaviour/>
         <behaviours:DocumentViewRefreshBehaviour RenderMarkdownHandler="{inf:Resolver}"/>

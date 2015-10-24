@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using Qujck.MarkdownEditor.Commands;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.Requests;
 
 namespace Qujck.MarkdownEditor.ViewModel
 {

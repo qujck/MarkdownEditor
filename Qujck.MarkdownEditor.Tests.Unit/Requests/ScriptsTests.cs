@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Xunit;
 using FluentAssertions;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.Requests;
 
-namespace Qujck.MarkdownEditor.Tests.Unit.Queries
+namespace Qujck.MarkdownEditor.Tests.Unit.Requests
 {
     public class ScriptsTests
     {
@@ -27,10 +27,10 @@ namespace Qujck.MarkdownEditor.Tests.Unit.Queries
             result.Should().Be(string.Join(Environment.NewLine, resources));
         }
 
-        private Query.Handlers.ScriptsHandler HandlerFactory()
+        private Strings.Handlers.ScriptsHandler HandlerFactory()
         {
-            return new Query.Handlers.ScriptsHandler(
-                new StubStringResourceProvider());
+            return new Strings.Handlers.ScriptsHandler(
+                new StubNamedResourcesProvider());
         }
     }
 }

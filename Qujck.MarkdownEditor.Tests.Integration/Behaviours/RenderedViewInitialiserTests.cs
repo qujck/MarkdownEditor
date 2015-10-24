@@ -13,7 +13,7 @@ using NUnit.Framework;
 using FluentAssertions;
 using ICSharpCode.AvalonEdit;
 using Qujck.MarkdownEditor.ViewModel;
-using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.Requests;
 using Qujck.MarkdownEditor.Behaviours;
 using System.Windows.Threading;
 
@@ -67,7 +67,7 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
         {
             var documentView = new DocumentView();
             var behaviour = this.FindBehaviour(documentView);
-            behaviour.HtmlQueryHandler = new StubQueryHandler<Query.Html>(() => "<!DOCTYPE html><html><body>RenderedViewInitialiserTests</body></html>");
+            behaviour.HtmlQueryHandler = new StubQueryHandler<Strings.Html>(() => "<!DOCTYPE html><html><body>RenderedViewInitialiserTests</body></html>");
 
             return documentView;
         }

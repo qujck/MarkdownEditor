@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Xunit;
 using FluentAssertions;
 using Qujck.MarkdownEditor.Infrastructure;
-using Qujck.MarkdownEditor.Queries;
+using Qujck.MarkdownEditor.Requests;
 
-namespace Qujck.MarkdownEditor.Tests.Unit.Queries
+namespace Qujck.MarkdownEditor.Tests.Unit.Requests
 {
     public class HtmlTests
     {
@@ -22,10 +22,10 @@ namespace Qujck.MarkdownEditor.Tests.Unit.Queries
             result.Should().Be(Constants.Content.Layout);
         }
 
-        private Query.Handlers.HtmlHandler HandlerFactory()
+        private Strings.Handlers.HtmlHandler HandlerFactory()
         {
-            return new Query.Handlers.HtmlHandler(
-                new StubStringResourceProvider());
+            return new Strings.Handlers.HtmlHandler(
+                new StubNamedResourcesProvider());
         }
     }
 }

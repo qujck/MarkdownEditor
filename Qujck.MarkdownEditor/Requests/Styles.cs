@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Qujck.MarkdownEditor.Infrastructure;
 
-namespace Qujck.MarkdownEditor.Queries
+namespace Qujck.MarkdownEditor.Requests
 {
-    internal static partial class Query
+    internal static partial class Strings
     {
         internal static string Execute(this IStringRequestHandler<Styles> handler)
         {
@@ -23,17 +23,17 @@ namespace Qujck.MarkdownEditor.Queries
         {
             internal sealed class StylesHandler : IStringRequestHandler<Styles>
             {
-                private readonly IStringResourceProvider stringResourceProvider;
+                private readonly IStringRequestHandler<NamedResources> namedResources;
 
-                public StylesHandler(IStringResourceProvider stringResourceProvider)
+                public StylesHandler(IStringRequestHandler<NamedResources> namedResources)
                 {
-                    this.stringResourceProvider = stringResourceProvider;
+                    this.namedResources = namedResources;
                 }
 
                 public string Execute(Styles query)
                 {
-                    string bootstrap = this.stringResourceProvider.One(Constants.Content.Bootstrap);
-                    string site = this.stringResourceProvider.One(Constants.Content.SiteCss);
+                    string bootstrap = this.namedResources.Execute(Constants.Content.Bootstrap);
+                    string site = this.namedResources.Execute(Constants.Content.SiteCss);
 
                     return bootstrap + Environment.NewLine + 
                         site;
