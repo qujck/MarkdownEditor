@@ -16,6 +16,9 @@ using System.Windows;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
+[assembly: InternalsVisibleTo("Qujck.MarkdownEditor.Tests.Unit")]
+[assembly: InternalsVisibleTo("Qujck.MarkdownEditor.Tests.Integration")]
+
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.

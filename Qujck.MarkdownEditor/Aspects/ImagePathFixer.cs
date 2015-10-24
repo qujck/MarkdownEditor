@@ -9,11 +9,11 @@ using Qujck.MarkdownEditor.Commands;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    public sealed class ImagePathFixer : ICommandHandler<Command.RenderMarkdown>
+    internal sealed class ImagePathFixer : ICommandRequestHandler<Command.RenderMarkdown>
     {
-        private readonly ICommandHandler<Command.RenderMarkdown> decorated;
+        private readonly ICommandRequestHandler<Command.RenderMarkdown> decorated;
 
-        public ImagePathFixer(ICommandHandler<Command.RenderMarkdown> decorated)
+        public ImagePathFixer(ICommandRequestHandler<Command.RenderMarkdown> decorated)
         {
             this.decorated = decorated;
         }

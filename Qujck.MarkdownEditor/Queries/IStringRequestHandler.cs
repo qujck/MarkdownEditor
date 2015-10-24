@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Qujck.MarkdownEditor.Queries
 {
-    public interface IQueryHandler<TQuery, TResult> where TQuery : IQueryParameter<TResult>
+    internal interface IStringRequestHandler<TQuery> where TQuery : IStringRequest
     {
-        TResult Execute(TQuery query);
+        string Execute(TQuery query);
     }
 }

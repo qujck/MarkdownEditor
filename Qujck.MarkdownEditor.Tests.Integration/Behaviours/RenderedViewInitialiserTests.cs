@@ -67,7 +67,7 @@ namespace Qujck.MarkdownEditor.Tests.Integration.Behaviours
         {
             var documentView = new DocumentView();
             var behaviour = this.FindBehaviour(documentView);
-            behaviour.HtmlQueryHandler = new StubQueryHandler<Query.Html, string>(() => "<!DOCTYPE html><html><body>RenderedViewInitialiserTests</body></html>");
+            behaviour.HtmlQueryHandler = new StubQueryHandler<Query.Html>(() => "<!DOCTYPE html><html><body>RenderedViewInitialiserTests</body></html>");
 
             return documentView;
         }

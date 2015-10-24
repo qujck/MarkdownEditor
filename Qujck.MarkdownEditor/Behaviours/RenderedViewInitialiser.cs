@@ -16,9 +16,9 @@ using Qujck.MarkdownEditor.ViewModel;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
-    public sealed class RenderedViewInitialiser : Behavior<DocumentView>
+    internal sealed class RenderedViewInitialiser : Behavior<DocumentView>
     {
-        public IQueryHandler<Query.Html, string> HtmlQueryHandler { private get; set; }
+        public IStringRequestHandler<Query.Html> HtmlQueryHandler { private get; set; }
 
         protected override void OnAttached()
         {

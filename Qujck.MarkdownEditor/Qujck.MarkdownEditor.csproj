@@ -82,6 +82,8 @@
     <Compile Include="DocumentView.xaml.cs">
       <DependentUpon>DocumentView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Queries\IStringRequest.cs" />
+    <Compile Include="Queries\IStringRequestHandler.cs" />
     <Compile Include="ViewModel\Aspects\SaveChanges.cs" />
     <Compile Include="ViewModel\Commands\IViewModelCommand.cs" />
     <Compile Include="ViewModel\Commands\NewFile.cs" />
@@ -96,8 +98,6 @@
     <Compile Include="Infrastructure\ForwardingMetaObject.cs" />
     <Compile Include="Infrastructure\ViewModelCommandAdapter.cs" />
     <Compile Include="Queries\Html.cs" />
-    <Compile Include="Queries\IQueryParameter.cs" />
-    <Compile Include="Queries\IQueryHandler.cs" />
     <Compile Include="Queries\Scripts.cs" />
     <Compile Include="Queries\Styles.cs" />
     <Compile Include="ViewModel\Commands\PreviousView.cs" />
@@ -122,8 +122,8 @@
     <Compile Include="Aspects\PrettifyInvoke.cs" />
     <Compile Include="Aspects\PrettifyScripts.cs" />
     <Compile Include="Aspects\PrettifyStyles.cs" />
-    <Compile Include="Commands\ICommandParameter.cs" />
-    <Compile Include="Commands\ICommandHandler.cs" />
+    <Compile Include="Commands\ICommandRequest.cs" />
+    <Compile Include="Commands\ICommandRequestHandler.cs" />
     <Compile Include="Commands\RenderMarkdown.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="Infrastructure\IStringResourceProvider.cs" />

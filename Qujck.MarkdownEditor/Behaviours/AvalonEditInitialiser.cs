@@ -20,7 +20,7 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
-    public sealed class AvalonEditInitialiser : Behavior<DocumentView>
+    internal sealed class AvalonEditInitialiser : Behavior<DocumentView>
     {
         public IStringResourceProvider StringResourceProvider { private get; set; }
 

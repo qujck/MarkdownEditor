@@ -7,21 +7,21 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Queries
 {
-    public static partial class Query
+    internal static partial class Query
     {
-        public static string Execute(this IQueryHandler<Styles, string> handler)
+        internal static string Execute(this IStringRequestHandler<Styles> handler)
         {
             return handler.Execute(new Styles());
         }
 
-        public sealed class Styles : IQueryParameter<string>
+        internal sealed class Styles : IStringRequest
         {
             internal Styles() { }
         }
 
-        public static partial class Handlers
+        internal static partial class Handlers
         {
-            public sealed class StylesHandler : IQueryHandler<Styles, string>
+            internal sealed class StylesHandler : IStringRequestHandler<Styles>
             {
                 private readonly IStringResourceProvider stringResourceProvider;
 

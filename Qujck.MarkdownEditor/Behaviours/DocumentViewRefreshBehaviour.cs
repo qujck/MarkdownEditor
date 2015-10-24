@@ -18,11 +18,11 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
-    public sealed class DocumentViewRefreshBehaviour : Behavior<DocumentView>
+    internal sealed class DocumentViewRefreshBehaviour : Behavior<DocumentView>
     {
         private readonly DispatcherTimer textChangedRefreshRenderedViewTimer;
 
-        public ICommandHandler<Command.RenderMarkdown> RenderMarkdownHandler { private get; set; }
+        public ICommandRequestHandler<Command.RenderMarkdown> RenderMarkdownHandler { private get; set; }
 
         public DocumentViewRefreshBehaviour()
         {

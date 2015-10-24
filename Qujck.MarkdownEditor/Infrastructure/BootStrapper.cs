@@ -44,10 +44,10 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
         internal sealed class DependencyResolver
         {
-            private ICommandHandler<Command.RenderMarkdown> renderMarkdownHandler;
-            private IQueryHandler<Query.Html, string> htmlQueryHandler;
-            private IQueryHandler<Query.Scripts, string> scriptsQueryHandler;
-            private IQueryHandler<Query.Styles, string> stylesQueryHandler;
+            private ICommandRequestHandler<Command.RenderMarkdown> renderMarkdownHandler;
+            private IStringRequestHandler<Query.Html> htmlHandler;
+            private IStringRequestHandler<Query.Scripts> scriptsHandler;
+            private IStringRequestHandler<Query.Styles> stylesHandler;
             private IStringResourceProvider stringResourceProvider;
             private IViewModelQuery<CanSaveFile> canSaveFileHandler;
             private IViewModelCommand<NewFile> newFileHandler;
@@ -89,21 +89,21 @@ namespace Qujck.MarkdownEditor.Infrastructure
 
             private DependencyResolver RegisterQueryHandlers()
             {
-                this.scriptsQueryHandler = new PrettifyScripts(
+                this.scriptsHandler = new PrettifyScripts(
                     new Query.Handlers.ScriptsHandler(
                         this.stringResourceProvider),
                     this.stringResourceProvider);
 
-                this.stylesQueryHandler = new PrettifyStyles(
+                this.stylesHandler = new PrettifyStyles(
                     new Query.Handlers.StylesHandler(
                         this.stringResourceProvider),
                     this.stringResourceProvider);
 
-                this.htmlQueryHandler = new PrepareHtml(
+                this.htmlHandler = new PrepareHtml(
                     new Query.Handlers.HtmlHandler(
                         this.stringResourceProvider),
-                    this.stylesQueryHandler,
-                    this.scriptsQueryHandler);
+                    this.stylesHandler,
+                    this.scriptsHandler);
 
                 return this;
             }
@@ -138,11 +138,11 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 {
                     return this.stringResourceProvider;
                 }
-                else if (serviceType == typeof(IQueryHandler<Query.Html, string>))
+                else if (serviceType == typeof(IStringRequestHandler<Query.Html>))
                 {
-                    return this.htmlQueryHandler;
+                    return this.htmlHandler;
                 }
-                else if (serviceType == typeof(ICommandHandler<Command.RenderMarkdown>))
+                else if (serviceType == typeof(ICommandRequestHandler<Command.RenderMarkdown>))
                 {
                     return this.renderMarkdownHandler;
                 }

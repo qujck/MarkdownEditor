@@ -8,7 +8,7 @@ using Qujck.MarkdownEditor.Queries;
 
 namespace Qujck.MarkdownEditor.Aspects
 {
-    public sealed class PrettifyScripts : IQueryHandler<Query.Scripts, string>
+    internal sealed class PrettifyScripts : IStringRequestHandler<Query.Scripts>
     {
         const string prettifyCodeSamples = 
 @"function prettifyCodeSamples() {
@@ -18,11 +18,11 @@ namespace Qujck.MarkdownEditor.Aspects
     prettyPrint();
 }";
 
-        private readonly IQueryHandler<Query.Scripts, string> decorated;
+        private readonly IStringRequestHandler<Query.Scripts> decorated;
         private readonly IStringResourceProvider stringResourceProvider;
 
         public PrettifyScripts(
-            IQueryHandler<Query.Scripts, string> decorated,
+            IStringRequestHandler<Query.Scripts> decorated,
             IStringResourceProvider stringResourceProvider)
         {
             this.decorated = decorated;

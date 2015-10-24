@@ -9,7 +9,7 @@ using Qujck.MarkdownEditor.ViewModel;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
-    public sealed class AvalonEditTextChangedUpdateModelBehaviour : Behavior<DocumentView>
+    internal sealed class AvalonEditTextChangedUpdateModelBehaviour : Behavior<DocumentView>
     {
         protected override void OnAttached()
         {

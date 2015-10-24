@@ -17,7 +17,7 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.Behaviours
 {
-    public sealed class DocumentViewScrollBehaviour : Behavior<DocumentView>
+    internal sealed class DocumentViewScrollBehaviour : Behavior<DocumentView>
     {
         protected override void OnAttached()
         {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qujck.MarkdownEditor.Commands
+namespace Qujck.MarkdownEditor.Queries
 {
-    public interface ICommandParameter
+    internal interface IStringRequest
     {
     }
 }

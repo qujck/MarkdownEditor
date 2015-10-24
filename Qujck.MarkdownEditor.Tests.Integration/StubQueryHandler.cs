@@ -7,17 +7,17 @@ using Qujck.MarkdownEditor.Queries;
 
 namespace Qujck.MarkdownEditor.Tests.Integration
 {
-    public class StubQueryHandler<TQuery, TResult> : 
-        IQueryHandler<TQuery, TResult> where TQuery : IQueryParameter<TResult>
+    internal class StubQueryHandler<TQuery> : 
+        IStringRequestHandler<TQuery> where TQuery : IStringRequest
     {
-        private readonly Func<TResult> result;
+        private readonly Func<string> result;
 
-        public StubQueryHandler(Func<TResult> result)
+        public StubQueryHandler(Func<string> result)
         {
             this.result = result;
         }
 
-        public TResult Execute(TQuery query)
+        public string Execute(TQuery query)
         {
             return result();
         }
