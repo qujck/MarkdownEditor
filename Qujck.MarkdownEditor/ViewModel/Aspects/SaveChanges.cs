@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Qujck.MarkdownEditor.Infrastructure;
+using Qujck.MarkdownEditor.ViewModel.Core;
 using Qujck.MarkdownEditor.ViewModel.Commands;
 using Qujck.MarkdownEditor.ViewModel.Queries;
 
 namespace Qujck.MarkdownEditor.ViewModel.Aspects
 {
     internal sealed class SaveChangesHandler<TViewModelParameter> : IViewModelCommand<TViewModelParameter>
-        where TViewModelParameter : ViewModelParameter
+        where TViewModelParameter : DynamicViewModelParameter
     {
         private readonly IViewModelCommand<TViewModelParameter> decorated;
         private readonly IViewModelQuery<CanSaveFile> canSaveFile;

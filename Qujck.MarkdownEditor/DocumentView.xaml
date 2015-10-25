@@ -14,11 +14,11 @@
     d:DesignHeight="300" 
     d:DesignWidth="300">
     <UserControl.InputBindings>
-        <KeyBinding Modifiers="" Key="F5" Command="{inf:ViewModelCommandAdapter NextView}"/>
-        <KeyBinding Modifiers="Shift" Key="F5" Command="{inf:ViewModelCommandAdapter PreviousView}"/>
-        <KeyBinding Modifiers="Ctrl" Key="N" Command="{inf:ViewModelCommandAdapter NewFile}"/>
-        <KeyBinding Modifiers="Ctrl" Key="O" Command="{inf:ViewModelCommandAdapter OpenFile}"/>
-        <KeyBinding Modifiers="Ctrl" Key="S" Command="{inf:ViewModelCommandAdapter SaveFile, CanSaveFile}"/>
+        <KeyBinding Modifiers="" Key="F5" Command="{vm:ViewModelCommandAdapter NextView}"/>
+        <KeyBinding Modifiers="Shift" Key="F5" Command="{vm:ViewModelCommandAdapter PreviousView}"/>
+        <KeyBinding Modifiers="Ctrl" Key="N" Command="{vm:ViewModelCommandAdapter NewFile}"/>
+        <KeyBinding Modifiers="Ctrl" Key="O" Command="{vm:ViewModelCommandAdapter OpenFile}"/>
+        <KeyBinding Modifiers="Ctrl" Key="S" Command="{vm:ViewModelCommandAdapter SaveFile, CanSaveFile}"/>
     </UserControl.InputBindings>
     <UserControl.DataContext>
         <vm:DocumentViewModel PropertyChanged="DataModel_PropertyChanged"/>
@@ -34,10 +34,10 @@
     </i:Interaction.Behaviors>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Unloaded" SourceName="TextEditor">
-            <i:InvokeCommandAction Command="{inf:ViewModelCommandAdapter NewFile}"/>
+            <i:InvokeCommandAction Command="{vm:ViewModelCommandAdapter NewFile}"/>
         </i:EventTrigger>
         <i:EventTrigger EventName="Unloaded" SourceName="TextEditor">
-            <i:InvokeCommandAction Command="{inf:ViewModelCommandAdapter Shutdown}"/>
+            <i:InvokeCommandAction Command="{vm:ViewModelCommandAdapter Shutdown}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid x:Name="MainGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

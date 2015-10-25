@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Qujck.MarkdownEditor.Infrastructure;
+using Qujck.MarkdownEditor.ViewModel.Core;
 
 namespace Qujck.MarkdownEditor.ViewModel.Commands
 {
-    internal sealed class PreviousView : ViewModelParameter
+    internal sealed class PreviousView : DynamicViewModelParameter
     {
         public PreviousView(DocumentViewModel viewModel) : base(viewModel)
         {

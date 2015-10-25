@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
+using Qujck.MarkdownEditor.ViewModel.Core;
 
 namespace Qujck.MarkdownEditor.ViewModel.Commands
 {
-    internal sealed class OpenFile : ViewModelParameter
+    internal sealed class OpenFile : DynamicViewModelParameter
     {
         public OpenFile(DocumentViewModel viewModel) : base(viewModel)
         {

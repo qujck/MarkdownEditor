@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Dynamic;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Qujck.MarkdownEditor.Infrastructure;
 
-namespace Qujck.MarkdownEditor.Infrastructure
+namespace Qujck.MarkdownEditor.ViewModel.Core
 {
     public abstract class DynamicViewModel : System.Windows.DependencyObject, 
         IDynamicMetaObjectProvider, INotifyPropertyChanged

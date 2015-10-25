@@ -94,19 +94,19 @@
     <Compile Include="ViewModel\Commands\SaveFile.cs" />
     <Compile Include="ViewModel\Commands\Shutdown.cs" />
     <Compile Include="ViewModel\DocumentViewModel.cs" />
-    <Compile Include="Infrastructure\DynamicViewModel.cs" />
+    <Compile Include="ViewModel\Core\DynamicViewModel.cs" />
     <Compile Include="Infrastructure\DynamicModel.cs" />
     <Compile Include="Infrastructure\ComEventListener.cs" />
     <Compile Include="Infrastructure\ForwardingMetaObject.cs" />
-    <Compile Include="Infrastructure\ViewModelCommandAdapter.cs" />
+    <Compile Include="ViewModel\ViewModelCommandAdapter.cs" />
     <Compile Include="Requests\Html.cs" />
     <Compile Include="Requests\Scripts.cs" />
     <Compile Include="Requests\Styles.cs" />
     <Compile Include="ViewModel\Commands\PreviousView.cs" />
-    <Compile Include="ViewModel\IViewModelParameter.cs" />
+    <Compile Include="ViewModel\Core\IViewModelParameter.cs" />
     <Compile Include="ViewModel\Queries\CanSaveFile.cs" />
     <Compile Include="ViewModel\Queries\IViewModelQuery.cs" />
-    <Compile Include="ViewModel\ViewModelParameter.cs" />
+    <Compile Include="ViewModel\Core\DynamicViewModelParameter.cs" />
     <Page Include="DocumentView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -156,7 +156,7 @@
     <EmbeddedResource Include="Content\Markdown2.xshd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="ViewModel\Constants.DocumentViewModel.cs" />
+    <Compile Include="ViewModel\DocumentViewModel.Constants.cs" />
     <None Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="fonts\glyphicons-halflings-regular.woff2" />

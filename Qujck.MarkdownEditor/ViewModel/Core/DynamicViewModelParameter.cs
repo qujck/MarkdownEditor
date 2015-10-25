@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Qujck.MarkdownEditor.Infrastructure;
 
-namespace Qujck.MarkdownEditor.ViewModel
+namespace Qujck.MarkdownEditor.ViewModel.Core
 {
-    internal abstract class ViewModelParameter : IViewModelParameter
+    internal abstract class DynamicViewModelParameter : IViewModelParameter
     {
         private DynamicViewModel viewModel { get; set; }
 
-        public ViewModelParameter(DynamicViewModel viewModel)
+        public DynamicViewModelParameter(DynamicViewModel viewModel)
         {
             this.viewModel = viewModel;
         }

@@ -5,8 +5,10 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Input;
 using System.Xaml;
+using Qujck.MarkdownEditor.ViewModel.Core;
+using Qujck.MarkdownEditor.Infrastructure;
 
-namespace Qujck.MarkdownEditor.Infrastructure
+namespace Qujck.MarkdownEditor.ViewModel
 {
     public class ViewModelCommandAdapter : MarkupExtension, ICommand
     {

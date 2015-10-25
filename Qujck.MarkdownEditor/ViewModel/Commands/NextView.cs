@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Qujck.MarkdownEditor.ViewModel.Core;
 
 namespace Qujck.MarkdownEditor.ViewModel.Commands
 {
-    internal sealed class NextView : ViewModelParameter
+    internal sealed class NextView : DynamicViewModelParameter
     {
         public NextView(DocumentViewModel viewModel) : base(viewModel)
         {

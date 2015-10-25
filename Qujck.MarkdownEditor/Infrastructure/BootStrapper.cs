@@ -8,6 +8,7 @@ using Qujck.MarkdownEditor.Infrastructure;
 using Qujck.MarkdownEditor.Requests;
 using Qujck.MarkdownEditor.Aspects;
 using Qujck.MarkdownEditor.ViewModel;
+using Qujck.MarkdownEditor.ViewModel.Core;
 using Qujck.MarkdownEditor.ViewModel.Aspects;
 using Qujck.MarkdownEditor.ViewModel.Commands;
 using Qujck.MarkdownEditor.ViewModel.Queries;
