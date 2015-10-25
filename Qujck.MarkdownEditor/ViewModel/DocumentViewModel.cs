@@ -30,31 +30,14 @@ namespace Qujck.MarkdownEditor.ViewModel
         {
             get
             {
-                bool result = this[Constants.DocumentViewModel.HtmlIsLoaded] == null
+                return this[Constants.DocumentViewModel.HtmlIsLoaded] == null
                     ? false
                     : (bool)this[Constants.DocumentViewModel.HtmlIsLoaded];
-                return result;
             }
             set
             {
                 this[Constants.DocumentViewModel.HtmlIsLoaded] = value;
             }
-        }
-
-        private static int WhatsNext(object currentView)
-        {
-            int next = (int)currentView + 1;
-            return Constants.DocumentViewModel.Views.Length == next
-                ? 0
-                : next;
-        }
-
-        private static int WhatsPrior(object currentView)
-        {
-            int prior = (int)currentView - 1;
-            return prior < 0
-                ? 0
-                : Constants.DocumentViewModel.Views.Length - 1;
         }
     }
 }
