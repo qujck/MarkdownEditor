@@ -10,6 +10,7 @@ using Qujck.MarkdownEditor.Infrastructure;
 
 namespace Qujck.MarkdownEditor.ViewModel
 {
+    [MarkupExtensionReturnType(typeof(ICommand))]
     public class ViewModelCommandAdapter : MarkupExtension, ICommand
     {
         private FrameworkElement frameworkElement;
