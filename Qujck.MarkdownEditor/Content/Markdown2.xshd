@@ -35,16 +35,16 @@
         ^(\#){6}\s.*
     </Rule>
     <Rule color="StrongEmphasis">
-			\*\*.*\*\*
-	</Rule>
+        \*\*.*?\*\*
+    </Rule>
 	<Rule color="StrongEmphasis">
-		__.*__
-	</Rule>
+        __.*?__
+    </Rule>
 	<Rule color="Emphasis">
-		\*(?![ ]).*\*
-	</Rule>
+        \*.*?\*
+    </Rule>
 	<Rule color="Emphasis">
-		_.*_
+		_.*?_
 	</Rule>
 	<Rule color="Code">
 		`(.+?)`
