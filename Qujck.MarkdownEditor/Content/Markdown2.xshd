@@ -69,10 +69,10 @@
 		\!\[.*\]\[.*\]
 	</Rule>
 	<Rule color="Link">
-		\[.*\]\(.*\)
+		\[.*?\]\(.*?\)
 	</Rule>
 	<Rule color="Link">
-		\[.*\]\[.*\]
+		\[.*?\]\[.*?\]
 	</Rule>
 	<Rule color="LineBreak">
 		[ ]{2}$
