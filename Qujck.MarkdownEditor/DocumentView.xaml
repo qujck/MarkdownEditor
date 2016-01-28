@@ -12,7 +12,8 @@
     x:Class="Qujck.MarkdownEditor.DocumentView"
     mc:Ignorable="d" 
     d:DesignHeight="300" 
-    d:DesignWidth="300">
+    d:DesignWidth="300"
+    Loaded="UserControl_Loaded">
     <UserControl.InputBindings>
         <KeyBinding Modifiers="" Key="F5" Command="{vm:ViewModelCommandAdapter NextView}"/>
         <KeyBinding Modifiers="Shift" Key="F5" Command="{vm:ViewModelCommandAdapter PreviousView}"/>

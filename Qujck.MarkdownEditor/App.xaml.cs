@@ -16,6 +16,10 @@ namespace Qujck.MarkdownEditor
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             var wnd = new MainWindow();
+            if (e.Args.Count() > 0)
+            {
+                this.Properties["OpenFile"] = e.Args[0];
+            }
             wnd.Show();
         }
     }

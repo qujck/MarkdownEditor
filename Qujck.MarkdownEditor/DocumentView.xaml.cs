@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml;
 using Qujck.MarkdownEditor.ViewModel;
+using Qujck.MarkdownEditor.Requests;
 
 namespace Qujck.MarkdownEditor
 {
@@ -45,6 +46,24 @@ namespace Qujck.MarkdownEditor
                 {
                     this.TextEditor.Text = currentText;
                 }
+            }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            string fileName = (string)Application.Current.Properties["OpenFile"];
+            if (fileName != null)
+            {
+                var timer = new DispatcherTimer(DispatcherPriority.Background);
+                timer.Interval = TimeSpan.FromSeconds(1);
+                timer.Tick += ((x, y) =>
+                {
+                    timer.Stop();
+                    timer = null;
+                    var viewModelParameter = (DocumentViewModel)((DocumentView)e.Source).DataContext;
+                    Infrastructure.BootStrapper.ExecuteViewCommand("OpenFile", viewModelParameter);
+                });
+                timer.Start();
             }
         }
     }
