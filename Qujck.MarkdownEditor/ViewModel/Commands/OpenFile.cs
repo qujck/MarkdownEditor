@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
+using Qujck.MarkdownEditor.Requests;
 using Qujck.MarkdownEditor.ViewModel.Core;
 using System.Windows;
 
@@ -15,41 +16,23 @@ namespace Qujck.MarkdownEditor.ViewModel.Commands
         public OpenFile(DocumentViewModel viewModel) : base(viewModel)
         {
         }
-
-        public string ApplicationFileName
-        {
-            get
-            {
-                string fileName = (string)Application.Current.Properties["OpenFile"];
-                if (fileName != null)
-                {
-                    Application.Current.Properties.Remove("OpenFile");
-                }
-                return fileName;
-            }
-        }
     }
 
     internal sealed class OpenFileHandler : IViewModelCommand<OpenFile>
     {
+        private readonly IActionRequestHandler<Actions.LoadWholeFile> loader;
+
+        public OpenFileHandler(IActionRequestHandler<Actions.LoadWholeFile> loader)
+        {
+            this.loader = loader;
+        }
+
         public void Run(OpenFile viewModelParameter)
         {
-            string fileName;
-            string applicationFileName = viewModelParameter.ApplicationFileName;
-            if (applicationFileName != null)
-            {
-                fileName = applicationFileName;
-            }
-            else
-            {
-                fileName = this.GetFileName();
-            }
-            string text = File.ReadAllText(fileName);
+            string fileName = this.GetFileName();
             if (fileName != null)
             {
-                viewModelParameter[Constants.DocumentViewModel.FilePath] = fileName;
-                viewModelParameter[Constants.DocumentViewModel.OpeningText] = text;
-                viewModelParameter[Constants.DocumentViewModel.CurrentText] = text;
+                this.loader.Run(viewModelParameter.DynamicViewModel as DocumentViewModel, fileName);
             }
         }
 

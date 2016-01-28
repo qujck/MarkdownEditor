@@ -82,6 +82,7 @@
     <Compile Include="DocumentView.xaml.cs">
       <DependentUpon>DocumentView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Requests\LoadWholeFile.cs" />
     <Compile Include="Requests\IStringRequest.cs" />
     <Compile Include="Requests\IStringRequestHandler.cs" />
     <Compile Include="Requests\NamedResources.cs" />

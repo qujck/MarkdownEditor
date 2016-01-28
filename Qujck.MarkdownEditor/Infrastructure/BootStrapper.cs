@@ -45,6 +45,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
         internal sealed class DependencyResolver
         {
             private IActionRequestHandler<Actions.RenderMarkdown> renderMarkdownHandler;
+            private IActionRequestHandler<Actions.LoadWholeFile> loadWholeFileHandler;
             private IStringRequestHandler<Strings.NamedResources> namedResourcesHandler;
             private IStringRequestHandler<Strings.PrefixedResources> prefixedResourcesHandler;
             private IStringRequestHandler<Strings.Html> htmlHandler;
@@ -76,6 +77,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 this.renderMarkdownHandler = new ImagePathFixer(
                     new PrettifyInvoke(
                         new Actions.Handlers.RenderMarkdownHandler()));
+                this.loadWholeFileHandler = new Actions.Handlers.LoadWholeFileHandler();
 
                 return this;
             }
@@ -119,7 +121,7 @@ namespace Qujck.MarkdownEditor.Infrastructure
                     new NewFileHandler(), this.canSaveFileHandler, saveFileHandler);
                 this.nextViewHandler = new NextViewHandler();
                 this.openFileHandler = new SaveChangesHandler<OpenFile>(
-                    new OpenFileHandler(), this.canSaveFileHandler, saveFileHandler);
+                    new OpenFileHandler(this.loadWholeFileHandler), this.canSaveFileHandler, saveFileHandler);
                 this.previousViewHandler = new PreviousViewHandler();
                 this.shutdownHandler = new ShutdownHandler();
 
@@ -144,6 +146,10 @@ namespace Qujck.MarkdownEditor.Infrastructure
                 else if (serviceType == typeof(IActionRequestHandler<Actions.RenderMarkdown>))
                 {
                     return this.renderMarkdownHandler;
+                }
+                else if (serviceType == typeof(IActionRequestHandler<Actions.LoadWholeFile>))
+                {
+                    return this.loadWholeFileHandler;
                 }
 
                 throw new InvalidOperationException();

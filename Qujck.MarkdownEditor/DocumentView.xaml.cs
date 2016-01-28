@@ -61,7 +61,10 @@ namespace Qujck.MarkdownEditor
                     timer.Stop();
                     timer = null;
                     var viewModelParameter = (DocumentViewModel)((DocumentView)e.Source).DataContext;
-                    Infrastructure.BootStrapper.ExecuteViewCommand("OpenFile", viewModelParameter);
+                    Infrastructure.BootStrapper
+                        .Resolver
+                        .Resolve<IActionRequestHandler<Actions.LoadWholeFile>>()
+                        .Run(viewModelParameter, fileName);
                 });
                 timer.Start();
             }
