@@ -13,11 +13,10 @@ namespace Qujck.MarkdownEditor
     /// </summary>
     public partial class App : Application
     {
-        public App()
+        private void Application_Startup(object sender, StartupEventArgs e)
         {
-            DoesIt();
+            var wnd = new MainWindow();
+            wnd.Show();
         }
-
-        private void DoesIt() { }
     }
 }
